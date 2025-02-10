@@ -1,6 +1,6 @@
 // Import de l'usine à routers
 import { Router } from "express";
-import { mainController } from "./controllers/MainController";
+import { mainController } from "./controllers/main-controller.js";
 
 
 
