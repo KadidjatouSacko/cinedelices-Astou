@@ -3,6 +3,7 @@
 export const mainController = {
     renderHomePage(req, res) {
         const css = "home";
-        res.render("home", { css });
+        const js = "index";
+        res.render("home", { css, js });
     }
 }

@@ -6,14 +6,19 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/css/<%= css %>.css">
+
+    <script src="assets/js/<%= js %>.js" defer></script>
     <title>CinéDélices || Accueil</title>
 </head>
 <body class="body">
     <header class="body__header">
-        <img src="./assets/img/logo.webp" alt="Logo Ciné Délices" class="body__header--img">
+        <a href="/">
+            <img src="./assets/img/logo.webp" alt="Logo Ciné Délices" class="body__header--img">
+        </a>
         <article class="body__header--ctnTitle">
             <h1 class="body__header--ctnTitle-title">CinéDélices</h1>
             <nav class="body__header--ctnTitle-nav">
+                <img src="./assets/img/bouton-fermer.png" id="close">
                 <ul class="body__header--ctnTitle-nav-ctn">
                     <a href="/recettes" class="body__header--ctnTitle-nav-ctn-link">
                         <li class="body__header--ctnTitle-nav-ctn-link-row">Recettes</li>
@@ -38,5 +43,6 @@
             </article>
         </article>        
     </header>
-</body>
-</html>
+    <main>
+
+    
