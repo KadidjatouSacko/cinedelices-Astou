@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Import de l'usine à routers
 import { Router } from "express";
 import { mainController } from "./controllers/MainController";
@@ -18,9 +17,3 @@ export const router = Router();
 router.get("/", mainController.renderHomePage);
 
 
-=======
-import { Router } from "express";
-import { mainController } from "./controllers/main-controller";
-
-export const router = Router();
->>>>>>> archi
