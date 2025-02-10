@@ -2,6 +2,7 @@
 
 export const mainController = {
     renderHomePage(req, res) {
-        res.render("home");
+        const css = "home";
+        res.render("home", { css });
     }
 }
