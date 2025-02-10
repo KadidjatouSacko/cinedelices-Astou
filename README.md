@@ -1,7 +1,7 @@
-          # APPLICATION CINÉ-DÉLICES
+# APPLICATION CINÉ-DÉLICES
 
-          ## ARCHITECTURE:
+## ARCHITECTURE:
 
-         ### APP : 
-         
-         - CONTROLLERS : méthode appelée par une route et qui effectuera un traitement particulier avant de renvoyer une vue au navigateur.
+### APP : 
+
+. CONTROLLERS : méthode appelée par une route et qui effectuera un traitement particulier avant de renvoyer une vue au navigateur.
