@@ -1,0 +1,121 @@
+header{
+    background-color: #2A2D34;
+    padding-bottom: 2.3rem;
+    height: 10rem;
+
+}
+
+.navbar-header h2{
+    color:bisque;
+    font-size: 3rem;
+    font-family:Georgia, 'Times New Roman', Times, serif ;
+}
+
+
+.navbar ul{
+    display: flex;
+    justify-content: space-evenly;
+
+
+
+}
+.navbar li{
+    background-color: #CE1902;
+    color : white;
+    list-style: none;
+    display: flex;
+    border-radius: 18%;
+    padding: 0.5rem 1.2rem;
+    font-size : 1.3rem;
+    margin-top: -2rem;
+    
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem 2rem 0rem;
+    margin-bottom: -2rem;
+    margin-top: -2rem;
+
+
+}
+
+.navbar-header img  {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 8rem;
+    border-radius: 40%;
+}
+
+
+
+.infos{
+    margin: 2rem;
+    padding: 2rem;
+    background-color: #CE1902;
+}
+
+.infos img {
+    width: 10rem;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.contact{
+    
+    display: flex;
+    justify-content: center
+
+
+}
+
+.contact label{
+    margin-right: 0.5rem;
+}
+
+.contact input{
+    margin-right: 3.5rem;
+}
+
+.text{
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.sumbit{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.sumbit button{
+ background-color: #CE1902;
+ padding: 1rem;
+ border-radius: 45%;
+ color: #EEEBD3;
+ font-size: 1rem;
+}
+
+.coordinates{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+ 
+
+h3{
+    display: flex;
+    justify-content: center
+}
+
