@@ -1,0 +1,30 @@
+{
+  "name": "cine-delices",
+  "version": "1.0.0",
+  "description": "Projet de fin de formation codé en équipe ayant pour objet la création d'un site recensant les recettes de cuisine inspirées de films et ou séries tv",
+  "homepage": "https://github.com/O-clock-Raclette/cine-delices#readme",
+  "bugs": {
+    "url": "https://github.com/O-clock-Raclette/cine-delices/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Raclette/cine-delices.git"
+  },
+  "license": "ISC",
+  "author": "Stéphanie CARTALIER",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "argon2": "^0.41.1",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.20.0"
+  }
+}
