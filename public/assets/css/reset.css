@@ -45,4 +45,13 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+<<<<<<< HEAD
+=======
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+>>>>>>> archi
 }
