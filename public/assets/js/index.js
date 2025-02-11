@@ -21,3 +21,7 @@ hamburger.addEventListener('click', () => {
     hamburger.style.display = "inline";
     nav.style.display = "none";
   });
+
+  // Gestion carousel en attendant le déploiement de la bdd (models, data-client)
+
+  

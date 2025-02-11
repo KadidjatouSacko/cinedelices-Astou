@@ -3,9 +3,14 @@
     src: url(../fonts/Fascinate-Regular.ttf);
 }
 
+@font-face {
+    font-family: "Montserrat";
+    src: url(../fonts/Montserrat-Regular.ttf);
+}
+
 :root {
     --font-title: "Fascinate";
-    --font-subtitle: "Roboto";
+    --font-subtitle: "Montserrat";
     --font-text: "Inter";
     --colorBg: #2A2D34;
     --colorNav: #EEEBD3;
@@ -50,7 +55,7 @@
 
 .body__header--ctnTitle-nav {
     width: 30vw;
-    height: 70vh;
+    height: 75vh;
     background-color: var(--colorNav);
     position: absolute;
     top: 20vh;
@@ -95,7 +100,7 @@
 
 .body__header--connect-link {
     text-decoration: none;
-    font-size: .8rem;
+    font-size: .6rem;
     font-family: var(--font-subtitle);
     margin-left: -1.2rem;
 }
@@ -143,6 +148,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .body__footer--link {
