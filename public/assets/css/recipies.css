@@ -91,6 +91,7 @@ a {
 
 button{
     margin-top:  40%;
+    margin-bottom: 20%;
 }
 
 
@@ -107,4 +108,9 @@ footer a {
         text-decoration: none;
         color: #CE1902; 
         font-size: 1.2rem;
+}
+
+button a{
+    
+    color: #2A2D34;
 }
