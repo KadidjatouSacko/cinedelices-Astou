@@ -1,7 +1,7 @@
 // Import de l'usine à routers
 import { Router } from "express";
 import { mainController } from "./controllers/mainController.js";
-import { recipesController } from "./controllers/recipesController.js";
+//import { recipesController } from "./controllers/recipesController.js";
 
 
 // Création d'un router

@@ -50,5 +50,5 @@ export const recipes = [
         duration : "75",
         difficulty : "Facile",
         price_level : 0
-    },
+    }
 ]
