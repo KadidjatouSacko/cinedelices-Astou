@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-BDD cinedelices
-=======
 # APPLICATION CINÉ-DÉLICES
 Cette application a pour objectif de recenser les recettes de cuisine inspirées de films ou thématiques cinématographique.
 
@@ -37,4 +34,6 @@ Fichier privé qui stocke les données sensibles de l'application. Ce fichier ne
 ### .env.example :
 
 Une copie du .env sera versionnée sur github indiquant les données à renseigner pour faire marcher l'application. 
->>>>>>> c48ba4f2b8ca2a13821ae79876e28ed85080ebe0
+
+API a rajouter en .env :
+ebca9cb1b38d3ceff2bcf1a944092f57

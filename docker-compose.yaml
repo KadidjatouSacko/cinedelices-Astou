@@ -25,6 +25,9 @@ services:
       - POSTGRES_USER=cinedelices
       - POSTGRES_PASSWORD=cinedelices
       - POSTGRES_DB=cinedelices
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
+
 volumes:
-  - postgres_data:/var/lib/postgresql/data
-  - ./data/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
+  postgres_data:
