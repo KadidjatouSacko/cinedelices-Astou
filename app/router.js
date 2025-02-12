@@ -2,6 +2,7 @@
 import { Router } from "express";
 import { mainController } from "./controllers/mainController.js";
 
+
 // Création d'un router
 export const router = Router();
 
@@ -13,3 +14,4 @@ export const router = Router();
 
 // --- Route / ---
 router.get("/", mainController.renderHomePage);
+
