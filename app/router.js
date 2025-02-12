@@ -1,7 +1,6 @@
 // Import de l'usine à routers
 import { Router } from "express";
-import { mainController } from "./controllers/MainController";
-
+import { mainController } from "./controllers/mainController.js";
 
 
 // Création d'un router
@@ -15,5 +14,4 @@ export const router = Router();
 
 // --- Route / ---
 router.get("/", mainController.renderHomePage);
-
 
