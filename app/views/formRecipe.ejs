@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+<body class="form-container">
+    <h2 class="title">Créer une Recette</h2>
+
+    <form action="recipes-form" method="POST" enctype="multipart/form-data">
+
+        <label for="name" class="recipe-name">Nom de la recette :</label>
+        <input class="name-text-box-1" type="text" id="nom" name="nom" required>
+<br>
+        <form class="form-radio">
+            <label>
+                <input type="radio" name="category" value="starter"> Entrée
+            </label>
+            <label>
+                <input type="radio" name="category" value="maincourse"> Plat
+            </label>
+            <label>
+                <input type="radio" name="category" value="dessert"> Dessert
+            </label>
+        </form>
+<br>
+        <label class="link-title" for="video">Lien vers l'extrait du film (optionnel):</label>
+        <input class="link-box" type="url" id="video" name="video" placeholder="https://www.youtube.com/watch?v=nsIpBTl0ab4&ab_channel=ImaginationInstitute">
+<br>
+
+        <label class="tools-title" for="tools">Ustensiles nécessaires (séparés par une virgule) :</label>
+        <textarea class="tools-text-box" id="tools" name="tools" rows="2" placeholder="Ex : Poêle, Mixeur, Sabre laser..."></textarea>
+
+<br>
+        <label class="ingredients-title" for="ingredients">Ingrédients nécessaires (séparés par une virgule) :</label>
+        <textarea class="ingredients-text-box" id="ingredients" name="ingredients" rows="3" required placeholder="Ex : Tomates, Oeufs, Bave de crapaud..."></textarea>
+        <br><br>
+<br>
+        <label class="description-title" for="description">Description de la recette :</label>
+        <textarea class="description-text-box" id="description" name="description" rows="4" required placeholder="Décrivez la recette..."></textarea>
+        
+<br>       
+        <!-- Stephanie ici la instruction a geré) -->
+        <label class="instruction-title" for="instructions">Instructions :</label>
+        <textarea class="instruction-text-box" id="instructions" name="instructions" rows="5" required placeholder="Décrivez les étapes de préparation..."></textarea>
+<br>
+        <label class="time-title" for="time">Temps de préparation (en minutes) :</label>
+        <input class="time-text-box" type="number" id="time" name="time" min="1" required>
+<br>
+        <label class="image-title" for="image">Image de la recette (optionnel) :</label>
+        <input class="image_btn" type="file" id="image" name="image">
+<br>
+
+        <button class="submit-btn" type="submit">Envoyer la Recette</button>
+<br>
+    </form>
+<%- include('partials/footer') %>
