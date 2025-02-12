@@ -1,5 +1,6 @@
 import { Model, Datatypes } from "sequelize";
-import { sequelize } from "./sequelizeClient.js"
+import { sequelize } from "./sequelizeClient.js";
+
 
 export class Category extends Model { }
 
@@ -13,3 +14,8 @@ Category.init({
     sequelize,
     tableName: "category"
 });
+
+//test 
+
+const categories = await Category.findAll();
+console.log(levels);
