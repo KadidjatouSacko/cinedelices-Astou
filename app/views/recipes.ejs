@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../public/assets/css/recipies.css">
-</head>
-<body>
-    <header>
-
+<%- include('partial/header') %>
         <nav>
             <section class="navbar-header">
                     <img src="../assets/img/logo.png" alt="logo">
@@ -28,14 +18,18 @@
     </header>
 
     <section class="recipies">
+       <% recette.forEach(recette => { %>
+        
         <section class="recipe">
             <div class="image-container">
                 <article class="movie-image" style="background-image: url('../public/assets/img/garfield.jpg');">
-                    <h3 class="name-recipe">Lasagnes</h3>
+                    <h3 class="name-recipe"><%= recette.nom %></h3>
                     <img src="../public/assets/img/lasagne.jpg" class="recipe-img">
+                    <p class="time"><%= recette.durée %></p>
+                    <p class="difficulte"><%= recette.difficulte %></p>
                     <div><button><a href="recipe.html">Voir la recette</a></button></div>
                 </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/charlie\ et\ la\ chocolatrie\ copy.jpg');">
+                <!-- <article class="movie-image" style="background-image: url('../public/assets/img/charlie\ et\ la\ chocolatrie\ copy.jpg');">
                     <h3 class="name-recipe">Moelleux au chocolat</h3>
                     <img src="../public/assets/img/moelleux au chocolat.jpg" class="recipe-img">
                     <div><button><a href="recipe.html">Voir la recette</a></button></div>
@@ -61,7 +55,7 @@
                     <div><button><a href="recipe.html">Voir la recette</a></button></div>
                 </article>
                 <article class="movie-image" style="background-image: url('../public/assets/img/ratatouille.jpg');">
-                    <h3 class="name-recipe">Ratatouille</h3>
+                    <h3 class="name-recipe"><%= recette.auteur %></h3>
                     <img src="../public/assets/img/ratatouille-recette.jpg" class="recipe-img">
                     <div><button><a href="recipe.html">Voir la recette</a></button></div>
                 </article>
@@ -70,15 +64,13 @@
                     <img src="../public/assets/img/donuts.jpg" class="recipe-img">
                     <div><button><a href="recipe.html">Voir la recette</a></button></div>
                 </article>
-            </div>
+            </div> -->
         </section>
     </section>
 
-    <footer>
-
-        <a href="./legal-notices.html"> Mentions légales</a>
-        <a href="./contact.html"> Contact</a>
-    </footer>
+    <% }) %>
+    
+    <%- include('partial/footer') %>
     
     
 </body>
