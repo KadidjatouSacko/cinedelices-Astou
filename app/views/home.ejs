@@ -1,0 +1,42 @@
+<%- include('./partials/header') %>
+<main class="body__main">
+    <section class="body__main--ctn">
+        <article class="body__main--ctn-article">
+            <h2 class="body__main--ctn-article-title">Bienvenue</h2>
+            <p class="body__main--ctn-article-subtitle">Ce site a été pensé et créé par 4 organisateurs de soirées à thèmes basés sur le cinéma et les séries TV.</p>
+            <p class="body__main--ctn-article-subtitle">Vous pourrez trouver les recettes qui composeront le menu de vos futures soirées à thème.</p>
+            <p class="body__main--ctn-article-subtitle">Avant de consulter notre catalogue de recettes, jetez un coup d'oeil aux dernières ajoutées...</p>
+        </article>
+
+        <article class="body__main--ctn-article">
+            <h2 class="body__main--ctn-article-title">Nos dernières recettes</h2>
+            <section class="body__main--ctn-article-carousel">
+                <article class="body__main--ctn-article-wrapper">
+                    <article class="body__main--ctn-article-wrapper-card">
+                        <section id="tags">
+                            <h3 class="body__main--ctn-article-wrapper-card-theme">Comédie</h3>
+                            <h3 class="body__main--ctn-article-wrapper-card-category">Apéritif</h3>
+                        </section>                    
+                        <h4 class="body__main--ctn-article-wrapper-card-recipe">Vodka martini</h4>
+                        <img src="assets/img/recipies/martini.jpg" alt="Photo d'un verre de martini" class="body__main--ctn-article-wrapper-card-img">
+                        <div class="body__main--ctn-article-wrapper-card-legends">
+                            <div class="body__main--ctn-article-wrapper-card-legend-time">
+                                <img src="" alt="">
+                            </div>
+                            <div class="body__main--ctn-article-wrapper-card-legend-level">
+                                <img src="" alt="">
+                            </div>
+                            <div class="body__main--ctn-article-wrapper-card-legend-price">
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                        <a href="/recette/:id" class="body__main--ctn-article-wrapper-card-btn">Voir</a>
+                    </article>
+                </article>
+            </section>            
+        </article>
+    </section>
+</main>
+
+
+<%- include('./partials/footer') %>
