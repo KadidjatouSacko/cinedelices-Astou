@@ -1,113 +1,136 @@
+.body__main {
+    width: 95vw;
+    margin-left: .25vw;
+}
 
-
-header{
-    background-color: #2A2D34;
-    padding-bottom: 2.3rem;
-    height: 10rem;
+.body__main--ctn {
 
 }
 
-.navbar-header h2{
-    color:bisque;
-    font-size: 3rem;
-    font-family:Georgia, 'Times New Roman', Times, serif ;
+.body__main--ctn-article {
+    width: 90%;
+    margin: .5rem 5%;
 }
 
-
-.navbar ul{
-    display: flex;
-    justify-content: space-evenly;
-
-
-
-}
-.navbar li{
-    background-color: #CE1902;
-    color : white;
-    list-style: none;
-    display: flex;
-    border-radius: 18%;
-    padding: 0.5rem 1.2rem;
-    font-size : 1.3rem;
-    margin-top: -2rem;
-    
+.body__main--ctn-article-title {
+    font-family: var(--font-subtitle);
+    font-size: .8rem;
+    text-align: center;
+    color: var(--colorRed);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 1rem .5rem;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-}
-
-.navbar-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem 2rem 0rem;
-    margin-bottom: -2rem;
-    margin-top: -2rem;
-
-
-}
-
-.navbar-header img  {
-    margin-top: 1rem;
-    margin-left: 1rem;
-    width: 8rem;
-    border-radius: 40%;
-}
-
-
-
-.container-caroussel{
-    width: 80%;
-    max-width: 900px;
+.body__main--ctn-article-subtitle {
+    font-family: var(--font-text);
+    font-size: .7rem;
+    margin: .35rem .40rem;
     text-align: center;
 }
 
-h3 {
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-.carousel {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.slides {
+.body__main--ctn-article-carousel {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 300%;
+    width: 70%;
+
 }
 
-.slide {
+.body__main--ctn-article-carousel:before{
+    content : "\0025C0";
+    color: var(--colorRed);
+}
+
+.body__main--ctn-article-carousel:after{
+    content : "\002BC8";
+    color: var(--colorRed);
+}
+
+.body__main--ctn-article-wrapper-card {
+    width: 90%;
+    height: 10rem;
+    border: 1px solid var(--colorRed);
+    border-radius: 15px;
     position: relative;
-    width: 100%;
-    flex-shrink: 0;
+    overflow: hidden;
+
+    background-color: rgba(255, 254, 254);
 }
 
-.slide img.large {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-}
-
-.small-image {
+.body__main--ctn-article-wrapper-card:before {
+    content: ' ';
+    display: block;
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    border: 3px solid white;
-  
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: auto;
+    opacity: 0.25;
+    background-image: url(../img/movies/cocktail.jpg);
+    background-size: cover;
+    cursor: pointer;
 }
 
+#tags {
+    width: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: .5rem .5rem;
+    z-index: 10;
+}
 
+.body__main--ctn-article-wrapper-card-theme, .body__main--ctn-article-wrapper-card-category {
+    font-size: .5rem;
+    padding: .2rem;
+    border: 1px solid var(--colorRed);
+    border-radius: 5px;
+    background-color: var(--colorNav);
+    color: var(--colorRed);
+    margin: 0 .3rem;
+    opacity: 1;
+}
 
+.body__main--ctn-article-wrapper-card-theme {
+    background-color: var(--colorRed);
+    color: white;
+}
 
+.body__main--ctn-article-wrapper-card-recipe {
+    width: 80%;
+    margin: .3rem 10%;
+    text-align: center;
+    font-family: var(--font-subtitle);
+    font-size: 1rem;
+    font-weight: 700;
+}
 
+.body__main--ctn-article-wrapper-card-img {
+    width: 35%;
+    margin: .2rem 30%;
+    border-radius: 5px;
+
+}
+
+.body__main--ctn-article-wrapper-card-legends {
+    background-color: beige;
+    opacity: .5;
+    width: 70%;
+    height: 1.5rem;
+    margin: .25rem 15% .5rem 15%;
+    border-radius: 5px;
+}
+
+.body__main--ctn-article-wrapper-card-btn {
+    width: 60%;
+    margin-left: 40%;
+    background-color: var(--colorRed);
+    border: 1px solid var(--colorNav);
+    border-radius: 5px;
+    color: var(--colorNav);
+    padding: .25rem .5rem;
+    font-family: var(--font-subtitle);
+    font-size: .7rem;
+    text-decoration: none;
+}
 
