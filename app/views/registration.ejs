@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmographie</title>
-    <link rel="stylesheet" href="../public/assets/css/inscription.css">
+    <title>Ciné-Delices</title>
+    <!-- <link rel="stylesheet" href="../public/assets/css/movies.css"> -->
 </head>
 <body>
     <header>
@@ -12,7 +12,7 @@
         <nav>
             <section class="navbar-header">
                 <img src="../public/assets/img/logo.png" alt="logo">
-                <h2> Inscription</h2>
+                <h2> Contact</h2>
                 <a href="#">Connexion</a>
     
             </section>
@@ -27,43 +27,43 @@
         </nav>
     </header>
 
+<link rel="stylesheet" href="/assets/css/registration.css">
 <main>
-
-
     <section class="registration-form">
-
-            <h2>Inscription</h2>
-            <section class="form">
+        <h2>Inscription</h2>
+        <section class="form">
             <form action="registration" method="POST">
                 <label for="nom">Nom <strong>*</strong>:</label>
                 <input type="text" id="nom" name="nom" required>
-                
+
                 <label for="prenom">Prénom <strong>*</strong> :</label>
                 <input type="text" id="prenom" name="prenom" required>
-                
+
                 <label for="pseudo">Pseudo <strong>*</strong>:</label>
                 <input type="text" id="pseudo" name="pseudo" required>
-                
+
                 <label for="email">Adresse mail <strong>*</strong>:</label>
                 <input type="email" id="email" name="email" required>
-                
+
                 <label for="password">Mot de passe <strong>*</strong>:</label>
                 <input type="password" id="password" name="password" required>
-                
+
                 <label for="confirm_password">Confirmer le mot de passe <strong>*</strong>:</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
-                
+
                 <div class="choice-button"> 
-                    <button><a href="/connexion" class="continue" >   Continuer sans compte</button></a>
-                <button type="submit">S'inscrire</button>
+                    <button><a href="/recettes" class="continue">Continuer sans compte</a> </button>
+                    <button type="submit">S'inscrire</button>
                 </div>
+                <span class="connexion"> 
+                    <p>Vous avez déja un compte</p>
+                    <a href="/connexion">
+                        <p class="blue">Connectez-vous</p>
+                    </a>
+                </span>
             </form>
         </section>
-        </body>
-
-
     </section>
-    
 </main>
 
 <footer>
@@ -71,3 +71,5 @@
     <a href="/legal-notices"> Mentions légales</a>
     <a href="/contact"> Contact</a>
 </footer>
+</body>
+</html>

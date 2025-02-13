@@ -104,12 +104,33 @@ button {
    justify-content: space-around
 }
 
-.continue{
+.connexion{
+    color: #333;
+    margin-left: 40%;
+    font-size: 1rem;
     
+}
+
+.blue{
+    color: blue;
+    /* margin-left: 40%; */
 }
 button:hover {
     background-color: #8b2012;
     
 }
 
+footer{
+    background-color: #2A2D34;
+    color: #CE1902;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-evenly;
 
+}
+
+footer a {
+        text-decoration: none;
+        color: #CE1902; 
+        font-size: 1.2rem;
+}
