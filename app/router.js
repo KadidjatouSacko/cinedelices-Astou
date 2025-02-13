@@ -15,5 +15,6 @@ router.get("/movies/:title", moviesController.GetOneMovies);
 router.get("/legal-notices", legalsnoticesController.GetAllMentions)
 router.get("/contact", contactController.Getcontact)
 router.get("/inscription",registrationController.Getresgistration)
+router.post("/contact/submit",contactController.contactSumbit)
 
 
