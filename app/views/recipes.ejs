@@ -1,77 +1,46 @@
 <%- include('partial/header') %>
-        <nav>
-            <section class="navbar-header">
-                    <img src="../assets/img/logo.png" alt="logo">
-                    <h2> RECETTES</h2>
-                    <a href="#">Connexion</a>
-        
-            </section>
-        
-            <section class="navbar">
-                    <ul>
-                        <li> <a href="#"> Recettes</a></li>
-                        <li> <a href="./contact.html"> contact</a></li>
-                        <li> <a href="./movies.html"> Filmographie</a></li>
-                    </ul>
-            </section>
-        </nav>
-    </header>
+
+<link rel="stylesheet" href="/assets/css/recipies.css">
+
+
+    <main>
 
     <section class="recipies">
-       <% recette.forEach(recette => { %>
-        
-        <section class="recipe">
-            <div class="image-container">
-                <article class="movie-image" style="background-image: url('../public/assets/img/garfield.jpg');">
-                    <h3 class="name-recipe"><%= recette.nom %></h3>
-                    <img src="../public/assets/img/lasagne.jpg" class="recipe-img">
-                    <p class="time"><%= recette.durée %></p>
-                    <p class="difficulte"><%= recette.difficulte %></p>
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-                <!-- <article class="movie-image" style="background-image: url('../public/assets/img/charlie\ et\ la\ chocolatrie\ copy.jpg');">
-                    <h3 class="name-recipe">Moelleux au chocolat</h3>
-                    <img src="../public/assets/img/moelleux au chocolat.jpg" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/kung-fu-panda.jpg');">
-                    <h3 class="name-recipe">ramens</h3>
-                    <img src="../public/assets/img/ramens.jpg" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/la-belle-et-la-bete.jpg');">
-                    <img src="../public/assets/img/" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/la-belle-et-le-clochard.jpg');">
-                    <h3 class="name-recipe">Pâtes aux boulettes</h3>
-                    <img src="../public/assets/img/pates-boulettes.jpg" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                    
-                </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/petit-chaperon-rouge.jpg');">
-                    <h3 class="name-recipe">galette</h3>
-                    <img src="../public/assets/img/galette.jpg" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/ratatouille.jpg');">
-                    <h3 class="name-recipe"><%= recette.auteur %></h3>
-                    <img src="../public/assets/img/ratatouille-recette.jpg" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-                <article class="movie-image" style="background-image: url('../public/assets/img/simpson.jpg');">
-                    <h3 class="name-recipe">donuts</h3>
-                    <img src="../public/assets/img/donuts.jpg" class="recipe-img">
-                    <div><button><a href="recipe.html">Voir la recette</a></button></div>
-                </article>
-            </div> -->
-        </section>
-    </section>
 
-    <% }) %>
+        <% recipes.forEach(recipe => { %>
+       
+            <section class="recipe">
+
+        <div class="image-container">
+                
+                <h3 class="name-recipe"><%= recipe.name %></h3>
+
+            <div class="article-container">
+                <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie %>.jpg');">
+                     <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img">
+               </article>
+            </div>
+                
+             <section class="img-symbole">
+                    <p class="time">  <img src="/assets/img/symbole-temps.jpg" alt="symbole-temps" class="symbole"> <%= recipe.time %></p>
+                    <p class="difficulte" ><img src="/assets/img/symbole-difficulté.jpg" alt="symbole-difficulte" class="symbole">  <%= recipe.difficulty %></p>
+                    <p class="price"> <img src="/assets/img/symbole-euro.jpg" alt="symbole-euro" class="symbole"> <%= recipe.price %></p>
+            </section>
+                    <div>
+                        <button>
+                            <a href="/recette/<%= recipe.name %>">Voir la recette</a>
+                        </button>
+                     </div>
+        </div>
+               
+            
+            </section>
+            <% }) %>
+    
     
     <%- include('partial/footer') %>
     
+</main>
     
 </body>
 </html>

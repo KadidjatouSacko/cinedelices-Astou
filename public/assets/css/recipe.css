@@ -1,3 +1,9 @@
+header {
+    background-color: #2A2D34;
+    padding-bottom: 2.3rem;
+    width: 100vw;
+}
+
 header{
     background-color: #2A2D34;
     padding-bottom: 2.3rem;
@@ -11,14 +17,11 @@ header{
     font-family:Georgia, 'Times New Roman', Times, serif ;
 }
 
-
 .navbar ul{
     display: flex;
     justify-content: space-evenly;
-
-
-
 }
+
 .navbar li{
     background-color: #CE1902;
     color : white;
@@ -71,10 +74,13 @@ main{
     margin: 0 25%;
 }
 
-.materials {
+.utensils {
     margin-top: 1.4rem;
     background-color: #EEEBD3;
-    padding : 0.2rem 
+    padding: 0.2rem;
+    width: 15rem;
+    height: 12rem;
+    
 
     
 }
@@ -90,14 +96,16 @@ main{
 }
 
 .description img{
-    width: 45rem;
-    height: 20rem;
+    width: 35rem;
+    height: 15rem;
     margin: 0 7rem;
     
 }
 
 .script{
     background-color: #EEEBD3;
+    width: 55rem;
+    height: 15rem;
 }
 
 footer{
@@ -113,4 +121,10 @@ footer a {
         text-decoration: none;
         color: #CE1902; 
         font-size: 1.2rem;
+}
+
+@media screen and (min-width : 768px) {
+    footer a {
+        font-size: 1.5rem;
+    }
 }

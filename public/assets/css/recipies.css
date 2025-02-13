@@ -1,10 +1,15 @@
-
+/* 🌍 RESET DE BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
 header{
     background-color: #2A2D34;
     padding-bottom: 2.3rem;
     height: 10rem;
-
 }
 
 .navbar-header h2{
@@ -13,14 +18,11 @@ header{
     font-family:Georgia, 'Times New Roman', Times, serif ;
 }
 
-
 .navbar ul{
     display: flex;
     justify-content: space-evenly;
-
-
-
 }
+
 .navbar li{
     background-color: #CE1902;
     color : white;
@@ -30,7 +32,6 @@ header{
     padding: 0.5rem 1.2rem;
     font-size : 1.3rem;
     margin-top: -2rem;
-    
 }
 
 a {
@@ -44,29 +45,46 @@ a {
     padding: 1rem 2rem 2rem 0rem;
     margin-bottom: -2rem;
     margin-top: -2rem;
-
-
 }
 
-.navbar-header img  {
+.navbar-header img {
     margin-top: 1rem;
     margin-left: 1rem;
     width: 8rem;
     border-radius: 40%;
 }
 
+
 .recipies{
     margin-top: 150px;
     margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
-.name-recipe{
+
+
+.recipe {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.name-recipe {
     margin: 10% 25%;
+    font-size: 1.5rem;
 }
+
 .image-container {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
 }
 
 .movie-image {
@@ -83,34 +101,64 @@ a {
     position: absolute;
     bottom: 20%;
     right: 20%;
-    width: 100px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 10%;
     border: 2px solid white;
 }
 
-button{
-    margin-top:  40%;
-    margin-bottom: 20%;
+
+.img-symbole{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
 }
 
+.symbole {
+    width: 35px;
+    height: 35px;
+}
 
-footer{
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #CE1902;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+/* FOOTER */
+footer {
     background-color: #2A2D34;
     color: #CE1902;
     padding: 2rem;
     display: flex;
     justify-content: space-evenly;
-
 }
 
 footer a {
-        text-decoration: none;
-        color: #CE1902; 
-        font-size: 1.2rem;
+    text-decoration: none;
+    color: #CE1902;
+    font-size: 1.2rem;
 }
 
-button a{
-    
-    color: #2A2D34;
+@media (min-width: 600px) {
+    .recipies {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .recipies {
+        grid-template-columns: repeat(4, 1fr); 
+    }
 }

@@ -1,0 +1,31 @@
+<%- include('partial/header') %>
+
+<link rel="stylesheet" href="/assets/css/movies.css">
+<main>
+    <h2>Notre sélection de films :</h2>
+
+    <section class="films">
+        <% movies.forEach(movie => { %>
+            <article class="film">
+                <h2 class="title"><%= movie.title %></h2>
+                <img src="/assets/img/<%= movie.title.toLowerCase() %>.jpg" alt="<%= movie.title %>">
+                <ul>
+                    <li><strong>Réalisateur :</strong> <span><%= movie.director %></span></li>
+                    <li><strong>Année :</strong> <span><%= movie.year %></span></li>
+                    <li><strong>Genre :</strong> <span><%= movie.genre %></span></li>
+                    <li><strong>Plat associé :</strong> <span></span></li>
+                </ul>
+                <button class="more">
+                    <a href="/movies/<%= movie.title %>">Voir</a>
+                </button>
+            </article>
+        <% }) %>
+    </section>
+</main>
+
+<footer>
+    <a href="./legal-notices">Mentions légales</a>
+    <a href="./contact.html">Contact</a>
+</footer>
+</body>
+</html>

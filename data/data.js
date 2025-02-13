@@ -1,9 +1,11 @@
-const recettes = [
+export const recipes = [
     {
-      nom: "Lasagnes",
-      auteur: "Jon Arbuckle",
-      duree: "45 min",
-      difficulte: "Moyenne",
+      name: "Lasagnes",
+      movie: "garfield",
+      author: "Jon Arbuckle",
+      time: "45 min",
+      difficulty: "Moyenne",
+      price:"Pas cher",
       ingredients: [
         "Pâtes à lasagne",
         "Bœuf haché",
@@ -11,8 +13,8 @@ const recettes = [
         "Fromage râpé",
         "Béchamel"
       ],
-      ustensiles: ["Four", "Plat à gratin", "Casserole", "Spatule"],
-      etapes: [
+      utensils: ["Four", "Plat à gratin", "Casserole", "Spatule"],
+      steps: [
         "Préchauffer le four à 180°C.",
         "Faire revenir le bœuf haché avec la sauce tomate.",
         "Préparer une béchamel.",
@@ -21,13 +23,15 @@ const recettes = [
       ]
     },
     {
-      nom: "Mousse au Chocolat",
-      auteur: "Chef Pâtissier",
-      duree: "15 min",
-      difficulte: "Facile",
+      name: "Mousse au Chocolat",
+      movie:"charlie et la chocolatrie",
+      author: "Chef Pâtissier",
+      time: "15 min",
+      difficulty: "Facile",
+      price:"Pas cher",
       ingredients: ["Chocolat noir", "Œufs", "Sucre", "Beurre"],
-      ustensiles: ["Saladier", "Fouet", "Ramequins"],
-      etapes: [
+      utensils: ["Saladier", "Fouet", "Ramequins"],
+      steps: [
         "Faire fondre le chocolat au bain-marie.",
         "Séparer les blancs des jaunes d'œufs.",
         "Mélanger les jaunes avec le chocolat fondu.",
@@ -36,13 +40,15 @@ const recettes = [
       ]
     },
     {
-      nom: "Galette",
-      auteur: "Grand-Mère Bretonne",
-      duree: "20 min",
-      difficulte: "Facile",
+      name: "Galette",
+      movie: "le petit chaperon rouge",
+      author: "Grand-Mère Bretonne",
+      time: "20 min",
+      difficulty: "Facile",
+      price:"Pas cher",
       ingredients: ["Farine de sarrasin", "Eau", "Sel", "Beurre", "Jambon", "Œuf", "Fromage râpé"],
-      ustensiles: ["Poêle", "Spatule"],
-      etapes: [
+      utensils: ["Poêle", "Spatule"],
+      steps: [
         "Mélanger la farine, l'eau et le sel pour faire la pâte.",
         "Laisser reposer 30 minutes.",
         "Faire chauffer une poêle avec du beurre.",
@@ -52,13 +58,15 @@ const recettes = [
       ]
     },
     {
-      nom: "Ramens",
-      auteur: "Naruto Uzumaki",
-      duree: "40 min",
-      difficulte: "Difficile",
+     name: "ramens",
+      movie: "kung fu panda",
+      author: "Naruto Uzumaki",
+      time: "40 min",
+      difficulty: "Difficile",
+      price:"Moyen",
       ingredients: ["Nouilles", "Bouillon", "Porc", "Œuf", "Algues", "Soja", "Ciboule"],
-      ustensiles: ["Casserole", "Bol", "Baguettes"],
-      etapes: [
+      utensils: ["Casserole", "Bol", "Baguettes"],
+      steps: [
         "Faire bouillir le bouillon avec les épices.",
         "Cuire les nouilles selon les instructions.",
         "Faire cuire l'œuf mollet.",
@@ -67,13 +75,15 @@ const recettes = [
       ]
     },
     {
-      nom: "Pâtes aux Boulettes",
-      auteur: "Mama Italienne",
-      duree: "35 min",
-      difficulte: "Moyenne",
+      name: "Pâtes aux boulettes",
+      movie:"la belle et le clochard",
+      author: "Mama Italienne",
+      time: "35 min",
+      difficulty: "Moyenne",
+      price:"Pas cher",
       ingredients: ["Spaghetti", "Viande hachée", "Sauce tomate", "Ail", "Parmesan"],
-      ustensiles: ["Poêle", "Casserole", "Passoire"],
-      etapes: [
+      utensils: ["Poêle", "Casserole", "Passoire"],
+      steps: [
         "Préparer des boulettes de viande.",
         "Les faire revenir dans une poêle.",
         "Cuire les pâtes al dente.",
@@ -82,13 +92,15 @@ const recettes = [
       ]
     },
     {
-      nom: "Ratatouille",
-      auteur: "Rémy (le rat)",
-      duree: "50 min",
-      difficulte: "Moyenne",
+      name: "Ratatouille",
+      movie: "ratatouill",
+      author: "Rémy (le rat)",
+      time: "50 min",
+      difficulty: "Moyenne",
+      price:"Moyen",
       ingredients: ["Courgettes", "Aubergines", "Tomates", "Poivrons", "Ail", "Huile d’olive"],
-      ustensiles: ["Poêle", "Couteau", "Plat à gratin"],
-      etapes: [
+      utensils: ["Poêle", "Couteau", "Plat à gratin"],
+      steps: [
         "Couper tous les légumes en rondelles.",
         "Faire revenir chaque légume séparément dans une poêle.",
         "Les disposer dans un plat en alternant les couches.",
@@ -97,13 +109,15 @@ const recettes = [
       ]
     },
     {
-      nom: "Donuts",
-      auteur: "Homer Simpson",
-      duree: "60 min",
-      difficulte: "Moyenne",
+      name: "Donuts",
+      movie: "simpson",
+      author: "Homer Simpson",
+      time: "60 min",
+      difficulty: "Moyenne",
+      price:"Moyen",
       ingredients: ["Farine", "Sucre", "Levure", "Lait", "Œufs", "Beurre", "Chocolat", "Huile"],
-      ustensiles: ["Friteuse", "Emporte-pièce", "Saladier"],
-      etapes: [
+      utensils: ["Friteuse", "Emporte-pièce", "Saladier"],
+      steps: [
         "Mélanger les ingrédients pour former une pâte.",
         "Laisser reposer 1 heure.",
         "Étaler et découper en forme de donuts.",
@@ -113,5 +127,5 @@ const recettes = [
     }
   ];
   
-  export default recettes;
+  export default recipes;
   
