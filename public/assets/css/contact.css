@@ -93,20 +93,26 @@ a {
     justify-content: center;
 }
 
-.sumbit{
+.sumbit {
     display: flex;
     justify-content: center;
+    margin-left: 45%;
+}
+
+.sumbit button {
+    background-color: #CE1902;
+    padding: 1rem;
+    border-radius: 45%;
+    color: #EEEBD3;
+    font-size: 1rem;
+    border: none; 
+    cursor: pointer; 
     
 }
 
-.sumbit button{
- background-color: #CE1902;
- padding: 1rem;
- border-radius: 45%;
- color: #EEEBD3;
- font-size: 1rem;
+.sumbit button:hover {
+    background-color: #9B1400;
 }
-
 .coordinates{
     display: flex;
     justify-content: space-evenly;
