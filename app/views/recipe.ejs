@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/assets/css/recipe.css">
+<header>
+    <nav>
+        <section class="navbar-header">
+            <img src="../assets/img/logo.png" alt="logo">
+            <h2><%= recipe.name %></h2>
+            <a href="#">Connexion</a>
+        </section>
+
+        <section class="navbar">
+            <ul>
+                <li> <a href="/recettes"> Recettes</a></li>
+                <li> <a href="/contact"> Contact</a></li>
+                <li> <a href="/movies"> Filmographie</a></li>
+            </ul>
+        </section>
+    </nav>
+</header>
+
+<main>
+    <section class="infos">
+        <!-- <div>
+            <img src="../assets/img/<%= recipe.name.toLowerCase() %>.jpg" alt="<%= recipe.name %>">
+        </div> -->
+
+        <article class="utensils">
+            <h3> Ustensiles :</h3>
+            <ul>
+                <% recipe.utensils.forEach(utensil => { %>
+                    <li>  <%= utensil %></li>
+                <% }) %>
+            </ul>
+        </article>
+
+        <article class="ingredients">
+            <h3> Acteurs principaux :</h3>
+            <ul>
+                <% recipe.ingredients.forEach(ingredient => { %>
+                    <li>  <%= ingredient %></li>
+                <% }) %>
+            </ul>
+        </article>
+    </section>
+
+    <section class="description">
+        <div>
+            <img src="../assets/img/<%= recipe.name.toLowerCase() %>.jpg" alt="<%= recipe.name %>">
+        </div>
+
+        <article class="script">
+            <h3> Script:</h3>
+            <ul>
+                <% recipe.steps.forEach(step => { %>
+                    <li>  <%= step %></li>
+                <% }) %>
+            </ul>
+        </article>
+    </section>
+</main>
+
+<footer>
+    <a href="/legal-notices"> Mentions légales</a>
+    <a href="/contact"> Contact</a>
+</footer>

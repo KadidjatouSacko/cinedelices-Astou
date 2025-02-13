@@ -1,13 +1,12 @@
-// Import de l'usine à routers
-import { Router } from "express";
-import { mainController } from "./controllers/mainController.js";
-import { recipesController } from "./controllers/recipesController.js";
 
-// Création d'un router
+import { mainController } from "./controllers/mainController.js";
+import { recipesController } from "./controllers/recipes-controllers.js"; 
+import { moviesController } from "./controllers/movies-controllers.js";
+
 export const router = Router();
 
-// === Paramétrage du router ===
-
-// --- Route / ---
 router.get("/", mainController.renderHomePage);
-//router.get("/recettes", recipesController.renderRecipePage);
+router.get("/recettes", recipesController.GetAllRecipes);
+router.get("/recette/:name", recipesController.GetOneRecipe);
+router.get("/movies", moviesController.GetAllMovies);
+router.get("/movies/:title", moviesController.GetOneMovies);
