@@ -1,7 +1,7 @@
 BEGIN;
 
 -- suppression des tables si elles existent déjà
-DROP TABLE IF EXISTS "categorie", "film", "ingredient", "difficulty", "recette", "recette_ingredient";
+DROP TABLE IF EXISTS "category", "movie", "ingredient", "difficulty", "recipe", "recipe_has_ingredient";
 
 
 CREATE TABLE "category" (

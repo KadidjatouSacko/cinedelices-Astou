@@ -17,6 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:reset": "psql -U cinedelices -d cinedelices -f ./data/create-tables.sql",
+    "db:seed": "psql -U cinedelices -d cinedelices -f ./data/seeding-tables.sql",
     "dev": "node --watch index.js"
   },
   "dependencies": {
