@@ -9,6 +9,11 @@ Tool.init({
         type: DataTypes.STRING, 
         allowNull: false,
         unique: true
+    }, 
+    category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: false
     }
 }, {
     sequelize,
@@ -16,5 +21,5 @@ Tool.init({
 });
 
 //test
-const tools = await Tool.findAll();
-console.log(tools);
+// const tools = await Tool.findAll();
+// console.log(tools);

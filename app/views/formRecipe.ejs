@@ -1,38 +1,100 @@
 <%- include('partials/header') %>
-<body class="form-container">
+<main class="body__main">
     <h2 class="title">Créer une Recette</h2>
+    <form action="recipes-form" method="POST" enctype="multipart/form-data" class="form">
+        <article class="form-level">
+            <label for="name" class="label">Nom de la recette * :</label>
+            <input class="input" type="text" id="nom" name="nom" required>
+        </article>
 
-    <form action="recipes-form" method="POST" enctype="multipart/form-data">
+        <article class="form-level">
+            <h3 class="subtitle">Catégorie *</h3>
+            <div class="sub-cat">
+                <label for="category" class="label">Entrée</label>
+                <input type="radio" name="category" value="starter">
+            </div>
+            <div class="sub-cat">
+                <label for="category" class="label">Plat</label>
+                <input type="radio" name="category" value="maincourse">
+            </div>
+            <div class="sub-cat">
+                <label for="category" class="label">Dessert </label>
+                <input type="radio" name="category" value="dessert">
+            </div>
+            <div class="sub-cat">
+                <label for="category" class="label">Boisson</label>
+                <input type="radio" name="category" value="beverage">
+            </div>                   
+        </article>
+        <article class="form-level">
+            <label class="label" for="video">Extrait du film :</label>
+            <input class="input" type="url" id="video" name="video" placeholder="https://www.youtube.com/watch?v=nsIpBTl0ab4&ab_channel=ImaginationInstitute">
+        </article>
 
-        <label for="name" class="recipe-name">Nom de la recette :</label>
-        <input class="name-text-box-1" type="text" id="nom" name="nom" required>
-<br>
-        <form class="form-radio">
-            <label>
-                <input type="radio" name="category" value="starter"> Entrée
-            </label>
-            <label>
-                <input type="radio" name="category" value="maincourse"> Plat
-            </label>
-            <label>
-                <input type="radio" name="category" value="dessert"> Dessert
-            </label>
-        </form>
-<br>
-        <label class="link-title" for="video">Lien vers l'extrait du film (optionnel):</label>
-        <input class="link-box" type="url" id="video" name="video" placeholder="https://www.youtube.com/watch?v=nsIpBTl0ab4&ab_channel=ImaginationInstitute">
-<br>
+        <article class="form-level">
+            <label for="description" class="label">Description de la recette *:</label>
+            <input type="text" name="description" id="description" rows="4" required placeholder="Décrivez la recette...">
+        </article>
 
-        <label class="tools-title" for="tools">Ustensiles nécessaires (séparés par une virgule) :</label>
-        <textarea class="tools-text-box" id="tools" name="tools" rows="2" placeholder="Ex : Poêle, Mixeur, Sabre laser..."></textarea>
+        <article class="form-level">
+            <label class="label" for="image">Photo de la recette :</label>
+            <input class="image-btn" type="file" id="image" name="image">
+        </article>
 
-<br>
-        <label class="ingredients-title" for="ingredients">Ingrédients nécessaires (séparés par une virgule) :</label>
-        <textarea class="ingredients-text-box" id="ingredients" name="ingredients" rows="3" required placeholder="Ex : Tomates, Oeufs, Bave de crapaud..."></textarea>
-        <br><br>
-<br>
-        <label class="description-title" for="description">Description de la recette :</label>
-        <textarea class="description-text-box" id="description" name="description" rows="4" required placeholder="Décrivez la recette..."></textarea>
+        <section class="multiple-levels">
+            <h3 class="subtitle">Ustensiles *</h3>                
+            <article class="tools-list">
+                <p class="add-elt">+</p>
+                <ul class="ctn-items">
+                        <li class="ctn-items-list" id="no-item">Aucun élément sélectionné</li>
+                </ul>
+            </article>
+                                   
+            <article class="form-add-tools">
+                <h3 class="add-title">Ajouter</h3> 
+                <div>
+                   <label class="label" for="tool">Ustensiles * :</label>
+                   <select name="tool" id="tool" class="select">
+                        <option value="">Sélectionner</option>
+                        <% tools.forEach(tool => { %>
+                           <option value="<%= tool.name %>"><%= tool.name %></option>
+                        <% })%>                        
+                   </select>
+                   <button type="button" class="add-btn">Ajouter</button>
+                   <button type="button" class="end-btn">J'ai tout</button>
+                </div>                        
+            </article>
+        </section>
+
+        <section class="multiple-levels">
+            <h3 class="subtitle">Ingrédients *</h3>                
+            <article class="ingredients-list">
+                <p class="add-elt">+</p>
+                <ul class="ctn-ingredients">
+                   <li class="ctn-ingredients-list" id="no-ingredients">Aucun élément sélectionné</li>
+                </ul>
+            </article>
+                                       
+            <article class="form-add-ingredients">
+                <h3 class="add-title">Ajouter</h3> 
+                <div>
+                   <label class="label" for="ingredients">Ingrédients * :</label>
+                   <select name="ingredient" id="ingredient" class="select">
+                        <option value="">Sélectionner</option>
+                        <% ingredients.forEach(ingredient => { %>
+                           <option value="<%= ingredient.name %>"><%= ingredient.name %></option>
+                        <% })%>                        
+                    </select>
+                    <button type="button" class="add-btn">Ajouter</button>
+                    <button type="button" class="end-btn">J'ai tout</button>
+                </div>                        
+            </article>
+        </section>
+
+        </article>
+        <article class="form-level">
+            <label class="label" for="steps">Etapes :</label>
+            <textarea class="description-text-box" id="description" name="description" rows="4" required placeholder="Décrivez la recette..."></textarea>
         
 <br>       
         <!-- Stephanie ici la instruction a geré) -->
@@ -42,11 +104,12 @@
         <label class="time-title" for="time">Temps de préparation (en minutes) :</label>
         <input class="time-text-box" type="number" id="time" name="time" min="1" required>
 <br>
-        <label class="image-title" for="image">Image de la recette (optionnel) :</label>
-        <input class="image_btn" type="file" id="image" name="image">
+       
 <br>
 
         <button class="submit-btn" type="submit">Envoyer la Recette</button>
 <br>
     </form>
+</main>
+
 <%- include('partials/footer') %>

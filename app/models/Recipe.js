@@ -16,5 +16,5 @@ Recipe.init({
 
 //test
 
-const recipes = await Recipe.findAll();
-console.log(recipes);
+// const recipes = await Recipe.findAll();
+// console.log(recipes);
