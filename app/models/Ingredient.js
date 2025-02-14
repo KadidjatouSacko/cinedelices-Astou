@@ -13,7 +13,3 @@ Ingredient.init({
     sequelize,
     tableName: "ingredient"
 });
-
-//test
-const labels = await Ingredient.findAll();
-console.log(labels);

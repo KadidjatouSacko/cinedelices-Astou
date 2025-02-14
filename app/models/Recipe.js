@@ -6,15 +6,20 @@ export class Recipe extends Model { }
 Recipe.init({
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    }
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    duration: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    image: {
+        type: DataTypes.STRING
+    },
 }, {
     sequelize,
     tableName: "recipe"
 });
-
-//test
-
-// const recipes = await Recipe.findAll();
-// console.log(recipes);

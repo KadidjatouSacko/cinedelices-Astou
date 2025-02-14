@@ -6,20 +6,13 @@ export class Movie extends Model { }
 Movie.init({
     title: {
         type: DataTypes.STRING, 
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     year: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false,
+        allowNull: false
     }
 }, {
     sequelize,
     tableName: "movie"
 });
-
-//test
-
-const movies = await Movie.findAll();
-console.log(movies);

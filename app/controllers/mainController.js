@@ -1,5 +1,3 @@
-
-
 export const mainController = {
     renderHomePage(req, res) {
         const css = "home";
@@ -7,6 +5,4 @@ export const mainController = {
         const js = "index"
         res.render("home", { css, title, js });
     },
-    
 }
-

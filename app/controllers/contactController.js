@@ -1,9 +1,9 @@
 export const contactController = {
-    Getcontact(req, res) {
+    GetContact(req, res) {
         res.render("contact");
     },
 
-    contactSumbit(req, res) {
+    ContactSumbit(req, res) {
         const pseudo = req.body.pseudo; 
         const mail = req.body.mail;    
         const text = req.body.text;     
