@@ -1,0 +1,158 @@
+.body__main {
+    overflow: auto;
+}
+
+.title {
+    font-family: var(--font-subtitle);
+    font-size: .8rem;
+    text-align: center;
+    color: var(--colorRed);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 1rem .5rem;
+}
+
+.form {
+    width: 90%;
+    margin: 5% 2.5%;
+}
+
+.form-level {
+    width: 90%;
+    margin: .5rem 5% 1rem 5%;
+}
+
+.form-level:nth-child(2) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.form-level:nth-child(2) h3 {
+    grid-column: 1/3;
+    width: 100%;
+    text-align: center;
+    margin-bottom: .25rem;
+}
+
+.subtitle {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--colorRed);
+    font-size: .8rem;
+    font-family: var(--font-subtitle);
+}
+
+.sub-cat {
+    width: 100%;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 25%;
+}
+
+.sub-cat .label {
+    font-size: .8rem;
+    justify-content: space-around;
+    text-align: center;
+    
+}
+
+.label {
+    font-family: var(--font-subtitle);
+    font-size: .7rem;
+}
+
+.input {
+    width: 50%;
+    height: 1rem;
+    border-radius: 5px;
+}
+
+#description {
+    height: 2rem;
+    width: 90%;
+}
+
+.select {
+    width: 20%;
+}
+
+.image-btn {
+    width: 40%;
+    font-size: .7rem;
+}
+
+.tools-list, .ingredients-list {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.add-elt {
+    font-size: 1rem;
+    font-family: var(--font-subtitle);
+    font-weight: 900;
+    color: var(--colorNav);
+    background-color: var(--colorRed);
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--colorNav);
+    border-radius: 5px;
+    text-align: center;
+    
+}
+
+.no-item {
+    font-family: var(--font-subtitle);
+    font-weight: 600;
+    font-size: .8rem;
+    text-align: center;
+    width: 90%;
+    margin: .75rem auto;
+}
+
+.form-add {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.add-title {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--colorRed);
+    font-size: .8rem;
+    font-family: var(--font-subtitle);
+    margin-bottom: .5rem;
+}
+
+.form-add-tools, .form-add-ingredients {
+    display: flex;
+    justify-content: center;
+}
+
+.form-add div {
+    width: fit-content;
+    margin: 0 auto .25rem auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-add label {
+    font-size: .8rem;
+}
+
+.add-btn {
+    background-color: var(--colorRed);
+    color: var(--colorNav);
+    font-family: var(--font-subtitle);
+    font-size: .7rem;
+    border-radius: 5px;
+    border-color: var(--colorNav);
+}
