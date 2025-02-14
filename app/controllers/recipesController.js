@@ -20,7 +20,7 @@ export const recipesController = {
     },
 
     GetOneRecipe(req,res) {
-      const recipeName = req.params.name.toLowerCase();
+      const recipeName = req.params.label.toLowerCase();
       const recipe = recipes.find(r => r.name.toLowerCase() === recipeName);
       res.render("recipe", {recipe})
     },
@@ -33,7 +33,7 @@ export const recipesController = {
       // const tools = await Tool.findAll();
       const ingredients = await Ingredient.findAll()
       //console.log(items);
-      res.render("formRecipe", { css, js, title, ingredients })
+      res.render("form-recipe", { css, js, title, ingredients })
   },
 
   async AddOneRecipe(req, res) {
@@ -49,8 +49,9 @@ export const recipesController = {
       const ingredients = await Ingredient.findAll()
       const css = "formRecipe"
       const title = "Ajouter une recette"
-      
+      const js = "form";
+
       console.log(name)    
-            res.render("form-recipe", { css, title, ingredients })
+            res.render("form-recipe", { css, js, title, ingredients })
           }
         }
