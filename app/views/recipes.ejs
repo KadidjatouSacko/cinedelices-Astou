@@ -2,45 +2,89 @@
 
 <link rel="stylesheet" href="/assets/css/recipies.css">
 
+<main>
+    
+    <section class="filters">
+        <form action="/recettes" method="GET">
+            
+            <label for="difficulty">Difficulté:</label>
+            <select name="difficulty" id="difficulty">
+                <option value="">Choisir</option>
+                <option value="Facile">Facile</option>
+                <option value="Moyenne">Moyenne</option>
+                <option value="Difficile">Difficile</option>
+            </select>
 
-    <main>
+           
+            <label for="genre">Genre:</label>
+            <select name="genre" id="genre">
+                <option value="">Choisir</option>
+                <option value="Comédie">Comédie</option>
+                <option value="Fantastique">Fantastique</option>
+                <option value="Animation">Animation</option>
+                <option value="Romance">Romance</option>
+                <option value="Action">Action</option>
+                <option value="Thriller">Thriller</option>
+            </select>
 
+            
+            <label for="price">Prix:</label>
+            <select name="price" id="price">
+                <option value="">Choisir</option>
+                <option value="Pas cher">Pas cher</option>
+                <option value="Moyen">Moyen</option>
+                <option value="Haut">Haut</option>
+            </select>
+            <button type="submit">Filtrer</button>
+
+           
+            <label for="search">Rechercher :</label>
+            <input type="text" name="search" id="search" placeholder="Rechercher une recette, un auteur, un film...">
+
+          
+            <button type="submit">Rechercher</button>
+        </form>
+    </section>
+
+   
     <section class="recipies">
-
         <% recipes.forEach(recipe => { %>
-       
             <section class="recipe">
+                <div class="image-container">
+                    <h3 class="name-recipe"><%= recipe.name %></h3>
+                    <div class="article-container">
+                        <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie %>.jpg');">
+                            <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img">
+                        </article>
+                    </div>
 
-        <div class="image-container">
-                
-                <h3 class="name-recipe"><%= recipe.name %></h3>
+                    <section class="img-symbole">
+                        <p class="time">  
+                            <img src="/assets/img/symbole-temps.jpg" alt="symbole-temps" class="symbole"> 
+                            <%= recipe.time %>
+                        </p>
+                        <p class="difficulte">
+                            <img src="/assets/img/symbole-difficulté.jpg" alt="symbole-difficulte" class="symbole">  
+                            <%= recipe.difficulty %>
+                        </p>
+                        <p class="price"> 
+                            <img src="/assets/img/symbole-euro.jpg" alt="symbole-euro" class="symbole"> 
+                            <%= recipe.price %>
+                        </p>
+                    </section>
 
-            <div class="article-container">
-                <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie %>.jpg');">
-                     <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img">
-               </article>
-            </div>
-                
-             <section class="img-symbole">
-                    <p class="time">  <img src="/assets/img/symbole-temps.jpg" alt="symbole-temps" class="symbole"> <%= recipe.time %></p>
-                    <p class="difficulte" ><img src="/assets/img/symbole-difficulté.jpg" alt="symbole-difficulte" class="symbole">  <%= recipe.difficulty %></p>
-                    <p class="price"> <img src="/assets/img/symbole-euro.jpg" alt="symbole-euro" class="symbole"> <%= recipe.price %></p>
-            </section>
                     <div>
                         <button>
                             <a href="/recette/<%= recipe.name %>">Voir la recette</a>
                         </button>
-                     </div>
-        </div>
-               
-            
+                    </div>
+                </div>
             </section>
-            <% }) %>
-    
-    
+        <% }) %>
+    </section>
+
     <%- include('partial/footer') %>
-    
 </main>
-    
+
 </body>
 </html>

@@ -9,7 +9,8 @@ import { registrationController } from "./controllers/registration-controllers.j
 export const router = Router();
 
 router.get("/recettes", recipesController.GetAllRecipes);
-router.get("/recette/:name", recipesController.GetOneRecipe);
+// router.get("/recette/:name", recipesController.GetOneRecipe);
+router.get("/recette/:id", recipesController.GetOneRecipe);
 router.get("/movies", moviesController.GetAllMovies);
 router.get("/movies/:title", moviesController.GetOneMovies);
 router.get("/legal-notices", legalsnoticesController.GetAllMentions)
