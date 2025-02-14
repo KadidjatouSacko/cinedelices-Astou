@@ -33,8 +33,24 @@ export const recipesController = {
       // const tools = await Tool.findAll();
       const ingredients = await Ingredient.findAll()
       //console.log(items);
-      res.render("formRecipe", { css, js, title, tools, ingredients })
+      res.render("formRecipe", { css, js, title, ingredients })
   },
-}
 
-    
+  async AddOneRecipe(req, res) {
+    const  {name,
+    // //   category,
+    // //   movie_id,
+    // //   description,
+    // //   image,
+    // //   ingredient,
+    // //   instructions,
+    } = req.body
+      
+      const ingredients = await Ingredient.findAll()
+      const css = "formRecipe"
+      const title = "Ajouter une recette"
+      
+      console.log(name)    
+            res.render("form-recipe", { css, title, ingredients })
+          }
+        }
