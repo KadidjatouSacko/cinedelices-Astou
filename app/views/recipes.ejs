@@ -1,52 +1,47 @@
-    <%- include('/partials/header') %>
-        <main>
-            <section class="infos">
-                <div>
-                    <img src="/ciné-Delices/garfield.jpg" alt="photo de <%=  %>">
-                </div>
-                <div class="video-container">
-                    <iframe width="300" height="200"
-                    src="https://www.youtube.com/embed/T-7YWIhiiXM"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                    </iframe>
-                </div>
 
-                <article class="matériels">
-                    <h3> Ustensiles : </h3>
-                    <ul>
-                        <li>Poêle</li>
-                        <li>four</li>
-                        <li>moule</li>
-                    </ul>
-                </article>
+<%- include('partial/header') %>
 
-                <article class="ingrédients">
-                    <h3> Acteurs : </h3>
-                    <ul>
-                        <li>steak</li>
-                        <li>pâtes à lasagnes</li>
-                        <li>béchamel</li>
-                        <li>sauce tomate</li>
-                    </ul>
-                </article>
+<link rel="stylesheet" href="/assets/css/recipies.css">
+
+
+    <main>
+
+    <section class="recipies">
+
+        <% recipes.forEach(recipe => { %>
+       
+            <section class="recipe">
+
+        <div class="image-container">
+                
+                <h3 class="name-recipe"><%= recipe.name %></h3>
+
+            <div class="article-container">
+                <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie %>.jpg');">
+                     <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img">
+               </article>
+            </div>
+                
+             <section class="img-symbole">
+                    <p class="time">  <img src="/assets/img/symbole-temps.jpg" alt="symbole-temps" class="symbole"> <%= recipe.time %></p>
+                    <p class="difficulte" ><img src="/assets/img/symbole-difficulté.jpg" alt="symbole-difficulte" class="symbole">  <%= recipe.difficulty %></p>
+                    <p class="price"> <img src="/assets/img/symbole-euro.jpg" alt="symbole-euro" class="symbole"> <%= recipe.price %></p>
             </section>
-
-            <section class="description">
-                <div>
-                    <img src="/ciné-Delices/lasagne.jpg" alt="lasagnes">
-                </div>
-
-                <article class="script">
-                    <h3> Script</h3>
-                    <p> etape 1 </p>
-                    <p> etape 2 </p>
-                    <p> etape 3 </p>
-                    <p> etape 4 </p>
-                </article>
+                    <div>
+                        <button>
+                            <a href="/recette/<%= recipe.name %>">Voir la recette</a>
+                        </button>
+                     </div>
+        </div>
+               
+            
             </section>
-        </main>
-
-        <%- include('/partials/footer') %>
+            <% }) %>
+    
+    
+    <%- include('partial/footer') %>
+    
+</main>
+    
+</body>
+</html>

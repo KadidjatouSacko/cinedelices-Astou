@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/assets/css/recipe">
+<%- include('partial/header') %>
+
+<main>
+    <section class="infos">
+        <!-- <div>
+            <img src="../assets/img/<%= recipe.name.toLowerCase() %>.jpg" alt="<%= recipe.name %>">
+        </div> -->
+
+        <article class="utensils">
+            <h3> Ustensiles :</h3>
+            <ul>
+                <% recipe.utensils.forEach(utensil => { %>
+                    <li>  <%= utensil %></li>
+                <% }) %>
+            </ul>
+        </article>
+
+        <article class="ingredients">
+            <h3> Acteurs principaux :</h3>
+            <ul>
+                <% recipe.ingredients.forEach(ingredient => { %>
+                    <li>  <%= ingredient %></li>
+                <% }) %>
+            </ul>
+        </article>
+    </section>
+
+    <section class="description">
+        <div>
+            <img src="../assets/img/<%= recipe.name.toLowerCase() %>.jpg" alt="<%= recipe.name %>">
+        </div>
+
+        <article class="script">
+            <h3> Script:</h3>
+            <ul>
+                <% recipe.steps.forEach(step => { %>
+                    <li>  <%= step %></li>
+                <% }) %>
+            </ul>
+        </article>
+    </section>
+</main>
+
+<footer>
+    <a href="/legal-notices"> Mentions légales</a>
+    <a href="/contact"> Contact</a>
+</footer>
