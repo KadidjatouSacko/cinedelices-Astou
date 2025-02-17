@@ -1,4 +1,5 @@
 import { Router } from "express";
+import {upload} from "multer";
 
 import { mainController } from "./controllers/mainController.js";
 import { recipesController } from "./controllers/recipesController.js"; 
@@ -21,5 +22,7 @@ router.get("/inscription",authController.GetRegistration)
 router.get("/contact", contactController.GetContact)
 router.post("/contact",contactController.ContactSumbit)
 router.get("/recette/ajouter",recipesController.RenderAddRecipePage)
-router.post("/recette/ajouter",recipesController.AddOneRecipe);
+//router.post("/recette/ajouter",recipesController.AddOneRecipe);
 //router.post('/recette/valider', recipesController.ValidateRecipe)
+
+router.post("/recette/ajouter", upload.single('image'), recipesController.AddOneRecipe)

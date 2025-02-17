@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<main class="body__main">
+    <section class="body__main--ctn">
+        <h2 class="body__main--ctn-title">Choisissez le film de votre recette</h2>
+        <form action="#" method="get" class="body__main--ctn-searchForm">
+            <article class="body__main--ctn-searchForm-part">
+                <label for="title">Par titre :</label>
+                <input type="search" name="title" id="title">
+            </article>
+            <article class="body__main--ctn-searchForm-part">
+                <label for="category">Par genre :</label>
+                <input type="search" name="category" id="category">
+            </article>
+            <button type="submit">Rechercher</button>
+        
+            <section class="body__main--ctn-searchResult">
+                <article> 
+                    <% movies.forEach(movie => { %>
+                        <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
+                            <img src="/assets/img/<%= movie.title %>.jpg" alt="<%= movie.title %>">
+                            <ul>
+                                <li><strong>Réalisateur :</strong> <span><%= movie.director %></span></li>
+                                <li><strong>Année :</strong> <span><%= movie.year %></span></li>
+                                <li><strong>Genre :</strong> <span><%= movie.genre %></span></li>
+                            </ul>
+                        
+                        </article>
+                     <% }) %>
+                <article>
+            </section>
+
+    </section>
+</main>

@@ -7,14 +7,14 @@ INSERT INTO "difficulty" (id, label) VALUES
 (3, 'Difficile');
 
 -- Insertion des films
-INSERT INTO "movie" (id, title, year) VALUES
-(1, 'Garfield', '2004-01-01'),
-(2, 'Charlie et la chocolaterie', '2005-01-01'),
-(3, 'Le Petit Chaperon Rouge', '2011-01-01'),
-(4, 'Kung Fu Panda', '2008-01-01'),
-(5, 'La Belle et le Clochard', '1955-01-01'),
-(6, 'Ratatouille', '2007-01-01'),
-(7, 'Simpson', '2007-01-01');
+INSERT INTO "movie" (id, title, year, category) VALUES
+(1, 'Garfield', '2004-01-01', 'comedy'),
+(2, 'Charlie et la chocolaterie', '2005-01-01', 'comedy'),
+(3, 'Le Petit Chaperon Rouge', '2011-01-01', 'comedy'),
+(4, 'Kung Fu Panda', '2008-01-01','comedy'),
+(5, 'La Belle et le Clochard', '1955-01-01', 'disney'),
+(6, 'Ratatouille', '2007-01-01', 'disney'),
+(7, 'Simpson', '2007-01-01', 'comedy');
 
 -- Insertion des catégories
 INSERT INTO "category" (id, name) VALUES
