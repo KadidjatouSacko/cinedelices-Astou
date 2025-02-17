@@ -1,6 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import { router } from "./app/router.js";
+import multer from 'multer';
+const upload = multer({ dest: './public/assets/img' }); 
+
 
 const app = express();
 

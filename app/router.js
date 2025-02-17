@@ -20,5 +20,6 @@ router.get("/mentions-legales", legalsNoticesController.GetAllLegalsNotices)
 router.get("/inscription",authController.GetRegistration)
 router.get("/contact", contactController.GetContact)
 router.post("/contact",contactController.ContactSumbit)
-router.post("/recette/ajouter",recipesController.RenderAddRecipePage)
-router.get("/recette/ajouter",recipesController.AddOneRecipe);
+router.get("/recette/ajouter",recipesController.RenderAddRecipePage)
+router.post("/recette/ajouter",recipesController.AddOneRecipe);
+//router.post('/recette/valider', recipesController.ValidateRecipe)

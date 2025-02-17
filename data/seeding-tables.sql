@@ -1,12 +1,12 @@
 BEGIN;
 
--- Insertion des niveaux de difficulté avec IDs explicites
+-- Insertion des niveaux de difficulté
 INSERT INTO "difficulty" (id, label) VALUES
 (1, 'Facile'),
 (2, 'Moyenne'),
 (3, 'Difficile');
 
--- Insertion des films avec IDs explicites
+-- Insertion des films
 INSERT INTO "movie" (id, title, year) VALUES
 (1, 'Garfield', '2004-01-01'),
 (2, 'Charlie et la chocolaterie', '2005-01-01'),
@@ -16,13 +16,13 @@ INSERT INTO "movie" (id, title, year) VALUES
 (6, 'Ratatouille', '2007-01-01'),
 (7, 'Simpson', '2007-01-01');
 
--- Insertion des catégories avec IDs explicites
+-- Insertion des catégories
 INSERT INTO "category" (id, name) VALUES
 (1, 'Entrée'),
 (2, 'Plat principal'),
 (3, 'Dessert');
 
--- Insertion des ingrédients avec IDs explicites
+-- Insertion des ingrédients
 INSERT INTO "ingredient" (id, label) VALUES
 (1, 'Pâtes à lasagne'),
 (2, 'Bœuf haché'),
@@ -56,7 +56,7 @@ INSERT INTO "ingredient" (id, label) VALUES
 (30, 'Lait'),
 (31, 'Huile');
 
--- Insertion des recettes avec IDs explicites
+-- Insertion des recettes
 INSERT INTO "recipe" (id, name, description, duration, difficulty_id, category_id, movie_id) VALUES
 (1, 'Lasagnes', 'Une délicieuse recette de lasagnes inspirée par Garfield.', 45, 2, 2, 1),
 (2, 'Mousse au Chocolat', 'Un dessert chocolaté inspiré de Charlie et la chocolaterie.', 15, 1, 3, 2),
@@ -66,12 +66,12 @@ INSERT INTO "recipe" (id, name, description, duration, difficulty_id, category_i
 (6, 'Ratatouille', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 2, 2, 6),
 (7, 'Donuts', 'Les donuts préférés d''Homer Simpson.', 60, 2, 3, 7);
 
--- Insertion des relations recette-ingredient (exemple avec Lasagnes)
+-- Insertion des relations recette-ingredient
 INSERT INTO "recipe_has_ingredient" (recipe_id, ingredient_id, quantity, unity) VALUES
-(1, 1, 6, 'feuilles'), -- Pâtes à lasagne
-(1, 2, 500, 'g'), -- Bœuf haché
-(1, 3, 400, 'ml'), -- Sauce tomate
-(1, 4, 200, 'g'), -- Fromage râpé
-(1, 5, 300, 'ml'); -- Béchamel
+(1, 1, 6, 'feuilles'),
+(1, 2, 500, 'g'),
+(1, 3, 400, 'ml'),
+(1, 4, 200, 'g'),
+(1, 5, 300, 'ml');
 
 COMMIT;

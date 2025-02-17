@@ -37,21 +37,32 @@ export const recipesController = {
   },
 
   async AddOneRecipe(req, res) {
-    const  {name,
-    // //   category,
-    // //   movie_id,
-    // //   description,
-    // //   image,
-    // //   ingredient,
-    // //   instructions,
-    } = req.body
+    console.log(req.body.name)
+    // const  {name,
+    // // //   category,
+    // // //   movie_id,
+    // // //   description,
+    // // //   image,
+    // // //   ingredient,
+    // // //   instructions,
+    // } = req.body
       
-      const ingredients = await Ingredient.findAll()
-      const css = "formRecipe"
-      const title = "Ajouter une recette"
-      const js = "form";
+    const css = "formRecipe"
+    const title = "Ajouter une recette"
+    const js = "form";
 
-      console.log(name)    
-            res.render("form-recipe", { css, js, title, ingredients })
-          }
-        }
+    //console.log(name)    
+      res.render("form-recipe", { css, js, title })      
+    },
+
+    // ValidateRecipe(req, res) {
+    //   const name = req.query.name
+    //   console.log(name);
+      
+    //   const css = "recipes"
+    //   const js = "index"
+    //   const title = "Catalogue de recettes"
+    //   res.render('recipes', { css, js, title })
+    // }
+
+  }
