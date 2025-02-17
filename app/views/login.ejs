@@ -13,37 +13,27 @@
         </div>
         <h1 class="page-title">Connexion</h1>
     </header>
-
     <main class="main-content">
         <div class="contact-container">
             <h2 class="contact-heading">Je me connecte</h2>
-            
             <div class="contact-info">
-           
-            </div>
-
-            
-                <form class="contact-form" action="/contact" method="POST">
-                  
-                        <div class="form-group">
-                            <label for="pseudo">Pseudo </label>
-                            <input type="pseudo" id="pseudo"  name="pseudo"  required>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="password"> Mot de passe:</label> 
-                                <input type="password"id="pseudo" name="pseudo" required>
-                            </div>
+                <!-- Ajout du form avec method et action -->
+                <form action="/connexion" method="POST">
+                    <div class="alert alert-danger" role="alert">
+                        Une erreur s'est produite lors de la connexion.
                     </div>
-                    <div class="form-group">
-                       
+                    <div>
+                        <label for="pseudo">Pseudo</label>
+                        <input type="text" id="pseudo" name="pseudo" required>
                     </div>
-                    <button type="submit" class="submit-btn">connexion</button>
+                    <div>
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Se connecter</button>
                 </form>
             </div>
         </div>
-
         <nav class="side-nav">
             <ul>
                 <li><a href="/recettes">Recettes</a></li>
@@ -55,5 +45,3 @@
     </main>
 </body>
 </html>
-
-
