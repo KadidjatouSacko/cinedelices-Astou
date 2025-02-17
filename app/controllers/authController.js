@@ -4,4 +4,10 @@ export const authController = {
       res.render("registration");
 
   },
+ LoginPage(req,res) { 
+  res.render("login");
+
+ }
+
 }
+
