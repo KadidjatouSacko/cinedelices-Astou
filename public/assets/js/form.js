@@ -41,4 +41,31 @@ endBtn.addEventListener('click', () => {
     addEltBtn.style.display = 'none';
 })
 
+// Fonction pour gérer la sélection d'un film
+function selectMovie(movieId) {
+    const selectedMovie = document.getElementById(movieId);
+    if (selectedMovie) {
+        const radioInput = selectedMovie.querySelector('input[type="radio"]');
+        if (radioInput) {
+            radioInput.checked = true;
+        }
+    }
+}
+
+// Écouteur d'événement pour la soumission du formulaire de recherche
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForms = document.querySelectorAll('.body__main--ctn-searchForm');
+    
+    searchForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchInput = this.querySelector('input[type="search"]');
+            if (searchInput && searchInput.value.trim()) {
+                // Redirection vers la route de recherche avec le paramètre
+                window.location.href = `/rechercher/genre?${searchInput.name}=${encodeURIComponent(searchInput.value.trim())}`;
+            }
+        });
+    });
+});
+
 
