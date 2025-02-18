@@ -10,8 +10,8 @@ export const movieController = {
             })
             .then(res => res.json())
             .then(json => console.log(json))
-            console.log(movies);
-            const length = movies.length
+            //console.log(movies);
+            const length = movies.results.length
             const css = 'formMovie'
             const js = "form"
             const title = "Ajouter une recette - choisir un film"

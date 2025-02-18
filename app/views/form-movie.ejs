@@ -26,7 +26,7 @@
                 <% if (length === 0) { %>
                     <h3><%= message %></h3>
                 <% } else if(length > 0) { %> 
-                    <% movies.forEach(movie => { %>
+                    <% movies.results.forEach(movie => { %>
                         <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
                             <img src="<%= movie.poster_path %>.jpg" alt="Affiche du film <%= movie.name %>">
                             <ul>
