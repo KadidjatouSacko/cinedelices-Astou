@@ -1,5 +1,10 @@
 BEGIN;
 
+-- Insertion des users, mot de passe = Test123!
+INSERT INTO "user" ("id", "pseudo", "firstname", "lastname", "email", "password") VALUES
+(1, 'Tatayoyo', 'Tata', 'Yoyo', 'tata@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc'),
+(3, 'Trop choupi', 'Mimi', 'Labelle', 'mimi@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc');
+
 -- Insertion des niveaux de difficulté avec IDs explicites
 INSERT INTO "difficulty" (id, label) VALUES
 (1, 'Facile'),

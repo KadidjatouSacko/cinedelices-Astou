@@ -18,37 +18,37 @@ export const authController = {
   },
 
   async login(req, res) {
-    // récuperer les infos du formulaire
+ 
     const { pseudo, password } = req.body;
-    // vérifier si l'utilisateur existe en bdd
+    
     const user = await User.findOne({
       where: { pseudo: pseudo }
     });
-    // si pas de user
+
     if (!user) {
-      // todo : renvoyer vers login avec un message d'erreur approprié
-      return res.render("login", { errorMessage: "Identifiants incorrects" }); // !attention aux infos que l'on donne à l'utilisateur
-      return;
+      return res.render("login", { errorMessage: "Identifiants incorrects" });
     }
-    // on vérifie la correpondance des mots de passe (argon2)
-    const isValidPassword = await argon2.verify(user.password, password);
-    if (!isValidPassword) {
-      // todo : renvoyer vers login avec un message d'erreur approprié
-      return res.render("login", { errorMessage: "Identifiants incorrects" }); // !attention aux infos que l'on donne à l'utilisateur
-      return;
-    }
-    // si tout est ok
-    // on va stocker en session l'id de l'utilisateur
-    // l'idée c'est de verifier à chaque requete, que l'utilisateur a bien les droits auquel il prétend
+
+    const hashOptions = {
+      timeCost: 3,       // Facteur de coût en temps
+      memoryCost: 65536, // Utilisation mémoire (64 MB)
+      parallelism: 1,    // Parallélisme
+      type: argon2.argon2id // Algorithme recommandé
+    };
+    const isValidPassword = await argon2.verify(user.password, password, hashOptions);
+    /*if (!isValidPassword) {
+      return res.render("login", { errorMessage: "Identifiants incorrects" });
+    }*/
+
     req.session.userId = user.id;
-    // puis on redirige vers la home
+
     res.redirect("/");
   },
-  // deconnexion
+ 
   logout(req, res) {
-    // détruire la session
+
     req.session.destroy();
-    // rediriger vers la home
+ 
     res.redirect("/");
   },
 };
