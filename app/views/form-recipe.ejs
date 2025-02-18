@@ -2,7 +2,7 @@
 <main class="body__main">
     <h2 class="title">Créer une Recette</h2>
     <!-- nom a validé -->
-    <form action="#" method="POST" enctype="multipart/form-data" class="form">
+    <form action="/recette/ajouter" method="POST" enctype="multipart/form-data" class="form">
         <article class="form-level">
             <label for="name" class="label">Nom de la recette * :</label>
             <input class="input" type="text" id="name" name="name" required>
@@ -41,28 +41,8 @@
             <label class="label" for="image">Photo de la recette :</label>
             <input class="image-btn" type="file" id="image" name="image">
         </article>
-
-        <!-- <section class="multiple-levels">
-            <h3 class="subtitle">Ustensiles *</h3>                
-            <article class="tools-list">
-                <p class="add-elt">+</p>
-                <ul class="ctn-items">
-                        <li class="ctn-items-list" id="no-item">Aucun élément sélectionné</li>
-                </ul>
-            </article>
-
-            <article class="form-add-tools">
-                <h3 class="add-title">Ajouter</h3> 
-                <div>
-                   <label class="label" for="tool">Ustensiles * :</label>
-                   <select name="tool" id="tool" class="select">
-                        <option value="">Sélectionner</option>
-                        DYNAMISER EJS  
-                           <option value=""></option>-->
-                                              
-                   <!-- </select> -->
-                   <button type="button" class="add-btn">Ajouter</button>
-                   <button type="button" class="end-btn">J'ai tout</button>
+        <button type="button" class="add-btn">Ajouter</button>
+        <button type="button" class="end-btn">J'ai tout</button>
                 </div>                        
             </article>
         </section>

@@ -1,4 +1,4 @@
-import upload from "../../index.js";
+//import upload from "../../index.js";
 
 // import {recipes} from "../../data/data.js"
 import { Recipe, Ingredient } from "../models/index.js";
@@ -21,75 +21,50 @@ export const recipesController = {
     },
 
     GetOneRecipe(req,res) {
-      const recipeName = req.params.label.toLowerCase();
-      const recipe = recipes.find(r => r.name.toLowerCase() === recipeName);
-      res.render("recipe", {recipe})
+      const recipeName = req.params.label;
+      // const recipe = recipes.find(r => r.name === recipeName);
+      res.render("recipe", {})
     },
-
-    async RenderAddRecipePage(req, res) {
+    
+    async RenderFilmSelectPage(req, res) {
       // console.log('youhouuuuu');
-      const css = "formRecipe"; 
+      const css = "formMovie"; 
       const js = "form";
-      const title = "Ajouter une recette : Relier un film à votre recette ... ";
-      // const tools = await Tool.findAll();
-      const ingredients = await Ingredient.findAll()
-      //console.log(items);
-      res.render("form-movie", { css, js, title, ingredients })
+      const title = "Ajouter une recette - relier un film à votre recette ";
+      const movies = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr&page=1&sort_by=popularity.desc', {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzliYmU1Y2NmZTNkZDkzYTA5NzE3YjYwM2Y0MjUxMSIsIm5iZiI6MTYzNDQwOTM3Ny43NjcsInN1YiI6IjYxNmIxYmExOTcxNWFlMDA0NDdhNzg1MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8NsQ44WmFHl7YAEPm0QnidrdGrwG-K7x7r_2ZOI25TM'
+        }
+      })
+      .then(res => res.json())
+      const length = movies.results.length
+      const message = "Aucun film trouvé"
+      res.render("form-movie", { css, title, js, length, movies, message })
   },
 
-  async AddOneRecipe(req, res) {
-const  upload  =  multer ( {  dest : './public/assets/img/'  } ) 
-app . post ( '/stats' ,  upload . single ( 'uploaded_file' ) ,  function  ( req ,  res )  { 
-   // req.file est le nom de votre fichier dans le formulaire ci-dessus, ici 'uploaded_file' 
-   // req.body contiendra les champs de texte, s'il y en avait 
-   console . log ( req . file ,  req . body ) 
-} ) ;
-      try {
-        // Le fichier est disponible dans req.file
-        const imageUrl = `/assets/img/recipes/${req.file.filename}`;
-        
-        // Les autres données du formulaire sont dans req.body
-        const { name, category, movie_id, description, image, ingredient, instructions, } = req.body;
-        
-        // Ici, ajoutez votre logique pour sauvegarder la recette dans la base de données
-        
-        res.status(200).json({
-          message: 'Recette ajoutée avec succès',
-          imageUrl: imageUrl
-        });
-      } catch (error) {
-        res.status(400).json({
-          error: error.message
-        });
-      }
-      console.log(req.body.name)
-    // const  {name,
-    // // //   category,
-    // // //   movie_id,
-    // // //   description,
-    // // //   image,
-    // // //   ingredient,
-    // // //   instructions,
-    // } = req.body
-      
+  RenderAddRecipePage(req,res) {
+    const filmId = req.params.filmId;
+    const css = "formRecipe"
+    const title = "Ajouter une recette"
+    const js = "form";
+    console.log('film', filmId);
+    res.render("form-recipe", {css, title, js})
+  },
+  
+  async AddOneRecipe(req, res) {      
     const css = "formRecipe"
     const title = "Ajouter une recette"
     const js = "form";
 
-    //console.log(name)    
-      res.render("form-recipe", { css, js, title }) 
+    console.log(req.body);
+    console.log(req.file);
+
+    //console.log(name)  
+    res.render("form-recipe", { css, js, title }) 
     },
        
-    }
+  };
 
-    // ValidateRecipe(req, res) {
-    //   const name = req.query.name
-    //   console.log(name);
-      
-    //   const css = "recipes"
-    //   const js = "index"
-    //   const title = "Catalogue de recettes"
-    //   res.render('recipes', { css, js, title })
-    // }
-
-  //}
+  

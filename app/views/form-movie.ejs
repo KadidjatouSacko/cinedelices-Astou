@@ -3,32 +3,42 @@
 <main class="body__main">
     <section class="body__main--ctn">
         <h2 class="body__main--ctn-title">Choisissez le film de votre recette</h2>
-        <form action="#" method="get" class="body__main--ctn-searchForm">
-            <article class="body__main--ctn-searchForm-part">
-                <label for="title">Par titre :</label>
-                <input type="search" name="title" id="title">
-            </article>
-            <article class="body__main--ctn-searchForm-part">
-                <label for="category">Par genre :</label>
-                <input type="search" name="category" id="category">
-            </article>
-            <button type="submit">Rechercher</button>
-        
-            <section class="body__main--ctn-searchResult">
-                <article> 
-                    <% movies.forEach(movie => { %>
+        <section class="body__main--ctn-sectionSearch">
+            <form action="/rechercher/genre" method="get" class="body__main--ctn-searchForm">
+                <article class="body__main--ctn-searchForm-part-ctn">
+                    <label for="title" class="body__main--ctn-searchForm-part-btn-label">Titre </label>
+                    <input type="search" name="title" id="title" class="body__main--ctn-searchForm-part-btn-input" placeholder="Dune">
+                    <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button> 
+                    
+                </article>
+            </form>
+            <form action="/rechercher/genre" method="get" class="body__main--ctn-searchForm">
+                <article class="body__main--ctn-searchForm-part-ctn">
+                    <label for="category" class="body__main--ctn-searchForm-part-btn-label">Genre </label>
+                    <input type="search" name="category" id="category" class="body__main--ctn-searchForm-part-btn-input" placeholder="Comédie">
+                    <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button> 
+                    
+                </article>
+            </form>
+        </section>
+        <section class="body__main--ctn-searchResult">
+            <article>
+                <% if (length === 0) { %>
+                    <h3><%= message %></h3>
+                <% } else if(length > 0) { %> 
+                    <% movies.results.forEach(movie => { %>
                         <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                            <img src="/assets/img/<%= movie.title %>.jpg" alt="<%= movie.title %>">
+                            <img src="<%= movie.poster_path %>.jpg" alt="Affiche du film <%= movie.name %>">
                             <ul>
-                                <li><strong>Réalisateur :</strong> <span><%= movie.director %></span></li>
-                                <li><strong>Année :</strong> <span><%= movie.year %></span></li>
-                                <li><strong>Genre :</strong> <span><%= movie.genre %></span></li>
-                            </ul>
-                        
+                                <li>Année : <%= movie.release_date %></li>
+                                <li>Genre : <%= movie.genre_ids[0] %></li>
+                            </ul>                        
                         </article>
-                     <% }) %>
-                <article>
-            </section>
-
+                    <% }) %> 
+                <% } %>                               
+            <article>
+        </section>
     </section>
 </main>
+
+<%- include('partials/footer') %>
