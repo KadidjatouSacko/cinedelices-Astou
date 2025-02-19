@@ -22,6 +22,12 @@ INSERT INTO "category" (id, name) VALUES
 (2, 'Plat principal'),
 (3, 'Dessert');
 
+INSERT INTO "genre" (name) VALUES
+    ('Action' ),
+    ('Comédie'),
+    ('Drame'),
+    ('Horreur');
+
 -- Insertion des ingrédients avec IDs explicites
 INSERT INTO "ingredient" (id, label) VALUES
 (1, 'Pâtes à lasagne'),
