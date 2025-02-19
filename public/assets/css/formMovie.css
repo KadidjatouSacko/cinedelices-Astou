@@ -46,3 +46,8 @@
     width: 4rem;
     font-size: .7rem;
 }
+
+.movie-image {
+    width: 50px;
+    height: auto;
+}

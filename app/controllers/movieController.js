@@ -38,51 +38,55 @@ export const movieController = {
 
     },
 
-    async searchMovie(req, res) {
+    async searchMovieByTitle(req, res) {
         try {
-            const title = req.query.title; // Récupère le titre depuis la requête GET
-            console.log(title);
+            const titleFilm = req.query.title; // Récupère le titre depuis la requête GET
+            console.log(titleFilm);
             
             // Configuration de l'API TMDB
             const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzliYmU1Y2NmZTNkZDkzYTA5NzE3YjYwM2Y0MjUxMSIsIm5iZiI6MTYzNDQwOTM3Ny43NjcsInN1YiI6IjYxNmIxYmExOTcxNWFlMDA0NDdhNzg1MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8NsQ44WmFHl7YAEPm0QnidrdGrwG-K7x7r_2ZOI25TM';
-            const TMDB_API_URL = `https://api.themoviedb.org/3/search/movie?query=${movie.name}?append_to_response='images?${poster_path}&language=fr`;
+            const TMDB_API_URL = `https://api.themoviedb.org/3/search/movie?query=${titleFilm}?&language=fr`;
             
             // Appel à l'API TMDB avec node-fetch
-            const response = await fetch(`${TMDB_API_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(title)}`, {
+            const movies = await fetch(`${TMDB_API_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(titleFilm)}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzliYmU1Y2NmZTNkZDkzYTA5NzE3YjYwM2Y0MjUxMSIsIm5iZiI6MTYzNDQwOTM3Ny43NjcsInN1YiI6IjYxNmIxYmExOTcxNWFlMDA0NDdhNzg1MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8NsQ44WmFHl7YAEPm0QnidrdGrwG-K7x7r_2ZOI25TM'
                 }
-            });
-
-            const data = await response.json();
-
+            })            
+            .then(res => res.json())
+           //console.log(movies);
+            
+            const moviesTreated = []; 
             // Formatage des résultats
-            const movies = data.results.map(movie => ({
-                id: movie.id,
-                title: movie.title,
-                release_date: movie.release_date,
-                posterUrl: movie.poster_path 
-                    ? `https://image.tmdb.org/t/p/w200${posterUrl}`
-                    : 'https://via.placeholder.com/200x300?text=Image+Non+Dispo'
-            }));
+            movies.results.forEach(movie => {                           
+                  const movieTreated = {id: movie.id, title: movie.title, image: `https://image.tmdb.org/t/p/w300${movie.poster_path}`, year: movie.release_date }
+                  moviesTreated.push(movieTreated);
+            });
+            console.log(moviesTreated);
+            const css = "formRecipe"
+            const js = "form"
+            const message = "Pas de film trouvé"
+            const title = "Recherche par titre de film"
+            //     id: movie.id,
+            //     title: movie.title,
+            //     release_date: movie.release_date,
+            //     posterUrl: movie.poster_path 
+            //         ? `https://image.tmdb.org/t/p/w300${posterUrl}`
+            //         : 'https://via.placeholder.com/200x300?text=Image+Non+Dispo'
+            // }));
 
             // Rendu de la vue avec les résultats
-            res.render('form-movie', {
-                css: 'votre_css',
-                js: 'votre_js',
-                title: 'Recherche de films',
-                movies: { results: movies },
-                length: movies.length,
-                message: movies.length === 0 ? 'Aucun film trouvé' : ''
-            });
+            res.render('form-movie', { css, js, title, moviesTreated, message});
+            //     : movies.length === 0 ? 'Aucun film trouvé' : ''
+            // });
 
         } catch (error) {
             console.error('Erreur lors de la recherche de films:', error);
             res.render('form-movie', {
-                css: 'votre_css',
-                js: 'votre_js',
-                title: 'Recherche de films',
+                css: "formRecipe",
+                js: "form",
+                title: 'Recherche par titre de films',
                 movies: { results: [] },
                 length: 0,
                 message: 'Une erreur est survenue lors de la recherche'

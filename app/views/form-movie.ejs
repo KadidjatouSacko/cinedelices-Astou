@@ -24,7 +24,7 @@
                 <form action="/recette/filmId/ajouter" method="get">
                     <% moviesTreated.forEach(movie => { %>
                         <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                            <label for="movie_id"><img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>">
+                            <label for="movie_id"><img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>" class="movie-image">
                                 <ul>
                                     <li>Année : <%= movie.year %></li>
                                 </ul>                        

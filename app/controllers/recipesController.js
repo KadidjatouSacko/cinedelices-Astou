@@ -38,6 +38,7 @@ export const recipesController = {
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzliYmU1Y2NmZTNkZDkzYTA5NzE3YjYwM2Y0MjUxMSIsIm5iZiI6MTYzNDQwOTM3Ny43NjcsInN1YiI6IjYxNmIxYmExOTcxNWFlMDA0NDdhNzg1MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8NsQ44WmFHl7YAEPm0QnidrdGrwG-K7x7r_2ZOI25TM'
         }
       }) 
+      })
       .then(res => res.json())
       console.log(movies);
       const moviesTreated = [];     
@@ -72,7 +73,7 @@ export const recipesController = {
     //console.log(name)  
     res.render("form-recipe", { css, js, title }) 
     },
-       
+
   };
 
   
