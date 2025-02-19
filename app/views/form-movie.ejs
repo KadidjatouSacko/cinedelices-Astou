@@ -4,12 +4,11 @@
     <section class="body__main--ctn">
         <h2 class="body__main--ctn-title">Choisissez le film de votre recette</h2>
         <section class="body__main--ctn-sectionSearch">
-            <form action="/rechercher/genre" method="get" class="body__main--ctn-searchForm">
+            <form action="/rechercher/titre" method="get" class="body__main--ctn-searchForm">
                 <article class="body__main--ctn-searchForm-part-ctn">
                     <label for="title" class="body__main--ctn-searchForm-part-btn-label">Titre </label>
                     <input type="search" name="title" id="title" class="body__main--ctn-searchForm-part-btn-input" placeholder="Dune">
-                    <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button> 
-                    
+                    <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button>    
                 </article>
             </form>
             <form action="/rechercher/genre" method="get" class="body__main--ctn-searchForm">
@@ -17,7 +16,6 @@
                     <label for="category" class="body__main--ctn-searchForm-part-btn-label">Genre </label>
                     <input type="search" name="category" id="category" class="body__main--ctn-searchForm-part-btn-input" placeholder="Comédie">
                     <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button> 
-                    
                 </article>
             </form>
         </section>
@@ -26,6 +24,17 @@
                 <% if (length === 0) { %>
                     <h3><%= message %></h3>
                 <% } else if(length > 0) { %> 
+                    <form action="/recette/:filmId/ajouter" method="get">
+                        <% movies.results.forEach(movie => { %>
+                            <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
+                                <img src="https://image.tmdb.org/t/p/w300/<%= movie.results.poster_path %>" alt="Affiche du film <%= movie.results.name %>">
+                                <ul>
+                                    <li>Année : <%= movie.release_date %></li>
+                                    <!-- <li>Genre : <%= movie.genre_ids[0] %></li> -->
+                                </ul>                        
+                            </article>
+                        <% }) %> 
+                    </form>
                     <% movies.results.forEach(movie => { %>
                         <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
                             <img src="<%= movie.poster_path %>.jpg" alt="Affiche du film <%= movie.name %>">
