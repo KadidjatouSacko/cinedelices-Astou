@@ -5,7 +5,8 @@ export const movieController = {
         const css = 'formMovie'
         const js = "form"
         const title = "Ajouter une recette - choisir un film"
-        const message = "Aucun film trouvé"      
+        const message = "Aucun film trouvé"
+        const moviesTreated = [];      
         try {
             const titleFilm = req.params.title 
             const movies = await fetch(`https://api.themoviedb.org/3/search/movie?query=${titleFilm}&include_adult=false&language=fr&page=1`, {
@@ -17,14 +18,19 @@ export const movieController = {
             })
             .then(res => res.json())
             .then(json => console.log(json))
-            console.log(movies);
+            //console.log(movies);
             if(!movies) {
                
                 res.redirect("/rechercher/erreur")
             }
-                   
+            movies.results.forEach(movie => {                
+                const movieTreated = {id: movie.id, title: movie.title, image: `https://image.tmdb.org/t/p/${movie.poster_path}`, year: movie.release_date }
+                moviesTreated.push(movieTreated);
+            });
+            console.log(moviesTreated);
             
-            res.render("form-movie", {css, title, js, movies, message})
+            
+            res.render("form-movie", {css, title, js, moviesTreated, message})
         } catch (err) {
             console.log(err);
             res.status(500).redirect("/erreur")

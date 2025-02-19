@@ -22,11 +22,11 @@
         <section class="body__main--ctn-searchResult">
             <article>
                 <form action="/recette/filmId/ajouter" method="get">
-                    <% movies.results.forEach(movie => { %>
+                    <% moviesTreated.forEach(movie => { %>
                         <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                            <label for="movie_id"><img src="<%= movie.posterUrl %>" alt="Affiche du film <%= movie.title %>">
+                            <label for="movie_id"><img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>">
                                 <ul>
-                                    <li>Année : <%= movie.release_date %></li>
+                                    <li>Année : <%= movie.year %></li>
                                 </ul>                        
                             </label>
                         <input type="radio" name="movie_id" id="movie_id">

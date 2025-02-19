@@ -40,10 +40,16 @@ export const recipesController = {
       })
       .then(res => res.json())
       console.log(movies);
+      const moviesTreated = [];     
+      movies.results.forEach(movie => {                
+        const movieTreated = {id: movie.id, title: movie.title, image: `https://image.tmdb.org/t/p/w300${movie.poster_path}`, year: movie.release_date }
+        moviesTreated.push(movieTreated);
+    });
+    console.log(moviesTreated);
      // const poster = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/images`)
       
       const message = "Aucun film trouvé"
-      res.render("form-movie", { css, title, js, movies, message })
+      res.render("form-movie", { css, title, js, moviesTreated, message })
   },
 
   RenderAddRecipePage(req,res) {
