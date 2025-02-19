@@ -31,7 +31,7 @@ export const recipesController = {
       const css = "formMovie"; 
       const js = "form";
       const title = "Ajouter une recette - relier un film à votre recette ";
-      const movies = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr&page=1&sort_by=popularity.desc', {
+      const movies = await fetch('https://api.themoviedb.org/3/discover/movie?append_to_response=images&include_adult=false&include_video=false&language=fr&page=1&sort_by=popularity.desc', {
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -39,9 +39,11 @@ export const recipesController = {
         }
       })
       .then(res => res.json())
-      const length = movies.results.length
+      console.log(movies);
+     // const poster = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/images`)
+      
       const message = "Aucun film trouvé"
-      res.render("form-movie", { css, title, js, length, movies, message })
+      res.render("form-movie", { css, title, js, movies, message })
   },
 
   RenderAddRecipePage(req,res) {

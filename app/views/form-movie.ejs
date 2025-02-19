@@ -21,30 +21,19 @@
         </section>
         <section class="body__main--ctn-searchResult">
             <article>
-                <% if (length === 0) { %>
-                    <h3><%= message %></h3>
-                <% } else if(length > 0) { %> 
-                    <form action="/recette/:filmId/ajouter" method="get">
-                        <% movies.results.forEach(movie => { %>
-                            <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                                <img src="https://image.tmdb.org/t/p/w300/<%= movie.results.poster_path %>" alt="Affiche du film <%= movie.results.name %>">
-                                <ul>
-                                    <li>Année : <%= movie.release_date %></li>
-                                    <!-- <li>Genre : <%= movie.genre_ids[0] %></li> -->
-                                </ul>                        
-                            </article>
-                        <% }) %> 
-                    </form>
+                <form action="/recette/filmId/ajouter" method="get">
                     <% movies.results.forEach(movie => { %>
                         <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                            <img src="<%= movie.poster_path %>.jpg" alt="Affiche du film <%= movie.name %>">
-                            <ul>
-                                <li>Année : <%= movie.release_date %></li>
-                                <li>Genre : <%= movie.genre_ids[0] %></li>
-                            </ul>                        
-                        </article>
+                            <label for="movie_id"><img src="<%= movie.posterUrl %>" alt="Affiche du film <%= movie.title %>">
+                                <ul>
+                                    <li>Année : <%= movie.release_date %></li>
+                                </ul>                        
+                            </label>
+                        <input type="radio" name="movie_id" id="movie_id">
                     <% }) %> 
-                <% } %>                               
+
+                    <button type="submit">Enregistrer</button>
+                </form>                             
             <article>
         </section>
     </section>
