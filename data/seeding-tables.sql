@@ -7,14 +7,14 @@ INSERT INTO "difficulty" (id, label) VALUES
 (3, 'Difficile');
 
 -- Insertion des films avec IDs explicites
-INSERT INTO "movie" (id, title, year) VALUES
-(1, 'Garfield', '2004-01-01'),
-(2, 'Charlie et la chocolaterie', '2005-01-01'),
-(3, 'Le Petit Chaperon Rouge', '2011-01-01'),
-(4, 'Kung Fu Panda', '2008-01-01'),
-(5, 'La Belle et le Clochard', '1955-01-01'),
-(6, 'Ratatouille', '2007-01-01'),
-(7, 'Simpson', '2007-01-01');
+INSERT INTO "movie" (id, title, year, genre) VALUES
+(1, 'Garfield', '2004-01-01', 'Animation'),
+(2, 'Charlie et la chocolaterie', '2005-01-01', 'Fantastique'),
+(3, 'Le Petit Chaperon Rouge', '2011-01-01', 'Animation'),
+(4, 'Kung Fu Panda', '2008-01-01', 'Animation'),
+(5, 'La Belle et le Clochard', '1955-01-01', 'Romance'),
+(6, 'Ratatouille', '2007-01-01', 'Animation'),
+(7, 'Simpson', '2007-01-01', 'Comédie');
 
 -- Insertion des catégories avec IDs explicites
 INSERT INTO "category" (id, name) VALUES
@@ -65,6 +65,12 @@ INSERT INTO "recipe" (id, name, description, duration, difficulty_id, category_i
 (5, 'Pâtes aux boulettes', 'Une recette italienne inspirée de La Belle et le Clochard.', 35, 2, 2, 5),
 (6, 'Ratatouille', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 2, 2, 6),
 (7, 'Donuts', 'Les donuts préférés d''Homer Simpson.', 60, 2, 3, 7);
+
+-- Insertion des données de la table "user"
+INSERT INTO "user" ("id", "firstname", "lastname", "email", "password") VALUES
+(1, 'Tata', 'Yoyo', 'tata@gmail.com', 'Tatayoyo123!'),
+(3, 'Mimi', 'Labelle', 'mimi@gmail.com', 'MimiLabelle123!');
+
 
 -- Insertion des relations recette-ingredient (exemple avec Lasagnes)
 INSERT INTO "recipe_has_ingredient" (recipe_id, ingredient_id, quantity, unity) VALUES

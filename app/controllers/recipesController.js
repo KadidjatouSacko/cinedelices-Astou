@@ -20,8 +20,9 @@ export const recipesController = {
     },
 
     GetOneRecipe(req,res) {
-      const recipeName = req.params.name.toLowerCase();
-      const recipe = recipes.find(r => r.name.toLowerCase() === recipeName);
+      const recipeId = req.params.id.toLowerCase();
+      const recipe = Recipe.findByPk(recipeId)
+      console.log(recipeId)
       res.render("recipe", {recipe})
     },
 

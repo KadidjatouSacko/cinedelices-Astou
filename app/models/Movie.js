@@ -1,18 +1,26 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "./sequelizeClient.js"
+import { sequelize } from "./sequelizeClient.js";
 
-export class Movie extends Model { }
+export class Movie extends Model {}
 
-Movie.init({
-    title: {
-        type: DataTypes.STRING, 
-        allowNull: false
+Movie.init(
+    {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        year: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        genre: {
+            type: DataTypes.STRING, 
+            allowNull: true, 
+        },
     },
-    year: {
-        type: DataTypes.DATE,
-        allowNull: false
+    {
+        sequelize,
+        tableName: "movie",
     }
-}, {
-    sequelize,
-    tableName: "movie"
-});
+);
+

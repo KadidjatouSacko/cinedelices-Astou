@@ -20,7 +20,10 @@
             <label for="genre">Genre:</label>
             <select name="genre" id="genre">
                 <option value="">Choisir</option>
-                <option value="Comédie">Comédie</option>
+                <% genres.forEach(genre => { %>
+                 
+                    <option value="Comédie"><%=  %></option>
+                <% }) %>
                 <option value="Fantastique">Fantastique</option>
                 <option value="Animation">Animation</option>
                 <option value="Romance">Romance</option>
@@ -55,9 +58,10 @@
                     <h3 class="name-recipe"><%= recipe.name %></h3>
                     <div class="article-container">
                         <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie.title %>.jpg');">
-                            <img src="/assets/img/<%= recipe.movie.title %>.jpg" class="recipe-img">
+                            <img src="/assets/img/<%= recipe.name %>'.jpg" class="recipe-img" alt="Image de <%= recipe.name %>">
                         </article>
                     </div>
+                    
 
                     <section class="img-symbole">
                         <p class="time">  
