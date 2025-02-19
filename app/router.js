@@ -32,6 +32,6 @@ router.post("/contact",contactController.ContactSumbit)
 router.get("/recette/ajouter",recipesController.RenderFilmSelectPage)
 router.get("/recette/:filmId/ajouter",recipesController.RenderAddRecipePage)
 router.post("/recette/ajouter", uploadImageRecipe.single('image'), recipesController.AddOneRecipe)
-router.get("/rechercher/titre", movieController.renderMoviesFromApi)
+router.get("/rechercher/titre", movieController.searchMovieByTitle)
 router.get("rechercher/erreur", )
 
