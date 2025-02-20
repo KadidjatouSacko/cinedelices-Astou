@@ -3,6 +3,7 @@ import { Difficulty } from './Difficulty.js';
 import { Ingredient } from './Ingredient.js';
 import { Movie } from './Movie.js';
 import { Recipe } from './Recipe.js';
+import { MovieCategory } from './MovieCategory.js'
 
 Difficulty.hasMany(Recipe, {
     foreignKey: 'difficulty_id',
