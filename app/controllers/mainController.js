@@ -1,6 +1,7 @@
 import { Recipe } from "../models/index.js";
 
 export const mainController = {
+
     async renderHomePage(req, res) {
         const css = "home";
         const title = "Accueil";

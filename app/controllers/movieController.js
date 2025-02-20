@@ -131,6 +131,8 @@ export const movieController = {
             });
         }
     }
+
 };
 
 export default movieController;
+

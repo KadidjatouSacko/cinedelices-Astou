@@ -1,63 +1,58 @@
-
 <%- include('partials/header') %>
 
 <main>
-    
     <section class="filters">
-        <form action="/recettes" method="GET">
-            
+        <form method="GET">
             <label for="difficulty">Difficulté:</label>
             <select name="difficulty" id="difficulty">
                 <option value="">Choisir</option>
-                <option value="Facile">Facile</option>
-                <option value="Moyenne">Moyenne</option>
-                <option value="Difficile">Difficile</option>
+                <option value="Facile" <%= difficulty === 'Facile' ? 'selected' : '' %>>Facile</option>
+                <option value="Moyenne" <%= difficulty === 'Moyenne' ? 'selected' : '' %>>Moyenne</option>
+                <option value="Difficile" <%= difficulty === 'Difficile' ? 'selected' : '' %>>Difficile</option>
             </select>
 
-           
             <label for="genre">Genre:</label>
             <select name="genre" id="genre">
                 <option value="">Choisir</option>
-                <option value="Comédie">Comédie</option>
-                <option value="Fantastique">Fantastique</option>
-                <option value="Animation">Animation</option>
-                <option value="Romance">Romance</option>
-                <option value="Action">Action</option>
-                <option value="Thriller">Thriller</option>
+                <% genres.forEach(genre => { %>
+                    <option value="<%= genre.genre %>" <%= genre.genre === selectedGenre ? 'selected' : '' %>><%= genre.genre %></option>
+                <% }) %>
             </select>
 
-            
             <label for="price">Prix:</label>
             <select name="price" id="price">
                 <option value="">Choisir</option>
-                <option value="Pas cher">Pas cher</option>
-                <option value="Moyen">Moyen</option>
-                <option value="Haut">Haut</option>
+                <option value="Pas cher" <%= price === 'Pas cher' ? 'selected' : '' %>>Pas cher</option>
+                <option value="Moyen" <%= price === 'Moyen' ? 'selected' : '' %>>Moyen</option>
+                <option value="Haut" <%= price === 'Haut' ? 'selected' : '' %>>Haut</option>
             </select>
+
             <button type="submit">Filtrer</button>
 
-           
             <label for="search">Rechercher :</label>
-            <input type="text" name="search" id="search" placeholder="Rechercher une recette, un auteur, un film...">
-
-          
+            <input type="text" name="search" id="search" placeholder="Rechercher une recette, un auteur, un film..." value="<%= search || '' %>">
             <button type="submit">Rechercher</button>
         </form>
     </section>
 
-   
-    <section class="recipes">
+
+    <section class="recipies">
+
         <% recipes.forEach(recipe => { %>
             <section class="recipe">
                 <div class="image-container">
                     <h3 class="name-recipe"><%= recipe.name %></h3>
                     <div class="article-container">
-                        <article class="movie-image" style="background-image: url('/assets/img/movies/<%= recipe.name %>');">
-                            <img src="/assets/img/recipes/<%= recipe.image %>" class="recipe-img">
+
+
+                        <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie.title %>.jpg');">
+                            <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img" alt="Image de <%= recipe.name %>">
+
                         </article>
                     </div>
 
                     <section class="img-symbole">
+
                         <p class="time">  
                             <img src="/assets/img/icon/time.jpg" alt="symbole-temps" class="symbole"> 
                             <%= recipe.duration %> min
@@ -68,6 +63,7 @@
                         </p>
                         <p class="price"> 
                             <img src="/assets/img/icon/euro.jpg" alt="symbole-euro" class="symbole"> 
+
                             <%= recipe.price %>
                         </p>
                     </section>

@@ -32,22 +32,28 @@
     <section class="registration-form">
         <h2>Inscription</h2>
         <section class="form">
-            <form action="registration" method="POST">
-                <label for="nom">Nom <strong>*</strong>:</label>
-                <input type="text" id="nom" name="nom" required>
-
-                <label for="prenom">Prénom <strong>*</strong> :</label>
-                <input type="text" id="prenom" name="prenom" required>
-
+            <% if (locals.error) { %>
+                <div class="error-message" style="color: red; margin-bottom: 15px;">
+                    <%= error %>
+                </div>
+            <% } %>
+            
+            <form action="/inscription" method="POST">
+                <label for="lastname">Nom <strong>*</strong>:</label>
+                <input type="text" id="lastname" name="lastname" value="<%= locals.formData ? formData.lastname : '' %>" required>
+            
+                <label for="firstname">Prénom <strong>*</strong>:</label>
+                <input type="text" id="firstname" name="firstname" value="<%= locals.formData ? formData.firstname : '' %>" required>
+            
                 <label for="pseudo">Pseudo <strong>*</strong>:</label>
-                <input type="text" id="pseudo" name="pseudo" required>
-
+                <input type="text" id="pseudo" name="pseudo" value="<%= locals.formData ? formData.pseudo : '' %>" required>
+            
                 <label for="email">Adresse mail <strong>*</strong>:</label>
-                <input type="email" id="email" name="email" required>
-
+                <input type="email" id="email" name="email" value="<%= locals.formData ? formData.email : '' %>" required>
+            
                 <label for="password">Mot de passe <strong>*</strong>:</label>
                 <input type="password" id="password" name="password" required>
-
+            
                 <label for="confirm_password">Confirmer le mot de passe <strong>*</strong>:</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
 
