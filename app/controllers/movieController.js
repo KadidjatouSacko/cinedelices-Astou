@@ -68,19 +68,8 @@ export const movieController = {
             const js = "form"
             const message = "Pas de film trouvé"
             const title = "Recherche par titre de film"
-            //     id: movie.id,
-            //     title: movie.title,
-            //     release_date: movie.release_date,
-            //     posterUrl: movie.poster_path 
-            //         ? `https://image.tmdb.org/t/p/w300${posterUrl}`
-            //         : 'https://via.placeholder.com/200x300?text=Image+Non+Dispo'
-            // }));
-
             // Rendu de la vue avec les résultats
             res.render('form-movie', { css, js, title, moviesTreated, message});
-            //     : movies.length === 0 ? 'Aucun film trouvé' : ''
-            // });
-
         } catch (error) {
             console.error('Erreur lors de la recherche de films:', error);
             res.render('form-movie', {
