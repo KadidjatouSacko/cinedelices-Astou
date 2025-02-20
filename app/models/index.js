@@ -2,10 +2,14 @@ import { Category } from './Category.js';
 import { Difficulty } from './Difficulty.js';
 import { Ingredient } from './Ingredient.js';
 import { Recipe } from './Recipe.js';
+
+import { MovieCategory } from './MovieCategory.js'
+
 import { Genre } from './Genre.js';  
 import {Movie} from './Movie.js';
 
 // Associations entre les modèles
+
 
 Difficulty.hasMany(Recipe, {
   foreignKey: 'difficulty_id',

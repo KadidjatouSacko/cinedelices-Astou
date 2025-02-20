@@ -1,7 +1,5 @@
 <%- include('partials/header') %>
 
-<link rel="stylesheet" href="/assets/css/recipies.css">
-
 <main>
     <section class="filters">
         <form method="GET">
@@ -37,28 +35,35 @@
         </form>
     </section>
 
+
     <section class="recipies">
+
         <% recipes.forEach(recipe => { %>
             <section class="recipe">
                 <div class="image-container">
                     <h3 class="name-recipe"><%= recipe.name %></h3>
                     <div class="article-container">
+
+
                         <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie.title %>.jpg');">
                             <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img" alt="Image de <%= recipe.name %>">
+
                         </article>
                     </div>
 
                     <section class="img-symbole">
-                        <p class="time">
-                            <img src="/assets/img/symbole-temps.jpg" alt="symbole-temps" class="symbole">
+
+                        <p class="time">  
+                            <img src="/assets/img/icon/time.jpg" alt="symbole-temps" class="symbole"> 
                             <%= recipe.duration %> min
                         </p>
                         <p class="difficulte">
-                            <img src="/assets/img/symbole-difficulté.jpg" alt="symbole-difficulte" class="symbole">
+                            <img src="/assets/img/icon/difficulty.png" alt="symbole-difficulte" class="symbole">  
                             <%= recipe.difficulty.label %>
                         </p>
-                        <p class="price">
-                            <img src="/assets/img/symbole-euro.jpg" alt="symbole-euro" class="symbole">
+                        <p class="price"> 
+                            <img src="/assets/img/icon/euro.jpg" alt="symbole-euro" class="symbole"> 
+
                             <%= recipe.price %>
                         </p>
                     </section>
