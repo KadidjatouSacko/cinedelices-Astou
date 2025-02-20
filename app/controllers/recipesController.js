@@ -35,6 +35,6 @@ export const recipesController = {
     //console.log(items);
     res.render("formRecipe", { css, js, title, tools, ingredients })
   },
-}
+};
 
     

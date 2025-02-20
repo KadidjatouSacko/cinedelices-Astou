@@ -22,4 +22,3 @@ fetch(url, options)
   .catch(err => console.error(err));
         }
     }
-}

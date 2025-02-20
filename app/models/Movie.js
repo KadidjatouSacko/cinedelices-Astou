@@ -4,15 +4,15 @@ import { sequelize } from "./sequelizeClient.js"
 export class Movie extends Model { }
 
 Movie.init({
-    title: {
-        type: DataTypes.STRING, 
-        allowNull: false
-    },
-    year: {
-        type: DataTypes.DATE,
-        allowNull: false
-    }
+  title: {
+    type: DataTypes.STRING, 
+    allowNull: false
+  },
+  year: {
+    type: DataTypes.DATE,
+    allowNull: false
+  }
 }, {
-    sequelize,
-    tableName: "movie"
+  sequelize,
+  tableName: "movie"
 });

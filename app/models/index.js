@@ -5,30 +5,30 @@ import { Movie } from './Movie.js';
 import { Recipe } from './Recipe.js';
 
 Difficulty.hasMany(Recipe, {
-    foreignKey: 'difficulty_id',
+  foreignKey: 'difficulty_id',
 });
 
 Recipe.belongsTo(Difficulty, {
-    foreignKey: 'difficulty_id',
-    as: 'difficulty'
+  foreignKey: 'difficulty_id',
+  as: 'difficulty'
 });
 
 Category.hasMany(Recipe, {
-    foreignKey: 'category_id',
+  foreignKey: 'category_id',
 });
 
 Recipe.belongsTo(Category, {
-    foreignKey: 'category_id',
-    as: 'category'
+  foreignKey: 'category_id',
+  as: 'category'
 });
 
 Movie.hasMany(Recipe, {
-    foreignKey: 'movie_id',
+  foreignKey: 'movie_id',
 });
 
 Recipe.belongsTo(Movie, {
-    foreignKey: 'movie_id',
-    as: 'movie'
+  foreignKey: 'movie_id',
+  as: 'movie'
 });
 
 export { Category, Difficulty, Ingredient, Movie, Recipe };
