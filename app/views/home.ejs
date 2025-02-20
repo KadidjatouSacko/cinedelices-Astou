@@ -3,36 +3,49 @@
     <section class="body__main--ctn">
         <article class="body__main--ctn-article">
             <h2 class="body__main--ctn-article-title">Bienvenue</h2>
-            <p class="body__main--ctn-article-subtitle">Ce site a été pensé et créé par 4 organisateurs de soirées à thèmes basés sur le cinéma et les séries TV.</p>
-            <p class="body__main--ctn-article-subtitle">Vous pourrez trouver les recettes qui composeront le menu de vos futures soirées à thème.</p>
-            <p class="body__main--ctn-article-subtitle">Avant de consulter notre catalogue de recettes, jetez un coup d'oeil aux dernières ajoutées...</p>
+            <p class="body__main--ctn-article-subtitle">Marre de saliver devant votre écran ? Passez à l'action et cuisinez les plats cultes de vos films et séries ! </p>
+            <!-- <p class="body__main--ctn-article-subtitle">Du mythique beignet d’Homer aux ramens de Naruto, tout est prêt à être recréé ! </p> -->
+            <p class="body__main--ctn-article-subtitle">Lights, camera… MANGEZ ! </p>
         </article>
 
         <article class="body__main--ctn-article">
-            <h2 class="body__main--ctn-article-title">Nos dernières recettes</h2>
+            <h2 class="body__main--ctn-article-lastRecipes">Nos dernières recettes</h2>
             <section class="body__main--ctn-article-carousel">
+                <div class="body__main--ctn-article-carousel-arrowLeft">
+                    <img src="/assets/img/icon/arrowLeft.png" alt="Recette précédente">
+                </div>
                 <article class="body__main--ctn-article-wrapper">
-                    <article class="body__main--ctn-article-wrapper-card">
-                        <section id="tags">
-                            <h3 class="body__main--ctn-article-wrapper-card-theme">Comédie</h3>
-                            <h3 class="body__main--ctn-article-wrapper-card-category">Apéritif</h3>
-                        </section>                    
-                        <h4 class="body__main--ctn-article-wrapper-card-recipe">Vodka martini</h4>
-                        <img src="assets/img/recipies/martini.jpg" alt="Photo d'un verre de martini" class="body__main--ctn-article-wrapper-card-img">
-                        <div class="body__main--ctn-article-wrapper-card-legends">
-                            <div class="body__main--ctn-article-wrapper-card-legend-time">
-                                <img src="" alt="">
-                            </div>
-                            <div class="body__main--ctn-article-wrapper-card-legend-level">
-                                <img src="" alt="">
-                            </div>
-                            <div class="body__main--ctn-article-wrapper-card-legend-price">
-                                <img src="" alt="">
-                            </div>
-                        </div>
-                        <a href="/recette/1" class="body__main--ctn-article-wrapper-card-btn">Voir</a>
-                    </article>
+                    <% recipes.forEach(recipe => { %>
+                        <article class="body__main--ctn-article-wrapper-card">
+                            <section id="tags">
+                                <div class="tags__ctn">
+                                    <img src="/assets/img/movies/<%=  %>" alt="" class="tags__ctn--img">
+                                </div>
+                                <h2 class="tags__ctn--title"><%= recipe.name %></h3>
+                            </section>                    
+                            <img src="/assets/img/recipes/<%= recipe.image %>" alt="Photo du rendu de la recette de <%= recipe.name %>" class="body__main--ctn-article-wrapper-card-img">
+                            <section class="body__main--ctn-article-wrapper-card-legends">
+                                <article class="body__main--ctn-article-wrapper-card-legend-ctn-category">
+                                    <h3 class="body__main--ctn-article-wrapper-card-legend-category"><%= recipe.category.name %></h3>                                    
+                                </article>
+                                <article class="body__main--ctn-article-wrapper-card-legend-ctn">
+                                    <img src="assets/img/icon/clock.png" alt="Icone de timer" class="body__main--ctn-article-wrapper-card-legend-ctn-icon">
+                                    <p class="body__main--ctn-article-wrapper-card-legend-ctn-text"><%= recipe.duration %> min</p>
+                                </article>
+                                <article class="body__main--ctn-article-wrapper-card-legend-ctn">
+                                    <img src="assets/img/icon/difficulty.png" alt="Icone de jauge de difficulté" class="body__main--ctn-article-wrapper-card-legend-ctn-icon">
+                                    <p class="body__main--ctn-article-wrapper-card-legend-ctn-text"><%= recipe.difficulty.label %></p>
+                                </article>
+                            </section >
+                            <p class="body__main--ctn-article-wrapper-card-btn">
+                                <a href="/recette/<%= recipe.id %>" class="body__main--ctn-article-wrapper-card-btn-placeHolder">Voir</a>
+                            </p>                            
+                        </article>
+                    <% }) %>                    
                 </article>
+                <div class="body__main--ctn-article-carousel-arrowRight">
+                    <img src="/assets/img/icon/arrowRight.png" alt="Recette suivante">
+                </div>
             </section>            
         </article>
     </section>

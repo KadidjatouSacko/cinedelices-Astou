@@ -2,29 +2,25 @@
 <main class="body__main">
     <h2 class="title">Créer une Recette</h2>
     <!-- nom a validé -->
-    <form action="/recette/ajouter" method="POST" enctype="multipart/form-data" class="form">
+    <form action="/recette/ajouter/validation" method="POST" enctype="multipart/form-data" class="form">
+        <input hidden name="film_id" value="<%= filmId %>" />
         <article class="form-level">
             <label for="name" class="label">Nom de la recette * :</label>
             <input class="input" type="text" id="name" name="name" required>
         </article>
-
         <article class="form-level">
             <h3 class="subtitle">Catégorie *</h3>
             <div class="sub-cat">
                 <label for="category" class="label">Entrée</label>
-                <input type="radio" name="category" value="starter">
+                <input type="radio" name="category" value="1">
             </div>
             <div class="sub-cat">
                 <label for="category" class="label">Plat</label>
-                <input type="radio" name="category" value="maincourse">
+                <input type="radio" name="category" value="2">
             </div>
             <div class="sub-cat">
                 <label for="category" class="label">Dessert </label>
-                <input type="radio" name="category" value="dessert">
-            </div>
-            <div class="sub-cat">
-                <label for="category" class="label">Boisson</label>
-                <input type="radio" name="category" value="beverage">
+                <input type="radio" name="category" value="3">
             </div>                   
         </article>
         <article class="form-level">
@@ -41,11 +37,6 @@
             <label class="label" for="image">Photo de la recette :</label>
             <input class="image-btn" type="file" id="image" name="image">
         </article>
-        <button type="button" class="add-btn">Ajouter</button>
-        <button type="button" class="end-btn">J'ai tout</button>
-                </div>                        
-            </article>
-        </section>
 
         <section class="multiple-levels">
             <h3 class="subtitle">Ingrédients *</h3>                
@@ -69,25 +60,19 @@
                 </div>                        
             </article>
         </section>
-
+        <article class="form-level">
+            <label class="instruction-title" for="instructions">Instructions :</label>
+            <textarea class="instruction-text-box" id="instructions" name="instructions" rows="5" required placeholder="Décrivez les étapes de préparation..."></textarea>
+        </article>     
+        <article class="form-level">
+            <label class="time-title" for="duration">Temps de préparation (en minutes) :</label>
+            <input class="time-text-box" type="number" id="duration" name="duration" min="1" required>
         </article>
         <article class="form-level">
-            <!-- <label class="label" for="steps">Etapes :</label> -->
-            <!-- <textarea class="description-text-box" id="description" name="description" rows="4" required placeholder="Décrivez la recette..."></textarea> -->
-        
-<br>       
-        <!-- Stephanie ici la instruction a geré) -->
-        <label class="instruction-title" for="instructions">Instructions :</label> -->
-        <textarea class="instruction-text-box" id="instructions" name="instructions" rows="5" required placeholder="Décrivez les étapes de préparation..."></textarea>
-<br>
-        <label class="time-title" for="time">Temps de préparation (en minutes) :</label>
-        <input class="time-text-box" type="number" id="time" name="time" min="1" required>
-<br>
-
-<br>
-
+            <label class="time-title" for="difficulty">Degré de difficulté :</label>
+            <input class="time-text-box" type="text" id="difficulty" name="difficulty" required> 
+        </article>
         <button class="submit-btn" type="submit">Envoyer la Recette</button>
-<br>
     </form>
 </main>
 
