@@ -20,3 +20,6 @@ router.get("/mentions-legales", legalsNoticesController.GetAllLegalsNotices)
 router.get("/inscription",authController.GetRegistration)
 router.get("/contact", contactController.GetContact)
 router.post("/contact",contactController.ContactSumbit)
+router.get("/inscription", authController.GetRegistration);
+router.post("/inscription", authController.signUp);
+
