@@ -1,5 +1,5 @@
 export const legalsNoticesController = {
-    GetAllLegalsNotices(req, res) {
-        res.render("legal-notices");
-    },
-}
+  GetAllLegalsNotices(req, res) {
+    res.render("legal-notices");
+  },
+};

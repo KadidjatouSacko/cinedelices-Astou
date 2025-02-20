@@ -1,4 +1,5 @@
 import { Model, DataTypes } from "sequelize";
+
 import { sequelize } from "./sequelizeClient.js"
 
 export class User extends Model { }

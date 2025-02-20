@@ -5,6 +5,25 @@ import { Genre, Recipe, Movie, Difficulty, Category } from "../models/index.js";
 
 export const recipesController = {
 
+
+  GetOneRecipe(req,res) {
+    const recipeName = req.params.name.toLowerCase();
+    const recipe = recipes.find(r => r.name.toLowerCase() === recipeName);
+    res.render("recipe", {recipe})
+  },
+
+  async RenderAddRecipePage(req, res) {
+    console.log('youhouuuuu');
+    const css = "formRecipe"; 
+    const js = "form";
+    const title = "Ajouter une recette";
+    // const tools = await Tool.findAll();
+    const ingredients = await Ingredient.findAll()
+    //console.log(items);
+    res.render("formRecipe", { css, js, title, tools, ingredients })
+  },
+
+
     async GetAllRecipes(req,res) {
 
         try {
@@ -62,7 +81,7 @@ export const recipesController = {
         }
 
       /*const recipes = await Recipe.findAll({
-        include: [ 'difficulty', 'category', 'movie' ]
+        include: [ 'difficulty', 'category', 'movie' title, css, js]
       });
 
       const css = 'recipies';
@@ -77,13 +96,7 @@ export const recipesController = {
         search: ""});*/
     },
 
-    GetOneRecipe(req,res) {
-      const recipeId = req.params.id.toLowerCase();
-      const recipe = Recipe.findByPk(recipeId)
-      console.log(recipeId)
-      res.render("recipe", {recipe})
-    },
-
+  
     async RenderAddRecipePage(req, res) {
       console.log('youhouuuuu');
       const css = "formRecipe"; 
@@ -95,8 +108,7 @@ export const recipesController = {
       res.render("formRecipe", { css, js, title, tools, ingredients })
   },
 
+};
 
-      async FiltrerRecipies(req, res) {
-          
-      }
+     
   }
