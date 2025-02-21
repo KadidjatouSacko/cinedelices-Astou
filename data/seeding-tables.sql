@@ -25,14 +25,36 @@ INSERT INTO "difficulty" ("id", "label") VALUES
 (5, 'Mr Etchebest ?');
 
 -- Insertion des films
-INSERT INTO "movie" ("id", "title", "year", "genre") VALUES
-(1, 'Garfield', '2004-01-01', 'Animation'),
-(2, 'Charlie et la chocolaterie', '2005-01-01', 'Fantastique'),
-(3, 'Le Petit Chaperon Rouge', '2011-01-01', 'Animation'),
-(4, 'Kung Fu Panda', '2008-01-01', 'Animation'),
-(5, 'La Belle et le Clochard', '1955-01-01', 'Romance'),
-(6, 'Ratatouille', '2007-01-01', 'Animation'),
-(7, 'Simpson', '2007-01-01', 'Comédie');
+INSERT INTO "movie" ("id", "title", "year", "genre_id") VALUES
+(1, 'Garfield', '2004-01-01', 16),
+(2, 'Charlie et la chocolaterie', '2005-01-01', 14),
+(3, 'Le Petit Chaperon Rouge', '2011-01-01', 16),
+(4, 'Kung Fu Panda', '2008-01-01', 16),
+(5, 'La Belle et le Clochard', '1955-01-01', 16),
+(6, 'Ratatouille', '2007-01-01', 16),
+(7, 'Simpson', '2007-01-01', 35);
+
+-- Insertion des catégories de films
+INSERT INTO "genre" ("id", "name") VALUES
+(28, 'Action'),
+(12, 'Aventure'),
+(16, 'Animation'),
+(35, 'Comédie'),
+(80, 'Crime'),
+(99, 'Documentaire'),
+(18, 'Drame'),
+(10751, 'Familial'),
+(14, 'Fantastique'),
+(36, 'Histoire'),
+(27, 'Horreur'),
+(10402, 'Musique'),
+(9648, 'Mystère'),
+(10749, 'Romance'),
+(878, 'Science-Fiction'),
+(10770, 'Téléfilm'),
+(53, 'Thriller'),
+(10752, 'Guerre'),
+(37, 'Western');
 
 -- Insertion des catégories de recettes
 INSERT INTO "category" ("id", "name") VALUES
@@ -40,12 +62,7 @@ INSERT INTO "category" ("id", "name") VALUES
 (2, 'Plat'),
 (3, 'Dessert');
 
--- Insertion des genres de films
-INSERT INTO "genre" ("id", "name") VALUES
-(1, 'Action'),
-(2, 'Comédie'),
-(3, 'Drame'),
-(4, 'Horreur');
+
 
 -- Insertion des ingrédients
 INSERT INTO "ingredient" ("id", "label") VALUES
@@ -99,32 +116,6 @@ INSERT INTO "recipe_has_ingredient" ("recipe_id", "ingredient_id", "quantity", "
 (1, 4, 200, 'g'), -- Fromage râpé
 (1, 5, 300, 'ml'); -- Béchamel
 
--- Insertion des catégories de films
-INSERT INTO "movieCategory" ("id", "name") VALUES
-(28, 'Action'),
-(12, 'Aventure'),
-(16, 'Animation'),
-(35, 'Comédie'),
-(80, 'Crime'),
-(99, 'Documentaire'),
-(18, 'Drame'),
-(10751, 'Familial'),
-(14, 'Fantastique'),
-(36, 'Histoire'),
-(27, 'Horreur'),
-(10402, 'Musique'),
-(9648, 'Mystère'),
-(10749, 'Romance'),
-(878, 'Science-Fiction'),
-(10770, 'Téléfilm'),
-(53, 'Thriller'),
-(10752, 'Guerre'),
-(37, 'Western');
 
--- Correction de l'insertion movieCategory pour les films
-INSERT INTO "movie_has_movieCategory" ("movie_id", "movieCategory_id") VALUES
-(1, 16), -- Garfield → Animation
-(2, 14), -- Charlie et la chocolaterie → Fantastique
-(3, 16); -- Le Petit Chaperon Rouge → Animation
 
 COMMIT;

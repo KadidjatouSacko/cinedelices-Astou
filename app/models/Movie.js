@@ -18,7 +18,7 @@ Movie.init ({
     },
   },
   year: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DATE,
     allowNull: false,
   },
 }, 
@@ -28,6 +28,6 @@ Movie.init ({
 
 });
 
-
+Movie.belongsTo(Genre, { foreignKey: 'genre_id', as: 'genre' });  
 
 
