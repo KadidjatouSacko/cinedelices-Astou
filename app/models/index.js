@@ -2,15 +2,11 @@ import { Category } from './Category.js';
 import { Difficulty } from './Difficulty.js';
 import { Ingredient } from './Ingredient.js';
 import { Recipe } from './Recipe.js';
-
-import { MovieCategory } from './MovieCategory.js'
-
 import { Genre } from './Genre.js';  
-import {Movie} from './Movie.js';
+import { Movie } from './Movie.js';
+import { Movie_Genre } from './Movie_Genre.js';
 
 // Associations entre les modèles
-
-
 Difficulty.hasMany(Recipe, {
   foreignKey: 'difficulty_id',
 });
@@ -35,12 +31,11 @@ Recipe.belongsTo(Movie, {
   as: 'movie'
 });
 
-Genre.hasMany(Movie, {
-    foreignKey: 'genre_id'
+Genre.belongsToMany(Movie, {
+  through: Movie_Genre
 });
-Movie.belongsTo(Genre, {
-    foreignKey: 'genre_id',
-    as: 'genre'
+Movie.belongsToMany(Genre, {
+  through: Movie_Genre
 });
 
 export { Category, Difficulty, Ingredient, Genre, Movie, Recipe };

@@ -13,34 +13,28 @@
             </form>
             <form action="/rechercher/genre" method="get" class="body__main--ctn-searchForm">
                 <article class="body__main--ctn-searchForm-part-ctn">
-                    <label for="name" class="body__main--ctn-searchForm-part-btn-label">Genre </label>
-                    <select name="name" id="name">
-                        <option value="">Sélectionner</option>
-                        <% categories.forEach(category => { %>
-                            <option value="<%= category.name %>"><%= category.name %></option>
-                        <% }) %>
-                    </select>
+                    <label for="category" class="body__main--ctn-searchForm-part-btn-label">Genre </label>
+                    <input type="search" name="category" id="category" class="body__main--ctn-searchForm-part-btn-input" placeholder="Comédie">
                     <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button> 
                 </article>
             </form>
         </section>
         <section class="body__main--ctn-searchResult">
-            <form action="/recette/ajouter/recette" method="get" class="body__main--ctn-searchResult-form">
-                <% moviesTreated.forEach(movie => { %>
-                    <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                        <label for="id" class="body__main--ctn-searchResult-card-label">
-                            <img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>" class="movie-image">
-                            <ul>
-                                <li><%= movie.title %></li>
-                                <li><%= movie.year %></li>
-                            </ul>                        
-                        </label>
-                        <input type="radio" name="id" id="<%= movie.id %>" value="<%= movie.id %>">
-                    </article>
-                <% }) %> 
+            <article>
+                <form action="/recette/ajouter" method="get">
+                    <% moviesTreated.forEach(movie => { %>
+                        <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
+                            <label for="movie_id"><img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>" class="movie-image">
+                                <ul>
+                                    <li>Année : <%= movie.year %></li>
+                                </ul>                        
+                            </label>
+                        <input type="radio" name="movie_id" id="movie_id" value="<%= movie.id %>">
+                    <% }) %> 
 
-                <button type="submit" class="form-btn">Enregistrer</button>
-            </form>                             
+                    <button type="submit">Enregistrer</button>
+                </form>                             
+            <article>
         </section>
     </section>
 </main>

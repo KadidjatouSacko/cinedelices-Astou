@@ -32,12 +32,13 @@ router.get("/mentions-legales", legalsNoticesController.GetAllLegalsNotices)
 router.get("/inscription",authController.GetRegistration)
 router.get("/contact", contactController.GetContact)
 router.post("/contact",contactController.ContactSumbit)
-router.get("/recette/ajouter",recipesController.RenderFilmSelectPage)
-router.get("/recette/ajouter/recette",recipesController.RenderAddRecipePage)
+
+router.get("/recette/select-film",recipesController.RenderFilmSelectPage)
+router.get("/recette/ajouter",recipesController.RenderAddRecipePage)
 router.post("/recette/ajouter", uploadImageRecipe.single('image'), recipesController.AddOneRecipe)
-router.post('/recette/ajouter/validation', recipesController.validateInsert)
-router.get("/rechercher/titre", movieController.searchMovieByTitle)
-router.get("/rechercher/genre", movieController.searchMovieByCategory)
+
+router.get("/rechercher/titre", movieController.searchMovieByTitle);
+router.get("/rechercher/genre", movieController.searchMovieByCategory);
 router.get("/films", moviesController.GetAllMovies);
 router.get("/films/:title", moviesController.GetOneMovie);
 router.post("/inscription", authController.signUp);

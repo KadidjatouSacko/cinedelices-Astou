@@ -5,34 +5,24 @@ TRUNCATE TABLE "user" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "recipe" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "ingredient" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "movie" RESTART IDENTITY CASCADE;
-TRUNCATE TABLE "movieCategory" RESTART IDENTITY CASCADE;
+TRUNCATE TABLE "genre" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "category" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "difficulty" RESTART IDENTITY CASCADE;
+TRUNCATE TABLE "movie_has_genre" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "recipe_has_ingredient" RESTART IDENTITY CASCADE;
-TRUNCATE TABLE "genre" RESTART IDENTITY CASCADE;
 
 -- Insertion des utilisateurs
-INSERT INTO "user" ("id", "pseudo", "firstname", "lastname", "email", "password") VALUES
-(1, 'Tatayoyo', 'Tata', 'Yoyo', 'tata@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc'),
-(2, 'Trop choupi', 'Mimi', 'Labelle', 'mimi@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc');
+INSERT INTO "user" ("pseudo", "firstname", "lastname", "email", "password") VALUES
+('Tatayoyo', 'Tata', 'Yoyo', 'tata@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc'),
+('Trop choupi', 'Mimi', 'Labelle', 'mimi@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc');
 
 -- Insertion des niveaux de difficulté
-INSERT INTO "difficulty" ("id", "label") VALUES
-(1, 'Débutant'),
-(2, 'Facile'),
-(3, 'Avancée'),
-(4, 'Experte'),
-(5, 'Mr Etchebest ?');
-
--- Insertion des films
-INSERT INTO "movie" ("id", "title", "year", "genre_id") VALUES
-(1, 'Garfield', '2004-01-01', 16),
-(2, 'Charlie et la chocolaterie', '2005-01-01', 14),
-(3, 'Le Petit Chaperon Rouge', '2011-01-01', 16),
-(4, 'Kung Fu Panda', '2008-01-01', 16),
-(5, 'La Belle et le Clochard', '1955-01-01', 16),
-(6, 'Ratatouille', '2007-01-01', 16),
-(7, 'Simpson', '2007-01-01', 35);
+INSERT INTO "difficulty" ("label") VALUES
+('Débutant'),
+('Facile'),
+('Avancée'),
+('Experte'),
+('Mr Etchebest ?');
 
 -- Insertion des catégories de films
 INSERT INTO "genre" ("id", "name") VALUES
@@ -56,57 +46,76 @@ INSERT INTO "genre" ("id", "name") VALUES
 (10752, 'Guerre'),
 (37, 'Western');
 
+-- Insertion des films
+INSERT INTO "movie" ("title", "year", "tmdb_id") VALUES
+('Garfield', '2004-01-01', 16),
+('Charlie et la chocolaterie', '2005-01-01', 14),
+('Le Petit Chaperon Rouge', '2011-01-01', 16),
+('Kung Fu Panda', '2008-01-01', 16),
+('La Belle et le Clochard', '1955-01-01', 16),
+('Ratatouille', '2007-01-01', 16),
+('Simpson', '2007-01-01', 35);
+
 -- Insertion des catégories de recettes
-INSERT INTO "category" ("id", "name") VALUES
-(1, 'Entrée'),
-(2, 'Plat'),
-(3, 'Dessert');
-
-
+INSERT INTO "category" ("name") VALUES
+('Entrée'),
+('Plat'),
+('Dessert');
 
 -- Insertion des ingrédients
-INSERT INTO "ingredient" ("id", "label") VALUES
-(1, 'Pâtes à lasagne'),
-(2, 'Bœuf haché'),
-(3, 'Sauce tomate'),
-(4, 'Fromage râpé'),
-(5, 'Béchamel'),
-(6, 'Chocolat noir'),
-(7, 'Œufs'),
-(8, 'Sucre'),
-(9, 'Beurre'),
-(10, 'Farine de sarrasin'),
-(11, 'Eau'),
-(12, 'Sel'),
-(13, 'Jambon'),
-(14, 'Nouilles'),
-(15, 'Bouillon'),
-(16, 'Porc'),
-(17, 'Algues'),
-(18, 'Soja'),
-(19, 'Ciboulette'),
-(20, 'Spaghettis'),
-(21, 'Ail'),
-(22, 'Parmesan'),
-(23, 'Courgettes'),
-(24, 'Aubergines'),
-(25, 'Tomates'),
-(26, 'Poivrons'),
-(27, 'Huile olive'),
-(28, 'Farine'),
-(29, 'Levure'),
-(30, 'Lait'),
-(31, 'Huile');
+INSERT INTO "ingredient" ("label") VALUES
+('Pâtes à lasagne'),
+('Bœuf haché'),
+('Sauce tomate'),
+('Fromage râpé'),
+('Béchamel'),
+('Chocolat noir'),
+('Œufs'),
+('Sucre'),
+('Beurre'),
+('Farine de sarrasin'),
+('Eau'),
+('Sel'),
+('Jambon'),
+('Nouilles'),
+('Bouillon'),
+('Porc'),
+('Algues'),
+('Soja'),
+('Ciboulette'),
+('Spaghettis'),
+('Ail'),
+('Parmesan'),
+('Courgettes'),
+('Aubergines'),
+('Tomates'),
+('Poivrons'),
+('Huile olive'),
+('Farine'),
+('Levure'),
+('Lait'),
+('Huile');
+
+-- Association genre et films
+INSERT INTO "movie_has_genre" ("movie_id", "genre_id") VALUES
+(1, 28),
+(1, 12),
+(2, 35),
+(3, 35),
+(4, 35),
+(5, 35),
+(6, 35),
+(7, 35);
 
 -- Insertion des recettes
-INSERT INTO "recipe" ("id", "name", "description", "duration", "image", "difficulty_id", "category_id", "movie_id") VALUES
-(1, 'Lasagnes de Garfield', 'Une délicieuse recette de lasagnes inspirée par Garfield.', 45, 'lasagnes.jpg', 2, 2, 1),
-(2, 'Mousse au Chocolat by Charlie', 'Un dessert chocolaté inspiré de Charlie et la chocolaterie.', 15, 'mousseAuChocolat.jpg', 1, 3, 2),
-(3, 'Galette du Petit Pouvcet', 'Une galette traditionnelle inspirée du Petit Chaperon Rouge.', 20, 'galette.jpg', 1, 2, 3),
-(4, 'Ramens de Naruto', 'Un bol de ramens digne de Naruto.', 40, 'ramen.jpg', 3, 2, 4),
-(5, 'Pâtes aux boulettes de Toni', 'Une recette italienne inspirée de La Belle et le Clochard.', 35, 'spaghettisBoulettes.jpg', 2, 2, 5),
-(6, 'Ratatouille facçon rat', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 'ratatouillex45.png', 2, 2, 6),
-(7, 'Donuts de Bart', 'Les donuts préférés d''Homer Simpson.', 60, 'donuts.jpg', 2, 3, 7);
+INSERT INTO "recipe" ("name", "description", "duration", "image", "difficulty_id", "category_id", "movie_id") VALUES
+('Lasagnes de Garfield', 'Une délicieuse recette de lasagnes inspirée par Garfield.', 45, 'lasagnes.jpg', 2, 2, 1),
+('Mousse au Chocolat by Charlie', 'Un dessert chocolaté inspiré de Charlie et la chocolaterie.', 15, 'mousseAuChocolat.jpg', 1, 3, 2),
+('Galette du Petit Pouvcet', 'Une galette traditionnelle inspirée du Petit Chaperon Rouge.', 20, 'galette.jpg', 1, 2, 3),
+('Ramens de Naruto', 'Un bol de ramens digne de Naruto.', 40, 'ramen.jpg', 3, 2, 4),
+('Pâtes aux boulettes de Toni', 'Une recette italienne inspirée de La Belle et le Clochard.', 35, 'spaghettisBoulettes.jpg', 2, 2, 5),
+('Ratatouille facçon rat', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 'ratatouillex45.png', 2, 2, 6),
+('Donuts de Bart', 'Les donuts préférés d''Homer Simpson.', 60, 'donuts.jpg', 2, 3, 7);
 
 -- Insertion des relations recette-ingredient
 INSERT INTO "recipe_has_ingredient" ("recipe_id", "ingredient_id", "quantity", "unity") VALUES

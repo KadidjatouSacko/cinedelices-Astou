@@ -1,8 +1,5 @@
 //https://developer.themoviedb.org/reference/genre-movie-list => pour importer les genres des films dans la table category de films
 
-
-import MovieCategory from "../models/MovieCategory.js";
-
 export const movieController = {  
 
     async renderMoviesFromApi(req, res) { 
@@ -111,14 +108,14 @@ export const movieController = {
                   moviesTreated.push(movieTreated);
             });
             console.log(moviesTreated);
-            const categories = await MovieCategory.findAll()
-            console.log("categories", categories);
+            const genres = await Genre.findAll()
+            console.log("genres", genres);
             
             const css = "formMovie"
             const js = "form"
             const message = "Pas de film trouvé"
             const title = "Recherche par titre de film"
-            res.render('form-movie', { css, js, title, categories, moviesTreated, message});
+            res.render('form-movie', { css, js, title, genres, moviesTreated, message});
         } catch (error) {
             const css = "formMovie"
             const js = "form"
