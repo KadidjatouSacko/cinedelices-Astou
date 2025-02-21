@@ -85,9 +85,9 @@ INSERT INTO "recipe" (id, name, description, duration, image, difficulty_id, cat
 (7, 'Donuts de Bart', 'Les donuts préférés d''Homer Simpson.', 60, 'donuts.jpg', 2, 3, 7);
 
 -- Insertion des données de la table "user"
-INSERT INTO "user" ("id", "firstname", "lastname", "email", "password") VALUES
-(1, 'Tata', 'Yoyo', 'tata@gmail.com', 'Tatayoyo123!'),
-(3, 'Mimi', 'Labelle', 'mimi@gmail.com', 'MimiLabelle123!');
+INSERT INTO "user" ("id", "pseudo","firstname", "lastname", "email", "password") VALUES
+(1, 'pseudo 1', 'Tata', 'Yoyo', 'tata@gmail.com', 'Tatayoyo123!'),
+(3, 'Pseudo 2', 'Mimi', 'Labelle', 'mimi@gmail.com', 'MimiLabelle123!');
 
 
 -- Insertion des relations recette-ingredient (exemple avec Lasagnes)
@@ -123,6 +123,6 @@ INSERT INTO "movieCategory" (id, name) VALUES
 INSERT INTO "recipe_has_ingredient" (id, movie_id, movieCategory_id) VALUES
 (1, 1, 16),
 (2, 2, 14),
-(3, 1, 16)
+(3, 1, 16);
 
 COMMIT;

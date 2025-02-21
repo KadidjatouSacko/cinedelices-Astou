@@ -86,8 +86,8 @@ export const recipesController = {
             res.status(500).send("Erreur serveur");
         }
 
-      /*const recipes = await Recipe.findAll({
-        include: [ 'difficulty', 'category', 'movie' title, css, js]
+      const recipes = await Recipe.findAll({
+        include: [ 'difficulty', 'category', 'movie' ,'title', 'css', 'js']
       });
 
       const css = 'recipes';
@@ -113,7 +113,7 @@ export const recipesController = {
       res.render("recipes", {recipes, title, css, js, difficulty: "", 
         selectedGenre: "",
         price: "",
-        search: ""});*/
+        search: ""});
     },
 
   
