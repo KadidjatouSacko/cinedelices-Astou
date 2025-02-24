@@ -4,30 +4,26 @@ import { sequelize } from './sequelizeClient.js';
 export class Contact extends Model { }
 
 Contact.init({
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+    pseudo: {
+        type: DataTypes.TEXT,
+        allowNull: false
     },
-    name: {
+    email: {
         type: DataTypes.TEXT,
         allowNull: false,
         unique: true
     },
-    created_at: {
-        type: DataTypes.DATE,
+    object: {
+        type: DataTypes.TEXT,
         allowNull: false,
-        defaultValue: DataTypes.NOW
+        unique: true
     },
-    updated_at: {
-        type: DataTypes.DATE,
-        allowNull: true
+    message: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        unique: true
     }
 }, {
     sequelize,
-    tableName: 'contact',
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    tableName: 'contact'
 });
-
-export default Contact

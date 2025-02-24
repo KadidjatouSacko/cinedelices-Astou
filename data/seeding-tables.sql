@@ -10,6 +10,7 @@ TRUNCATE TABLE "category" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "difficulty" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "movie_has_genre" RESTART IDENTITY CASCADE;
 TRUNCATE TABLE "recipe_has_ingredient" RESTART IDENTITY CASCADE;
+TRUNCATE TABLE "recipe_has_tool" RESTART IDENTITY CASCADE;
 
 -- Insertion des utilisateurs
 INSERT INTO "user" ("pseudo", "firstname", "lastname", "email", "password") VALUES
@@ -17,12 +18,13 @@ INSERT INTO "user" ("pseudo", "firstname", "lastname", "email", "password") VALU
 ('Trop choupi', 'Mimi', 'Labelle', 'mimi@gmail.com', '$argon2id$v=19$m=65536,t=3,p=1$rZQloTOpUJjgWiLATRStPQ$ACnIm2NveHLB67284MsavOIJhqszB/BIYFBDXotFfc');
 
 -- Insertion des niveaux de difficulté
-INSERT INTO "difficulty" ("label") VALUES
+INSERT INTO "difficulty" ("name") VALUES
 ('Débutant'),
 ('Facile'),
-('Avancée'),
-('Experte'),
-('Mr Etchebest ?');
+('Moyen'),
+('Avancé'),
+('Expert'),
+('Chef Etchebest ?');
 
 -- Insertion des catégories de films
 INSERT INTO "genre" ("id", "name") VALUES
@@ -68,7 +70,7 @@ INSERT INTO "category" ("name") VALUES
 ('Dessert');
 
 -- Insertion des ingrédients
-INSERT INTO "ingredient" ("label") VALUES
+INSERT INTO "ingredient" ("name") VALUES
 ('Pâtes à lasagne'),
 ('Bœuf haché'),
 ('Sauce tomate'),
@@ -113,10 +115,10 @@ INSERT INTO "movie_has_genre" ("movie_id", "genre_id") VALUES
 (7, 35);
 
 -- Insertion des recettes
-INSERT INTO "recipe" ("name", "description", "duration", "image", "user","difficulty_id", "category_id", "movie_id", "price_id") VALUES
+INSERT INTO "recipe" ("name", "description", "duration", "image", "user_id","difficulty_id", "category_id", "movie_id", "price_id") VALUES
 ('Lasagnes de Garfield', 'Une délicieuse recette de lasagnes inspirée par Garfield.', 45, 'lasagnes.jpg',1, 2, 2, 1, 2),
 ('Mousse au Chocolat by Charlie', 'Un dessert chocolaté inspiré de Charlie et la chocolaterie.', 15, 'mousseAuChocolat.jpg',1, 1, 3, 2, 1),
-('Galette du Petit Pouvcet', 'Une galette traditionnelle inspirée du Petit Chaperon Rouge.', 20, 'galette.jpg',1, 1, 2, 3, 1),
+('Galette du Petit Poucet', 'Une galette traditionnelle inspirée du Petit Chaperon Rouge.', 20, 'galette.jpg',1, 1, 2, 3, 1),
 ('Ramens de Naruto', 'Un bol de ramens digne de Naruto.', 40, 'ramen.jpg',1, 3, 2, 4, 3),
 ('Pâtes aux boulettes de Toni', 'Une recette italienne inspirée de La Belle et le Clochard.', 35, 'spaghettisBoulettes.jpg',1, 2, 2, 5, 2),
 ('Ratatouille facçon rat', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 'ratatouillex45.png',1, 2, 2, 6, 2),
@@ -124,11 +126,11 @@ INSERT INTO "recipe" ("name", "description", "duration", "image", "user","diffic
 
 -- Insertion des relations recette-ingredient
 INSERT INTO "recipe_has_ingredient" ("recipe_id", "ingredient_id", "quantity", "unity") VALUES
-(1, 1, 6, 'feuilles'), -- Pâtes à lasagne
-(1, 2, 500, 'g'), -- Bœuf haché
-(1, 3, 400, 'ml'), -- Sauce tomate
-(1, 4, 200, 'g'), -- Fromage râpé
-(1, 5, 300, 'ml'); -- Béchamel
+(3, 1, 6, 'feuilles'), -- Pâtes à lasagne
+(3, 2, 500, 'g'), -- Bœuf haché
+(3, 3, 400, 'ml'), -- Sauce tomate
+(3, 4, 200, 'g'), -- Fromage râpé
+(3, 5, 300, 'ml'); -- Béchamel
 
 
 INSERT INTO "tool" ("name") VALUES
@@ -201,6 +203,8 @@ Recouvrir avec la seconde pâte feuilletée et souder les bords en appuyant lég
 Dorer la surface avec le jaune d’œuf dilué dans un peu d’eau ou de lait.
 Enfourner à 180°C (chaleur tournante) pendant 30 à 35 minutes, jusqu’à ce que la galette soit bien dorée.', 3);
 
-
+INSERT INTO "recipe_has_tool" ("recipe_id", "tool_id") VALUES
+(3, 1),
+(3, 2);
 
 COMMIT;

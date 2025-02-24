@@ -28,7 +28,7 @@ export const recipesController = {
   async GetAllRecipes(req, res) {
 
     try {
-      const css = 'recipies';
+      const css = 'recipes';
       const js = "index";
       const title = " Page des recettes";
       const { difficulty, genre, price, search } = req.query;
@@ -193,6 +193,7 @@ export const recipesController = {
   }, 
 
   async RenderUpdateRecipePage(req, res) {
+
     try {
       const css = 'update-recipe'
       const js = 'update-recipe'
@@ -205,16 +206,15 @@ export const recipesController = {
           { model: Price, as: "price"},
           { model: Difficulty, as: "difficulty"},
           { model: User, as: "user"},
+          { model: Tool, as: "tools"},
+          { model: Ingredient, as: "ingredients"},
+          { model: Step, as: "steps"}
         ]
-        })
-      
-      
+      })
 
-      console.log(recipe)
-      res.render("update-recipe", { css, js, title, recipe, tool} )
+      res.render("update-recipe", { css, js, title, recipe} )
     } catch { (err) => {
         console.log(err);
-  
       }
     }
   }

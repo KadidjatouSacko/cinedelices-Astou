@@ -57,14 +57,14 @@ Ingredient.belongsToMany(Recipe, {
   through: Recipe_Ingredient,
   foreignKey: 'ingredient_id',
   otherKey: 'recipe_id',
-  as: 'ingredients',
+  as: 'recipes',
   onDelete: 'CASCADE',
 });
 Recipe.belongsToMany(Ingredient, {
   through: Recipe_Ingredient,
   foreignKey: 'recipe_id',
   otherKey: 'ingredient_id',
-  as: 'recipes',
+  as: 'ingredients',
   onDelete: 'CASCADE',
 });
 
@@ -92,11 +92,26 @@ Movie.belongsToMany(Genre, {
   through: Movie_Genre
 });
 
-  User.belongsTo(Recipe, {
-    foreignKey: 'user',
-    as: 'recipes'
-  });
+User.hasMany(Recipe, {
+  foreignKey: 'user_id',
+  as: 'recipes'
+});
+Recipe.belongsTo(User, {
+  foreignKey: 'user_id',
+  as: 'user'
+});
 
-  Recipe_Ingredient
+Recipe.hasMany(Step, {
+  foreignKey: 'recipe_id',
+  as: 'steps'
+});
+Step.belongsTo(Recipe, {
+  foreignKey: 'recipe_id',
+  as: 'recipe'
+});
+
+
+
+  // Recipe_Ingredient
 
 export { User, Category, Difficulty, Ingredient, Genre, Movie, Recipe, Recipe_Ingredient, Price, Tool, Recipe_Tool, Step, Contact,  Movie_Genre };

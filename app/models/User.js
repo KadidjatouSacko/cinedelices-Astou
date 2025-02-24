@@ -4,47 +4,37 @@ import { sequelize } from "./sequelizeClient.js"
 
 export class User extends Model { }
 
-User.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        pseudo: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-            unique: true
-        },
-        email: {
-            type: DataTypes.STRING(255),
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
-            }
-        },
-        password: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        firstname: {
-            type: DataTypes.TEXT,
-            allowNull: true
-        },
-        lastname: {
-            type: DataTypes.TEXT,
-            allowNull: true
-        },
-        role: {
-            type: DataTypes.TEXT,
-            defaultValue: "member"
+User.init({
+    pseudo: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        unique: true
+    },
+    email: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true
         }
     },
-    {
-        sequelize,
-        tableName: "user",
-        createdAt: "created_at",
-        updatedAt: "updated_at",
+    password: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    firstname: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    lastname: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    role: {
+        type: DataTypes.TEXT,
+        defaultValue: "member"
     }
-);
+}, {
+    sequelize,
+    tableName: "user"
+});
