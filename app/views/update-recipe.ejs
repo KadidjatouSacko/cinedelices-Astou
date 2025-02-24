@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<body>
+    <main class="recipe_main">
+        <section>
+            <h2>Ustensiles</h2>
+            <ul>
+                <% for(let i = 0; i < ustensiles.length; i++) { %>
+                    <li><input type="text" name="tools<%= i + 1 %> <%= ingredient.label %><%= ustensiles[i] %>"></li>
+                <% } %>
+            </ul>
+            <h2>Ingrédients</h2>
+            <ul>
+                <% for(let i = 0; i < ingredients.length; i++) { %>
+                    <li><input type="text" name="ingredient<%= i + 1 %>" ingredient.label="<%= ingredients[i] %>"></li>
+                    <% } %>
+            </ul>
+        </section>
+        
+        <section>
+            <% for(let i = 0; i < etapes.length; i++) { %>
+                <article>
+                    <h3>Étape <%= i + 1 %></h3>
+                    <textarea name="step<%= i + 1 %> <%= recipe.description %><%= etapes[i] %>"></textarea>
+                </article>
+                <% } %>
+            </section>
+        </main>
+        </section>
+    </main>
+</body>
+<%- include('partials/footer') %>
