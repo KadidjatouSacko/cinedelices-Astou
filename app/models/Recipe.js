@@ -24,6 +24,14 @@ Recipe.init({
   image: {
     type: DataTypes.STRING
   },
+  user: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "user",
+      key: 'id'
+    }
+  },
   difficulty_id: {
     type: DataTypes.INTEGER,
     allowNull: false,

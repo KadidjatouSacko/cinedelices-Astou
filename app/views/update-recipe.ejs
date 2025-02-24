@@ -1,46 +1,46 @@
 <%- include('partials/header') %>
-
-<body>
-    <main class="recipe_main">
-
-        <section class="recipe_section_tool">
-            <h2 class="recipe_section_tool_title">Ustensiles</h2>
-            <ul class="tool_list">
-                <% for(let i = 0; i < tool.length; i++) { %>
-                    <li>
-                        <input type="text" name="tool<%= i + 1 %>" value="<%= tool[i].name %>">
-                        <button type="button" class="delete-btn" data-index="<%= i %>" data-type="tool">X</button>
-                    </li>
-                <% } %>
-            </ul>
-        </section>
-        
-        <section class="recipe_section_ingredient">
-            <h2 class="recipe_section_ingredient_title">Ingrédients</h2>
-            <ul class="ingredient_list">
-                <% for(let i = 0; i < ingredient.length; i++) { %>
-                    <li>
-                        <input type="text" name="ingredient<%= i + 1 %>" value="<%= ingredient[i].label %>">
-                        <button type="button" class="delete-btn" data-index="<%= i %>" data-type="ingredient">X</button>
-                    </li>
-                <% } %>
-            </ul>
-        </section>
-
-        <section class="recipe_section_step">
-            <h2 class="recipe_section_step_title">Étapes</h2>
-            <ul class="step_list">
-                <% for(let i = 0; i < step.length; i++) { %>
-                    <article class="step">
-                        <h3 class="step_title">Étape <%= i + 1 %></h3>
-                        <textarea name="step<%= i + 1 %>"><%= step[i].instruction %></textarea>
-                        <button type="button" class="delete-btn" data-index="<%= i %>" data-type="step">X</button>
-                    </article>
-                <% } %>
-            </ul>
-        </section>
+<main>
+        <form action="/recette/<%= recipe.id %>/modifier" method="post">
+            <!-- titre de la recette -->
+            <!-- image du film  -->
+            <!-- image de la recette -->
+            <section class="recipe_section_tool">
+                <h2 class="recipe_section_tool_title">Ustensiles</h2>
+                <ul class="tool_list">
+                    <% for(let i = 0; i < tool.length; i++) { %>
+                        <li>
+                            <input type="text" name="tool<%= i + 1 %>" value="<%= tool[i].name %>">
+                            <button type="button" class="delete-btn" data-index="<%= i %>" data-type="tool">X</button>
+                        </li>
+                    <% } %>
+                </ul>
+            </section>
+            
+            <section class="recipe_section_ingredient">
+                <h2 class="recipe_section_ingredient_title">Ingrédients</h2>
+                <ul class="ingredient_list">
+                    <% for(let i = 0; i < ingredient.length; i++) { %>
+                        <li>
+                            <input type="text" name="ingredient<%= i + 1 %>" value="<%= ingredient[i].label %>">
+                            <button type="button" class="delete-btn" data-index="<%= i %>" data-type="ingredient">X</button>
+                        </li>
+                    <% } %>
+                </ul>
+            </section>
+    
+            <section class="recipe_section_step">
+                <h2 class="recipe_section_step_title">Étapes</h2>
+                <ul class="step_list">
+                    <% for(let i = 0; i < step.length; i++) { %>
+                        <article class="step">
+                            <h3 class="step_title">Étape <%= i + 1 %></h3>
+                            <textarea name="step<%= i + 1 %>"><%= step[i].instruction %></textarea>
+                            <button type="button" class="delete-btn" data-index="<%= i %>" data-type="step">X</button>
+                        </article>
+                    <% } %>
+                </ul>
+            </section>
+        </form>
     </main>
-    <script src="/public/assets/js/update-recipe.js"></script>
-</body>
 
 <%- include('partials/footer') %>
