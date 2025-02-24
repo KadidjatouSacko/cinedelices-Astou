@@ -46,6 +46,11 @@ INSERT INTO "genre" ("id", "name") VALUES
 (10752, 'Guerre'),
 (37, 'Western');
 
+INSERT INTO "price" ("id","name") VALUES
+(1, 'Eco'),
+(2, 'Moyen'),
+(3, 'Cher');
+
 -- Insertion des films
 INSERT INTO "movie" ("title", "year", "tmdb_id") VALUES
 ('Garfield', '2004-01-01', 16),
@@ -108,14 +113,14 @@ INSERT INTO "movie_has_genre" ("movie_id", "genre_id") VALUES
 (7, 35);
 
 -- Insertion des recettes
-INSERT INTO "recipe" ("name", "description", "duration", "image", "difficulty_id", "category_id", "movie_id") VALUES
-('Lasagnes de Garfield', 'Une délicieuse recette de lasagnes inspirée par Garfield.', 45, 'lasagnes.jpg', 2, 2, 1),
-('Mousse au Chocolat by Charlie', 'Un dessert chocolaté inspiré de Charlie et la chocolaterie.', 15, 'mousseAuChocolat.jpg', 1, 3, 2),
-('Galette du Petit Pouvcet', 'Une galette traditionnelle inspirée du Petit Chaperon Rouge.', 20, 'galette.jpg', 1, 2, 3),
-('Ramens de Naruto', 'Un bol de ramens digne de Naruto.', 40, 'ramen.jpg', 3, 2, 4),
-('Pâtes aux boulettes de Toni', 'Une recette italienne inspirée de La Belle et le Clochard.', 35, 'spaghettisBoulettes.jpg', 2, 2, 5),
-('Ratatouille facçon rat', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 'ratatouillex45.png', 2, 2, 6),
-('Donuts de Bart', 'Les donuts préférés d''Homer Simpson.', 60, 'donuts.jpg', 2, 3, 7);
+INSERT INTO "recipe" ("name", "description", "duration", "image", "user","difficulty_id", "category_id", "movie_id", "price_id") VALUES
+('Lasagnes de Garfield', 'Une délicieuse recette de lasagnes inspirée par Garfield.', 45, 'lasagnes.jpg',1, 2, 2, 1, 2),
+('Mousse au Chocolat by Charlie', 'Un dessert chocolaté inspiré de Charlie et la chocolaterie.', 15, 'mousseAuChocolat.jpg',1, 1, 3, 2, 1),
+('Galette du Petit Pouvcet', 'Une galette traditionnelle inspirée du Petit Chaperon Rouge.', 20, 'galette.jpg',1, 1, 2, 3, 1),
+('Ramens de Naruto', 'Un bol de ramens digne de Naruto.', 40, 'ramen.jpg',1, 3, 2, 4, 3),
+('Pâtes aux boulettes de Toni', 'Une recette italienne inspirée de La Belle et le Clochard.', 35, 'spaghettisBoulettes.jpg',1, 2, 2, 5, 2),
+('Ratatouille facçon rat', 'Le célèbre plat provençal inspiré par Ratatouille.', 50, 'ratatouillex45.png',1, 2, 2, 6, 2),
+('Donuts de Bart', 'Les donuts préférés d''Homer Simpson.', 60, 'donuts.jpg',1, 2, 3, 7, 3);
 
 -- Insertion des relations recette-ingredient
 INSERT INTO "recipe_has_ingredient" ("recipe_id", "ingredient_id", "quantity", "unity") VALUES
@@ -124,6 +129,77 @@ INSERT INTO "recipe_has_ingredient" ("recipe_id", "ingredient_id", "quantity", "
 (1, 3, 400, 'ml'), -- Sauce tomate
 (1, 4, 200, 'g'), -- Fromage râpé
 (1, 5, 300, 'ml'); -- Béchamel
+
+
+INSERT INTO "tool" ("name") VALUES
+('Tournebroche'),
+('Bain-marie'),
+('Barbecue'),
+('Casserole'),
+('Cocotte'),
+('Couscoussier'),
+('Crêpière'),
+('Cuiseur de riz'),
+('Cuit vapeur'),
+('Four'),
+('Plancha'),
+('Poêle'),
+('Rotissoire'),
+('Salamandre'),
+('Sauteuse'),
+('Terrine'),
+('Thermomètre de cuisson'),
+('Wok'),
+('Batteur / mixeur'),
+('Centrifugeuse'),
+('Congélateur'),
+('Girafe'),
+('Hachoir'),
+('Machine à pain'),
+('Pétrin'),
+('Sorbetière'),
+('Ciseaux'),
+('Couteau à découper'),
+('Couteau office'),
+('Couperet'),
+('Désosseur'),
+('Écailleur'),
+('Éminceur'),
+('Couteau économe'),
+('Hachoir à viande'),
+('Mandoline'),
+('Râpe'),
+('Zesteur'),
+('Corne'),
+('Coupe-pâte'),
+('Douille'),
+('Emporte-pièce'),
+('Maryse'),
+('Moule à gaufres'),
+('Moule à manqué'),
+('Poche à douilles'),
+('Rouleau à pâtisserie'),
+('Casse-noix'),
+('Chinois'),
+('Cul de poule'),
+('Égouttoir'),
+('Entonnoir'),
+('Fouet'),
+('Mortier'),
+('Presse-purée'),
+('Siphon')
+;
+
+INSERT INTO "step" ("title", "instruction", "recipe_id") VALUES
+('Préparer la crème', 'Dans un saladier, mélanger le beurre mou et le sucre jusqu’à obtenir une texture crémeuse. 
+Ajouter la poudre d’amandes, les 2 œufs, l’extrait de vanille et le rhum (si utilisé). Bien mélanger.', 3),
+('Assembler la galette', 'Dérouler une première pâte feuilletée sur une plaque de cuisson recouverte de papier sulfurisé.
+Étaler la crème frangipane en laissant environ 2 cm de bord sans garniture.
+Placer la fève sur un bord pour éviter de la couper au moment du service.
+Recouvrir avec la seconde pâte feuilletée et souder les bords en appuyant légèrement avec les doigts.', 3),
+('Décoration et cuisson', 'À l’aide d’un couteau, dessiner délicatement des motifs sur la pâte (rosaces, croisillons...).
+Dorer la surface avec le jaune d’œuf dilué dans un peu d’eau ou de lait.
+Enfourner à 180°C (chaleur tournante) pendant 30 à 35 minutes, jusqu’à ce que la galette soit bien dorée.', 3);
 
 
 
