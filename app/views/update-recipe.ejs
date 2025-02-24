@@ -2,31 +2,45 @@
 
 <body>
     <main class="recipe_main">
-        <section>
-            <h2>Ustensiles</h2>
-            <ul>
-                <% for(let i = 0; i < ustensiles.length; i++) { %>
-                    <li><input type="text" name="tools<%= i + 1 %> <%= ingredient.label %><%= ustensiles[i] %>"></li>
+
+        <section class="recipe_section_tool">
+            <h2 class="recipe_section_tool_title">Ustensiles</h2>
+            <ul class="tool_list">
+                <% for(let i = 0; i < tool.length; i++) { %>
+                    <li>
+                        <input type="text" name="tool<%= i + 1 %>" value="<%= tool[i].name %>">
+                        <button type="button" class="delete-btn" data-index="<%= i %>" data-type="tool">X</button>
+                    </li>
                 <% } %>
-            </ul>
-            <h2>Ingrédients</h2>
-            <ul>
-                <% for(let i = 0; i < ingredients.length; i++) { %>
-                    <li><input type="text" name="ingredient<%= i + 1 %>" ingredient.label="<%= ingredients[i] %>"></li>
-                    <% } %>
             </ul>
         </section>
         
-        <section>
-            <% for(let i = 0; i < etapes.length; i++) { %>
-                <article>
-                    <h3>Étape <%= i + 1 %></h3>
-                    <textarea name="step<%= i + 1 %> <%= recipe.description %><%= etapes[i] %>"></textarea>
-                </article>
+        <section class="recipe_section_ingredient">
+            <h2 class="recipe_section_ingredient_title">Ingrédients</h2>
+            <ul class="ingredient_list">
+                <% for(let i = 0; i < ingredient.length; i++) { %>
+                    <li>
+                        <input type="text" name="ingredient<%= i + 1 %>" value="<%= ingredient[i].label %>">
+                        <button type="button" class="delete-btn" data-index="<%= i %>" data-type="ingredient">X</button>
+                    </li>
                 <% } %>
-            </section>
-        </main>
+            </ul>
+        </section>
+
+        <section class="recipe_section_step">
+            <h2 class="recipe_section_step_title">Étapes</h2>
+            <ul class="step_list">
+                <% for(let i = 0; i < step.length; i++) { %>
+                    <article class="step">
+                        <h3 class="step_title">Étape <%= i + 1 %></h3>
+                        <textarea name="step<%= i + 1 %>"><%= step[i].instruction %></textarea>
+                        <button type="button" class="delete-btn" data-index="<%= i %>" data-type="step">X</button>
+                    </article>
+                <% } %>
+            </ul>
         </section>
     </main>
+    <script src="/public/assets/js/update-recipe.js"></script>
 </body>
+
 <%- include('partials/footer') %>
