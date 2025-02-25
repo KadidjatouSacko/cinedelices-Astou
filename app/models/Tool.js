@@ -1,15 +1,15 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "./sequelizeClient.js";
 
-export class Category extends Model { }
+export class Tool extends Model { }
 
-Category.init({
+Tool.init({
   name: {
-    type: DataTypes.TEXT, 
+    type: DataTypes.TEXT,
     allowNull: false,
     unique: true
   }
 }, {
   sequelize,
-  tableName: "category"
+  tableName: 'tool'
 });

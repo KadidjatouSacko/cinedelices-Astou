@@ -2,7 +2,7 @@
 
 // import {recipes} from "../../data/data.js"
 
-import { Genre, Recipe, Ingredient, Movie, Difficulty, Category } from "../models/index.js";
+import { Genre, Recipe, Ingredient, Movie, Difficulty, Category, Tool, Step, User, Price  } from "../models/index.js";
 
 export const recipesController = {
 
@@ -28,7 +28,7 @@ export const recipesController = {
   async GetAllRecipes(req, res) {
 
     try {
-      const css = 'recipies';
+      const css = 'recipes';
       const js = "index";
       const title = " Page des recettes";
       const { difficulty, genre, price, search } = req.query;
@@ -190,6 +190,32 @@ export const recipesController = {
     console.log(recipes);
 
     res.redirect("/recettes")
-  }
+  }, 
 
+  async RenderUpdateRecipePage(req, res) {
+
+    try {
+      const css = 'update-recipe'
+      const js = 'update-recipe'
+      const title = 'Modifier la recette <%= recipe.name %>'
+      const recipe_id = req.params.id
+      
+      const recipe = await Recipe.findByPk(recipe_id, {
+        include: [
+          { model: Category, as: "category" },
+          { model: Price, as: "price"},
+          { model: Difficulty, as: "difficulty"},
+          { model: User, as: "user"},
+          { model: Tool, as: "tools"},
+          { model: Ingredient, as: "ingredients"},
+          { model: Step, as: "steps"}
+        ]
+      })
+
+      res.render("update-recipe", { css, js, title, recipe} )
+    } catch { (err) => {
+        console.log(err);
+      }
+    }
+  }
 };

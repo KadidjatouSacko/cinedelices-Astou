@@ -36,7 +36,8 @@ router.post("/contact",contactController.ContactSumbit)
 router.get("/recette/select-film",recipesController.RenderFilmSelectPage)
 router.get("/recette/ajouter",recipesController.RenderAddRecipePage)
 router.post("/recette/ajouter", uploadImageRecipe.single('image'), recipesController.AddOneRecipe)
-
+router.get("/recette/:id/modifier", recipesController.RenderUpdateRecipePage)
+// router.post("/recette/:id/modifier", recipesController.UpdateRecipeById)
 router.get("/rechercher/titre", movieController.searchMovieByTitle);
 router.get("/rechercher/genre", movieController.searchMovieByCategory);
 router.get("/films", moviesController.GetAllMovies);

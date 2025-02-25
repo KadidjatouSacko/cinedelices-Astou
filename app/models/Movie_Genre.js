@@ -6,5 +6,11 @@ export class Movie_Genre extends Model { }
 Movie_Genre.init({
 }, {
   sequelize,
-  tableName: "movie_has_genre"
+  tableName: "movie_has_genre",
+  indexes: [
+    {
+      unique: true,
+      fields: ['movie_id', 'genre_id']
+    }
+  ]
 });
