@@ -1,6 +1,5 @@
 BEGIN;
 
-
 DROP TABLE IF EXISTS "user", "category", "genre", "price","movie", "ingredient", "difficulty", "recipe", "movie_has_genre", "recipe_has_ingredient", "contact","tool", "recipe_has_tool", "step";
 
 CREATE TABLE "user" (
