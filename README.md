@@ -37,3 +37,4 @@ Une copie du .env sera versionnée sur github indiquant les données à renseign
 
 API a rajouter en .env :
 ebca9cb1b38d3ceff2bcf1a944092f57
+# Cin--Delices
