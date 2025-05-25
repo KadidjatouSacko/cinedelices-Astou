@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciné-Delices</title>
-    <!-- <link rel="stylesheet" href="../public/assets/css/movies.css"> -->
-</head>
-<body>
-    <header>
-
-        <nav>
-            <section class="navbar-header">
-                <img src="../public/assets/img/logo.png" alt="logo">
-                <h2> Contact</h2>
-                <a href="#">Connexion</a>
-    
-            </section>
-    
-            <section class="navbar">
-                <ul>
-                    <li> <a href="/recettes"> Recettes</a></li>
-                    <li> <a href="/contact"> contact</a></li>
-                    <li> <a href="/films"> Filmographie</a></li>
-                </ul>
-            </section>
-        </nav>
-    </header>
-
+<%- include('partials/header') %>
 <link rel="stylesheet" href="/assets/css/registration.css">
 <main>
     <section class="registration-form">
@@ -34,22 +6,23 @@
         <section class="form">
             <% if (locals.error) { %>
                 <div class="error-message" style="color: red; margin-bottom: 15px;">
-                    <%= error %>
+                    <%= locals.error %>
                 </div>
             <% } %>
             
             <form action="/inscription" method="POST">
                 <label for="lastname">Nom <strong>*</strong>:</label>
-                <input type="text" id="lastname" name="lastname" value="<%= locals.formData ? formData.lastname : '' %>" required>
+                <input type="text" id="lastname" name="lastname" value="<%- escape(locals.formData ? formData.lastname : '') %>" required>
             
                 <label for="firstname">Prénom <strong>*</strong>:</label>
-                <input type="text" id="firstname" name="firstname" value="<%= locals.formData ? formData.firstname : '' %>" required>
+                <input type="text" id="firstname" name="firstname" value="<%- escape(locals.formData ? formData.firstname : '') %>" required>
             
                 <label for="pseudo">Pseudo <strong>*</strong>:</label>
-                <input type="text" id="pseudo" name="pseudo" value="<%= locals.formData ? formData.pseudo : '' %>" required>
-            
+                <input type="text" id="pseudo" name="pseudo" value="<%- escape(locals.formData ? locals.formData.pseudo : '') %>" required>
+
+                
                 <label for="email">Adresse mail <strong>*</strong>:</label>
-                <input type="email" id="email" name="email" value="<%= locals.formData ? formData.email : '' %>" required>
+                <input type="email" id="email" name="email" value="<%- escape(locals.formData ? formData.email : '') %>" required>
             
                 <label for="password">Mot de passe <strong>*</strong>:</label>
                 <input type="password" id="password" name="password" required>

@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+<link rel="stylesheet" href="/assets/css/user-profile.css">
+
+<main class="user-profile">
+    <h1>Bienvenue sur votre profil, <%= user.username %></h1>
+    <span> Votre compte a été créé le <%= user.created_at %></span>, la dernière modification a eu lieu le : <span><%= user.updated_at %></span>
+    <p>Email: <%= user.email %></p>
+    <p>Pseudo: <%= user.pseudo %></p>
+    <p>Prénom : <%= user.firstname %></p>
+    <p>Nom: <%= user.lastname %></p>
+    <p>Mot de passe : <%= '********' %></p>
+
+    
+    <a href="/profil/modifier" class="btn-modifier">Modifier mon profil</a>
+</main>
+
+<%- include('partials/footer') %>

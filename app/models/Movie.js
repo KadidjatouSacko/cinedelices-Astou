@@ -12,10 +12,23 @@ Movie.init ({
     type: DataTypes.DATE,
     allowNull: false,
   },
+  overview : {
+    type: DataTypes.STRING,
+    allowNull : true
+  },
+
   tmdb_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false,  // Si tu veux qu'il soit obligatoire
+    unique: true,  // Si tu veux qu'il soit unique
+    validate: {
+      notEmpty: true  // Vérifie qu'il n'est pas vide
+    }
+  } //
 }, 
 {
   sequelize,

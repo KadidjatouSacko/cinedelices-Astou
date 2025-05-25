@@ -1,5 +1,7 @@
 <%- include('partials/header') %>
 
+<link rel="stylesheet" href="/assets/css/recipes.css">
+
 <main>
     <section class="filters">
         <form method="GET">
@@ -11,27 +13,29 @@
                 <option value="Difficile" <%= difficulty === 'Difficile' ? 'selected' : '' %>>Difficile</option>
             </select>
 
-            <label for="genre">Genre:</label>
-            <select name="genre" id="genre">
+            <label for="category">Catégorie:</label>
+            <select name="category" id="category">
                 <option value="">Choisir</option>
-                <% genres.forEach(genre => { %>
-                    <option value="<%= genre.genre %>" <%= genre.genre === selectedGenre ? 'selected' : '' %>><%= genre.genre %></option>
-                <% }) %>
+                <option value="Entrée" <%= selectedCategory === 'Entrée' ? 'selected' : '' %>>Entrée</option>
+                <option value="Plat" <%= selectedCategory === 'Plat' ? 'selected' : '' %>>Plat</option>
+                <option value="Dessert" <%= selectedCategory === 'Dessert' ? 'selected' : '' %>>Dessert</option>
             </select>
 
+            
             <label for="price">Prix:</label>
             <select name="price" id="price">
                 <option value="">Choisir</option>
-                <option value="Pas cher" <%= price === 'Pas cher' ? 'selected' : '' %>>Pas cher</option>
-                <option value="Moyen" <%= price === 'Moyen' ? 'selected' : '' %>>Moyen</option>
-                <option value="Haut" <%= price === 'Haut' ? 'selected' : '' %>>Haut</option>
+                <option value="Eco" <%= selectedPrice === 'Eco' ? 'selected' : '' %>>Eco</option>
+                <option value="Moyen" <%= selectedPrice === 'Moyen' ? 'selected' : '' %>>Moyen</option>
+                <option value="Cher" <%= selectedPrice === 'Cher' ? 'selected' : '' %>>Cher</option>
             </select>
 
             <button type="submit">Filtrer</button>
 
             <label for="search">Rechercher :</label>
-            <input type="text" name="search" id="search" placeholder="Rechercher une recette, un auteur, un film..." value="<%= search || '' %>">
+            <input type="text" name="search" id="search" placeholder="Rechercher une recette, un auteur, un film, une catégorie, une difficulté..." value="<%= search || '' %>">
             <button type="submit">Rechercher</button>
+
         </form>
     </section>
 
@@ -45,8 +49,8 @@
                     <div class="article-container">
 
 
-                        <article class="movie-image" style="background-image: url('/assets/img/<%= recipe.movie.title %>.jpg');">
-                            <img src="/assets/img/<%= recipe.name %>.jpg" class="recipe-img" alt="Image de <%= recipe.name %>">
+                        <article class="movie-image" style="background-image: url('/assets/img/movies/<%= recipe.movie.title.toLowerCase().replace(/\s+/g, '-').replace(/[éèê]/g, 'e').replace(/[àâ]/g, 'a').replace(/[ùü]/g, 'u').replace(/[ô]/g, 'o').replace(/[^a-z0-9-]/g, '') %>.jpg')">
+                            <img src="/assets/img/recipes/<%= recipe.image %>" class="recipe-img" alt="Image de <%= recipe.name %>">
 
                         </article>
                     </div>
@@ -64,13 +68,15 @@
                         <p class="price"> 
                             <img src="/assets/img/icon/euro.jpg" alt="symbole-euro" class="symbole"> 
 
-                            <%= recipe.price %>
+                            <%= recipe.price.name %>
                         </p>
+                        
                     </section>
 
                     <div>
                         <button>
-                            <a href="/recette/<%= recipe.name %>">Voir la recette</a>
+                            <a href="/recettes/<%= recipe.slug %>">Voir la recette</a>
+
                         </button>
                     </div>
                 </div>

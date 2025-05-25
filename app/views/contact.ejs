@@ -1,38 +1,37 @@
 <%- include('partials/header') %>
+
 <link rel="stylesheet" href="/assets/css/contact.css">
 <main>
-    <h3> Vous pouvez nous contacter soit : </h3>
+    <h3>Vous pouvez nous contacter soit :</h3>
 
     <section class="coordinates">
-        <span>
+        <div class="coordinate">
             <p>Par mail : contact@ciné-délices.fr</p>
-        </span>
-        <span>
+        </div>
+        <div class="coordinate">
             <p>Par téléphone: 07.08.25.58.99</p>
-        </span>
+        </div>
     </section>
 
     <section>
-        <h3> En remplissant le formulaire : </h3>
-        <section>
-            <form class="form" action="/contact" method="POST">
-                <div class="contact">
-                    <label for="pseudo"> Pseudo: </label>
-                    <input type="text" id="pseudo" placeholder="pseudo" name="pseudo" required>
+        <h3>En remplissant le formulaire :</h3>
+        <form class="form" action="/contact" method="POST">
+            <div class="contact">
+                <label for="pseudo">Pseudo :</label>
+                <input type="text" id="pseudo" placeholder="Pseudo" name="pseudo" required>
 
-                    <label for="adresse-mail"> Adresse Mail</label>
-                    <input type="email" id="mail" placeholder="adresse mail" name="mail" required>
-                </div>
+                <label for="email">Adresse Mail :</label>
+                <input type="email" id="email" placeholder="Adresse Mail" name="email" required>
+            </div>
 
-                <span class="text">
-                    <textarea name="text" id="text" cols="60" rows="10" required></textarea>
-                </span>
+            <span class="text">
+                <textarea name="text" id="text" cols="30" rows="10" placeholder="Votre message" required></textarea>
+            </span>
 
-                <span class="submit">
-                    <button type="submit">Envoyer</button>
-                </span>
-            </form>
-        </section>
+            <span class="submit">
+                <button type="submit">Envoyer</button>
+            </span>
+        </form>
     </section>
 </main>
 

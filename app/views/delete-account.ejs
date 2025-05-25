@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+
+<link rel="stylesheet" href="/assets/css/delete-account.css">
+<main class="delete-account">
+    <h1>Supprimer mon compte</h1>
+    <p>Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.</p>
+    <form action="/profil/supprimer" method="POST">
+        <button type="submit" class="btn-danger">Confirmer la suppression</button>
+    </form>
+    <a href="/profil" class="btn-cancel">Annuler</a>
+</main>
+
+<%- include('partials/footer') %>

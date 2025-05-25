@@ -1,34 +1,51 @@
-header{
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F9F9F9;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    font-size: 1rem;
+}
+
+/* Header */
+header {
     background-color: #2A2D34;
-    padding-bottom: 2.3rem;
-    height: 10rem;
-
+    padding: 2rem 0;
+    color: white;
 }
 
-.navbar-header h2{
-    color:bisque;
+.navbar-header h2 {
     font-size: 3rem;
-    font-family:Georgia, 'Times New Roman', Times, serif ;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
 }
 
-
-.navbar ul{
+.navbar ul {
     display: flex;
-    justify-content: space-evenly;
-
-
-
+    justify-content: center;
+    gap: 1.5rem;
 }
-.navbar li{
+
+.navbar li {
     background-color: #CE1902;
-    color : white;
+    color: white;
     list-style: none;
-    display: flex;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.2rem;
     border-radius: 18%;
-    padding: 0.5rem 1.2rem;
-    font-size : 1.3rem;
-    margin-top: -2rem;
-    
+    text-align: center;
+    cursor: pointer;
+}
+
+.navbar li:hover {
+    background-color: #9B1400;
 }
 
 a {
@@ -36,92 +53,185 @@ a {
     color: white;
 }
 
-.navbar-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem 2rem 0rem;
-    margin-bottom: -2rem;
-    margin-top: -2rem;
-
-
-}
-
-.navbar-header img  {
-    margin-top: 1rem;
-    margin-left: 1rem;
-    width: 8rem;
-    border-radius: 40%;
-}
-
-
-
-.infos{
-    margin: 2rem;
+/* Contact Page */
+main {
     padding: 2rem;
-    background-color: #CE1902;
+    background-color: #fff;
 }
 
-.infos img {
-    width: 10rem;
+h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-.form{
+.coordinates {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.contact{
-    
+.coordinate p {
+    font-size: 1.2rem;
+    color: #2A2D34;
+    text-align: center;
+}
+
+/* Form */
+.form {
     display: flex;
-    justify-content: center
-
-
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.contact label{
-    margin-right: 0.5rem;
+.contact label {
+    font-size: 1.1rem;
+    color: #2A2D34;
+    text-align: left;
 }
 
-.contact input{
-    margin-right: 3.5rem;
-}
-
-.text{
-    margin: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.sumbit {
-    display: flex;
-    justify-content: center;
-    margin-left: 45%;
-}
-
-.sumbit button {
-    background-color: #CE1902;
+.contact input,
+.text textarea {
     padding: 1rem;
-    border-radius: 45%;
-    color: #EEEBD3;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     font-size: 1rem;
-    border: none; 
-    cursor: pointer; 
-    
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+    width: 100%;
 }
 
-.sumbit button:hover {
+.contact input:focus,
+.text textarea:focus {
+    outline: none;
+    border-color: #CE1902;
+}
+
+/* Submit Button */
+
+.submit {
+    display: flex;
+    justify-content: center; /* Centrage du bouton */
+    width: 100%; /* Assure que l'élément parent prend toute la largeur disponible */
+}
+
+.submit button {
+    background-color: #CE1902;
+    color: #EEEBD3;
+    padding: 0.6rem 2rem; /* Réduit la taille du bouton pour être plus proportionnel */
+    border-radius: 45%;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto; /* Ne prend que la taille du contenu */
+    max-width: 250px; /* Limite la largeur du bouton sur grand écran */
+}
+
+.submit button:hover {
     background-color: #9B1400;
-}
-.coordinates{
-    display: flex;
-    justify-content: space-evenly;
-
-}
- 
-
-h3{
-    display: flex;
-    justify-content: center
+background-color: #9B1400;
 }
 
+footer {
+    background-color: #2A2D34;
+    padding: 1.5rem;
+    color: #EEEBD3;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Mobile-First Design */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .navbar li {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .coordinates {
+        gap: 1.5rem;
+    }
+
+    .coordinate p {
+        font-size: 1rem;
+    }
+
+    .form {
+        gap: 1rem;
+    }
+
+    .contact label {
+        font-size: 1rem;
+    }
+
+    .contact input,
+    .text textarea {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+
+    .submit button {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+}
+
+/* Tablet and Larger Screens */
+@media (min-width: 769px) {
+    .coordinates {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .coordinate p {
+        font-size: 1.2rem;
+    }
+
+    .form {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .submit button {
+        width: 50%;
+    }
+}
+
+/* Accessibility Improvements */
+input:disabled,
+textarea:disabled,
+button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+
+input,
+textarea,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+button:focus {
+    outline: 2px solid #CE1902;
+}
+
+/* Keyboard Navigation */
+input:focus,
+textarea:focus,
+button:focus {
+    border-color: #CE1902;
+    box-shadow: 0 0 0 3px rgba(206, 25, 2, 0.5);
+}

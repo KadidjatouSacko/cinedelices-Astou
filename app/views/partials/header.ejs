@@ -3,49 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="/assets/css/reset.css">
-    <link rel="stylesheet" href="/assets/css/normalize.css">
-    <link rel="stylesheet" href="/assets/css/<%= css %>.css">
-    <script src="/assets/js/index.js" type="module" defer></script>
-
-    <% if (js) { %>
-        <script type="module" src="/assets/js/<%= js %>.js" defer></script>
-        <% } else { %>
-    <% } %>
-
-    <title>CinéDélices || <%= title %></title>
+    <title>Ciné-Delices</title>
+    <link rel="stylesheet" href="/assets/css/header.css">
 </head>
-<body class="body">
-    <header class="body__header">
-        <a href="/">
-            <img src="/assets/img/logo.webp" alt="Logo Ciné Délices" class="body__header--img">
-        </a>
-        <article class="body__header--ctnTitle">
-            <h1 class="body__header--ctnTitle-title">CinéDélices</h1>
-            <nav class="body__header--ctnTitle-nav">
-                <img src="/assets/img/icon/bouton-fermer.png" id="close">
-                <ul class="body__header--ctnTitle-nav-ctn">
-                    <a href="/recettes" class="body__header--ctnTitle-nav-ctn-link">
-                        <li class="body__header--ctnTitle-nav-ctn-link-row">Recettes</li>
-                    </a>
-                    <a href="/contact" class="body__header--ctnTitle-nav-ctn-link">
-                        <li class="body__header--ctnTitle-nav-ctn-link-row">Contact</li>
-                    </a>
-                    <a href="/filmographie" class="body__header--ctnTitle-nav-ctn-link">
-                        <li class="body__header--ctnTitle-nav-ctn-link-row">Filmographie</li>
-                    </a>
+<body>
+    <header>
+        <nav>
+            <!-- Section du haut avec le logo et les liens de connexion / inscription -->
+            <section class="navbar-top">
+                <img src="/assets/img/logo.webp" alt="logo" class="logo">
+                <div class="auth-links">
+                    <!-- Si l'utilisateur est connecté, afficher le lien vers le profil et déconnexion -->
+                    <% if (user) { %>
+                        <a href="/profil">Bonjour <%= user.pseudo %> !</a>
+                        <a href="/deconnexion">Déconnexion</a>
+                        <a href="/recette/select-film">Créer une recette</a>
+                        <!-- <a href="/recette/:id/modifier">Modifier une recette</a> -->
+                        <a href="/profil"> Mon profil</a>
+                    <% } else { %> 
+                        <!-- Si l'utilisateur n'est pas connecté, afficher les liens Connexion et Inscription -->
+                        <a href="/connexion">Connexion</a>
+                        <a href="/inscription">Inscription</a>
+                    <% } %>
+                    
+                </div>
+            </section>
+
+            <!-- Titre de l'application -->
+            <h2>Ciné-Delices</h2>
+
+            <!-- Menu de navigation principal -->
+            <section class="navbar">
+                <ul>
+                    <li><a href="/recettes">Recettes</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/films">Filmographie</a></li>
                 </ul>
-            </nav>
-        </article>
-        <article class="body__header--connect">
-            <a href="/connexion" class="body__header--connect-link">Connexion</a>
-            <article class="body__header--connect-burger">
-                <article class="body__header--connect-burger-ctn">
-                    <div class="body__header--connect-burger-line"></div>
-                <div class="body__header--connect-burger-line"></div>
-                <div class="body__header--connect-burger-line"></div>
-                </article>                
-            </article>
-        </article>        
+            </section>
+        </nav>
     </header>
+</body>
+</html>
+

@@ -1,3 +1,4 @@
+/* Mobile First */
 .body__main--ctn-article {
     width: 90%;
     margin: .5rem 5%;
@@ -5,12 +6,14 @@
 
 .body__main--ctn-article-title {
     font-family: var(--font-subtitle);
-    font-size: .8rem;
+    font-size: 2rem; /* Augmentation de la taille */
     text-align: center;
     color: var(--colorRed);
     font-weight: 700;
     text-transform: uppercase;
     margin: 1rem .5rem;
+    letter-spacing: 2px; /* Espace entre les lettres pour plus de lisibilité */
+    line-height: 1.5; /* Meilleure lisibilité */
 }
 
 .body__main--ctn-article-lastRecipes {
@@ -25,9 +28,12 @@
 
 .body__main--ctn-article-subtitle {
     font-family: var(--font-subtitle);
-    font-size: .7rem;
+    font-size: 1.2rem; /* Augmentation de la taille */
     margin: .5rem .40rem;
     text-align: center;
+    color: var(--colorTextDark); /* S'assurer que la couleur est lisible sur fond clair */
+    line-height: 1.5;
+    font-weight: 600;
 }
 
 .body__main--ctn-article-carousel {
@@ -42,9 +48,10 @@
 .body__main--ctn-article-wrapper {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Une recette par ligne */
     grid-template-rows: 1fr;
     margin-left: 5%;
+    gap: 1rem; /* Ajout d'un espace entre les éléments */
 }
 
 .body__main--ctn-article-carousel-arrowLeft {
@@ -63,12 +70,13 @@
 
 .body__main--ctn-article-wrapper-card {
     width: 100%;
-    height: 9.5rem;
+    height: auto;
     border: 1px solid var(--colorRed);
     border-radius: 15px;
     position: relative;
     overflow: hidden;
     background-color: #ebede0;
+    margin-bottom: 1rem; /* Espacement sous chaque recette */
 }
 
 #tags {
@@ -89,8 +97,8 @@
 }
 
 .tags__ctn--img {
-    width: 30px;
-    height: 40px;
+    width: 40px; /* Augmenter la taille de l'icône */
+    height: 50px;
     margin-left: 1.5rem;
     border-radius: 5px;
 }
@@ -124,10 +132,11 @@
 }
 
 .body__main--ctn-article-wrapper-card-img {
-    width: 40%;
-    height: 3rem;
-    margin: .2rem 0 .4rem 50.5%;
+    width: 100%; /* Image pleine largeur */
+    height: 10rem; /* Augmentation de la taille de l'image */
+    margin: .2rem 0 .4rem 0;
     border-radius: 5px;
+    object-fit: cover; /* Pour que l'image s'adapte bien à l'espace */
 }
 
 .body__main--ctn-article-wrapper-card-legends {
@@ -190,115 +199,53 @@
 }
 
 .body__main--ctn-article-wrapper-card-btn-placeHolder {
-    position: relative;
-    left: 40%;
-    color: var(--colorNav);    
-    font-family: var(--font-subtitle);
-    font-size: .7rem;
-    font-weight: 700;
-    text-decoration: none;
+    display: inline-block; /* Forcer l'affichage */
+    visibility: visible; /* Assurer qu'il soit visible */
+    background-color: #ff0000; /* Pour tester si l'élément est bien visible */
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
-@media screen and (min-width: 425px) {
-    .body__main--ctn-article-title {
-        font-size: .9rem;        
-    }
-
-    .body__main--ctn-article-subtitle {
-        width: 80%;
-        margin-left: 10%;
-    }
-
-    .body__main--ctn-article-wrapper-card {
-        width: 90%;
-    }
-}
-
+/* Quand il y a 2 recettes par ligne */
 @media screen and (min-width: 768px) {
-    .body__main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .body__main--ctn-article-wrapper {
+        grid-template-columns: 1fr 1fr; /* Deux recettes par ligne */
+        gap: 2rem; /* Ajout d'un espace entre les recettes */
     }
-    
-    .body__main--ctn-article-title, .body__main--ctn-article-lastRecipes {
-        font-size: 1.1rem;        
-    }
-
-    .body__main--ctn-article-subtitle {
-        width: 70%;
-        margin-left: 15%;
-        font-size: 1rem;
-    }
-
-     /* .body__main--ctn-article-wrapper {
-        grid-template-columns: 1fr 1fr;
-     } */
 
     .body__main--ctn-article-wrapper-card {
-        width: 90%;
-    }
-
-    .tags__ctn--title {
-        font-size: 1rem;
+        width: 95%;
+        margin-bottom: 2rem; /* Espacement amélioré */
     }
 }
 
+/* Quand il y a 3 recettes par ligne */
 @media screen and (min-width: 1024px) {
-
-    .body__main {
-        max-width: 1000px;
-    }
-
-    .body__main--ctn-article-title, .body__main--ctn-article-lastRecipes {
-        font-size: 1.8rem; 
-        margin-bottom: 2.7rem;       
-    }
-
-    .body__main--ctn-article-subtitle {
-        font-size: 1.5rem;
+    .body__main--ctn-article-wrapper {
+        grid-template-columns: 1fr 1fr 1fr; /* Trois recettes par ligne */
+        gap: 2rem; /* Espacement entre les recettes */
     }
 
     .body__main--ctn-article-wrapper-card {
         width: 90%;
-        height: 15rem;
-    }
-
-    .tags__ctn--img {
-        width: 100%;
-    }
-
-    .tags__ctn--title {
-        font-size: 1.3rem;
+        height: 18rem; /* Hauteur ajustée pour l'image plus grande */
     }
 
     .body__main--ctn-article-wrapper-card-img {
-        height: 5.5rem;
-        margin-left: 45%;
-    }
-
-    .body__main--ctn-article-wrapper-card-legend-ctn-category, .body__main--ctn-article-wrapper-card-legend-ctn-text {
-        font-size: .9rem;
-    }
-
-    .body__main--ctn-article-wrapper-card-legend-ctn-icon {
-        width: 50%;
+        height: 10rem; /* Taille de l'image ajustée */
     }
 }
 
+/* Quand il y a 3 recettes par ligne max */
 @media screen and (min-width: 1440px) {
-    .body__main {
-        max-width: 1200px;
-        margin: auto;
+    .body__main--ctn-article-wrapper {
+        grid-template-columns: 1fr 1fr 1fr; /* Trois recettes par ligne */
+        gap: 2rem; /* Espacement entre les recettes */
     }
 
-    /* .body__main--ctn-article-wrapper {
-        grid-template-columns: 1fr 1fr 1fr;
-    } */
-
     .body__main--ctn-article-wrapper-card {
-        height: 15.5rem;
-        margin-left: 45%;
+        width: 90%;
+        height: 18rem;
     }
 }

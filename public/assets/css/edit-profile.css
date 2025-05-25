@@ -1,0 +1,171 @@
+/* Global */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f9f9f9; /* Couleur plus douce pour le fond */
+    margin: 0;
+    padding: 0;
+    color: #2A2D34; /* Couleur de texte discrète */
+}
+
+/* Header & Footer */
+header, footer {
+    background-color: #2A2D34;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Léger effet d'ombre */
+}
+
+footer {
+    margin-top: 40px;
+}
+
+/* Main container */
+main.edit-profile {
+    max-width: 100%; /* Pleine largeur sur les petits écrans */
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Ombre douce autour de la boîte */
+}
+
+/* Title */
+main.edit-profile h1 {
+    text-align: center;
+    color: #CE1902; /* Rouge discrète pour le titre */
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre les champs */
+}
+
+/* Form Labels */
+form label {
+    font-weight: 600;
+    color: #2A2D34;
+    font-size: 1em;
+}
+
+/* Input Fields */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ddd; /* Couleur plus douce pour la bordure */
+    border-radius: 8px;
+    font-size: 1em;
+    color: #2A2D34;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    border-color: #CE1902;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Submit Button */
+form button[type="submit"] {
+    padding: 14px 25px;
+    background-color: #CE1902;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #A01402; /* Rouge plus foncé au survol */
+    transform: translateY(-2px); /* Effet de léger soulèvement au survol */
+}
+
+/* Media Queries pour les écrans plus larges */
+@media (min-width: 768px) {
+    main.edit-profile {
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 30px;
+    }
+
+    form {
+        gap: 20px;
+    }
+
+    form h1 {
+        font-size: 2em;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"] {
+        font-size: 1.1em;
+    }
+
+    form button[type="submit"] {
+        font-size: 1.2em;
+    }
+}
+
+/* Style pour la page de suppression */
+.delete-account {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.delete-account h1 {
+    color: #CE1902;
+    margin-bottom: 20px;
+}
+
+.delete-account p {
+    font-size: 1.1em;
+    color: #2A2D34;
+    margin-bottom: 20px;
+}
+
+.delete-account button {
+    background-color: #CE1902;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-account button:hover {
+    background-color: #A01402;
+}
+
+.delete-account .btn-cancel {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #2A2D34;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.delete-account .btn-cancel:hover {
+    background-color: #444;
+}
+

@@ -1,4 +1,6 @@
 <%- include('partials/header') %>
+
+<link rel="stylesheet" href="/assets/css/home.css">
 <main class="body__main">
     <section class="body__main--ctn">
         <article class="body__main--ctn-article">
@@ -38,11 +40,12 @@
                                 </article>
                             </section >
                             <p class="body__main--ctn-article-wrapper-card-btn">
-                                <a href="/recette/<%= recipe.id %>" class="body__main--ctn-article-wrapper-card-btn-placeHolder">Voir</a>
+                                <a href="/recettes/<%= recipe.slug %> " class="body__main--ctn-article-wrapper-card-btn-placeHolder">Voir la recette</a>
                             </p>                            
                         </article>
-                    <% }) %>                    
+                        <% }) %>                    
                 </article>
+                
                 <div class="body__main--ctn-article-carousel-arrowRight">
                     <img src="/assets/img/icon/arrowRight.png" alt="Recette suivante">
                 </div>

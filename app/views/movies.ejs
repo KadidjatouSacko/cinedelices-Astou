@@ -8,15 +8,25 @@
         <% movies.forEach(movie => { %>
             <article class="film">
                 <h2 class="title"><%= movie.title %></h2>
-                <img src="/assets/img/<%= movie.title.toLowerCase() %>.jpg" alt="<%= movie.title %>">
+                <img src="/assets/img/movies/<%= movie.title.toLowerCase().replace(/\s+/g, '-').replace(/[éèê]/g, 'e').replace(/[àâ]/g, 'a').replace(/[ùü]/g, 'u').replace(/[ô]/g, 'o').replace(/[^a-z0-9-]/g, '') %>.jpg">
                 <ul>
                     <li><strong>Réalisateur :</strong> <span><%= movie.director %></span></li>
                     <li><strong>Année :</strong> <span><%= movie.year %></span></li>
                     <li><strong>Genre :</strong> <span><%= movie.genre %></span></li>
-                    <li><strong>Plat associé :</strong> <span></span></li>
+                    <li><strong>Plat associé :</strong>
+                        <% if (movie.recipes && movie.recipes.length > 0) { %>
+                            <ul>
+                                <% movie.recipes.forEach(recipe => { %>
+                                    <li><%= recipe %></li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <span>Aucun plat associé</span>
+                        <% } %>
+                    </li>
                 </ul>
-                <button class="more">
-                    <a href="/films/<%= movie.title %>">Voir</a>
+                 <button class="more">
+                    <a href="/films/<%= movie.slug %>">Voir</a>
                 </button>
             </article>
         <% }) %>

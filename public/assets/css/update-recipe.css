@@ -1,0 +1,81 @@
+/* Style pour la page de recette */
+.recipe-img {
+    width: 100%;
+    max-width: 40rem;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 1rem auto;
+}
+
+.modify-button {
+    background-color: #CE1902;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    display: block;
+    margin-top: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.modify-button:hover {
+    background-color: #9E1502;
+}
+
+/* Style pour la page de modification */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2rem;
+    padding: 2rem;
+    background-color: #EEEBD3;
+    border-radius: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+button.delete-btn:hover {
+    background-color: darkred;
+}
+
+button[type="submit"] {
+    background-color: #2A2D34;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: #9E1502;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .recipe-img {
+        max-width: 100%;
+    }
+    form {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}

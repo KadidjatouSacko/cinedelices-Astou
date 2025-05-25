@@ -1,0 +1,110 @@
+/* Structure globale du header */
+header {
+    background-color: #2A2D34;
+    color: white;
+    padding-bottom: 2rem; /* Assure l'espacement inférieur */
+    margin-bottom: 2rem; /* Ajoute une marge inférieure pour séparer le header du reste du contenu */
+}
+
+/* Section avec le logo et les liens de connexion */
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo {
+    width: 6rem;
+    height: auto;
+}
+
+/* Liens d'authentification */
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-size: 1.1rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Titre principal */
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'Georgia', serif;
+}
+
+/* Barre de navigation principale */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #1E1F26;
+    padding: 1rem;
+}
+
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    background-color: #CE1902;
+    padding: 0.5rem 1.2rem;
+    margin: 0 1rem;
+    border-radius: 18%;
+    font-size: 1.2rem;
+}
+
+.navbar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar li:hover {
+    background-color: #d44a2e; /* Couleur plus claire au survol */
+}
+
+/* Responsive mobile-first */
+@media (max-width: 768px) {
+    .navbar-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        width: 4rem; /* Reduit la taille du logo pour les petits écrans */
+    }
+
+    .auth-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 1rem;
+    }
+
+    .auth-links a {
+        margin-left: 0;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar li {
+        margin: 0.5rem 0;
+    }
+}

@@ -1,42 +1,112 @@
 <%- include('partials/header') %>
+<link rel="stylesheet" href="/assets/css/formMovie.css">
 
 <main class="body__main">
     <section class="body__main--ctn">
         <h2 class="body__main--ctn-title">Choisissez le film de votre recette</h2>
+        
         <section class="body__main--ctn-sectionSearch">
-            <form action="/rechercher/titre" method="get" class="body__main--ctn-searchForm">
-                <article class="body__main--ctn-searchForm-part-ctn">
-                    <label for="title" class="body__main--ctn-searchForm-part-btn-label">Titre </label>
-                    <input type="search" name="title" id="title" class="body__main--ctn-searchForm-part-btn-input" placeholder="Dune">
-                    <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button>    
-                </article>
+            <form action="/rechercher/films" method="get" class="body__main--ctn-searchForm unified-search">
+                <div class="search-fields">
+                    <article class="body__main--ctn-searchForm-part-ctn">
+                        <label for="title" class="body__main--ctn-searchForm-part-btn-label">Titre</label>
+                        <input type="search" name="title" id="title" 
+                               class="body__main--ctn-searchForm-part-btn-input" 
+                               placeholder="Dune" 
+                               value="<%= typeof title !== 'undefined' ? title : '' %>">
+                    </article>
+                    
+                    <article class="body__main--ctn-searchForm-part-ctn">
+                        <label for="category" class="body__main--ctn-searchForm-part-btn-label">Genre</label>
+                        <select name="category" id="category" class="body__main--ctn-searchForm-part-btn-input">
+                            <option value="">Tous les genres</option>
+                            <option value="28" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '28' ? 'selected' : '' %>>Action</option>
+                            <option value="12" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '12' ? 'selected' : '' %>>Aventure</option>
+                            <option value="16" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '16' ? 'selected' : '' %>>Animation</option>
+                            <option value="35" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '35' ? 'selected' : '' %>>Comédie</option>
+                            <option value="80" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '80' ? 'selected' : '' %>>Crime</option>
+                            <option value="99" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '99' ? 'selected' : '' %>>Documentaire</option>
+                            <option value="18" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '18' ? 'selected' : '' %>>Drame</option>
+                            <option value="10751" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '10751' ? 'selected' : '' %>>Familial</option>
+                            <option value="14" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '14' ? 'selected' : '' %>>Fantaisie</option>
+                            <option value="36" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '36' ? 'selected' : '' %>>Histoire</option>
+                            <option value="27" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '27' ? 'selected' : '' %>>Horreur</option>
+                            <option value="10402" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '10402' ? 'selected' : '' %>>Musique</option>
+                            <option value="9648" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '9648' ? 'selected' : '' %>>Mystère</option>
+                            <option value="10749" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '10749' ? 'selected' : '' %>>Romance</option>
+                            <option value="878" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '878' ? 'selected' : '' %>>Science-Fiction</option>
+                            <option value="10770" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '10770' ? 'selected' : '' %>>Téléfilm</option>
+                            <option value="53" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '53' ? 'selected' : '' %>>Thriller</option>
+                            <option value="10752" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '10752' ? 'selected' : '' %>>Guerre</option>
+                            <option value="37" <%= typeof selectedCategory !== 'undefined' && selectedCategory == '37' ? 'selected' : '' %>>Western</option>
+                        </select>
+                    </article>
+                </div>
+                
+                <div class="search-actions">
+                    <button type="submit" class="body__main--ctn-searchForm-part-btn">
+                        <img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img">
+                        Rechercher
+                    </button>
+                    <button type="button" class="clear-filters-btn" onclick="clearFilters()">
+                        Effacer les filtres
+                    </button>
+                </div>
             </form>
-            <form action="/rechercher/genre" method="get" class="body__main--ctn-searchForm">
-                <article class="body__main--ctn-searchForm-part-ctn">
-                    <label for="category" class="body__main--ctn-searchForm-part-btn-label">Genre </label>
-                    <input type="search" name="category" id="category" class="body__main--ctn-searchForm-part-btn-input" placeholder="Comédie">
-                    <button type="submit" class="body__main--ctn-searchForm-part-btn"><img src="/assets/img/icon/search.png" alt="Icone de recherche : loupe rouge" class="body__main--ctn-searchForm-part-btn-img"></button> 
-                </article>
-            </form>
+            
+            <!-- Affichage des filtres actifs -->
+            <% if (typeof title !== 'undefined' && title || typeof selectedCategory !== 'undefined' && selectedCategory) { %>
+                <div class="active-filters">
+                    <h3>Filtres actifs :</h3>
+                    <% if (typeof title !== 'undefined' && title) { %>
+                        <span class="filter-tag">Titre: "<%= title %>"</span>
+                    <% } %>
+                    <% if (typeof selectedCategory !== 'undefined' && selectedCategory) { %>
+                        <span class="filter-tag">Genre sélectionné</span>
+                    <% } %>
+                </div>
+            <% } %>
         </section>
+
         <section class="body__main--ctn-searchResult">
             <article>
                 <form action="/recette/ajouter" method="get">
-                    <% moviesTreated.forEach(movie => { %>
-                        <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
-                            <label for="movie_id"><img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>" class="movie-image">
-                                <ul>
-                                    <li>Année : <%= movie.year %></li>
-                                </ul>                        
-                            </label>
-                        <input type="radio" name="movie_id" id="movie_id" value="<%= movie.id %>">
-                    <% }) %> 
-
-                    <button type="submit">Enregistrer</button>
-                </form>                             
-            <article>
+                    <% if (typeof moviesTreated !== 'undefined' && moviesTreated.length > 0) { %>
+                        <div class="movies-grid">
+                            <% moviesTreated.forEach(movie => { %>
+                                <article class="body__main--ctn-searchResult-card" id="<%= movie.id %>">
+                                    <label for="movie_<%= movie.id %>">
+                                        <img src="<%= movie.image %>" alt="Affiche du film <%= movie.title %>" class="movie-image">
+                                        <ul>
+                                            <li><strong>Titre : </strong><%= movie.title %></li>
+                                            <li><strong>Description : </strong><%= movie.overview || 'Description non disponible' %></li>
+                                            <li><strong>Année : </strong><%= movie.year %></li>
+                                            <% if (movie.genres && movie.genres.length > 0) { %>
+                                                <li><strong>Genres : </strong><%= movie.genres.join(', ') %></li>
+                                            <% } %>
+                                        </ul>
+                                    </label>
+                                    <input type="radio" name="movie_id" id="movie_<%= movie.id %>" value="<%= movie.id %>">
+                                </article>
+                            <% }) %>
+                        </div>
+                        <button type="submit" class="submit-btn">Enregistrer</button>
+                    <% } else { %>
+                        <p class="no-results"><%= typeof message !== 'undefined' ? message : 'Aucun film trouvé.' %></p>
+                    <% } %>
+                </form>
+            </article>
         </section>
     </section>
 </main>
+
+<script>
+function clearFilters() {
+    document.getElementById('title').value = '';
+    document.getElementById('category').value = '';
+    // Optionnel : soumettre automatiquement le formulaire après avoir effacé
+    // document.querySelector('.unified-search').submit();
+}
+</script>
 
 <%- include('partials/footer') %>

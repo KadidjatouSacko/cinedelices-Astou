@@ -1,46 +1,204 @@
 <%- include('partials/header') %>
-    <main>
-        <form action="/recette/<%= recipe.id %>/modifier" method="post">
-            <!-- titre de la recette -->
-            <!-- image du film  -->
-            <!-- image de la recette -->
-            <section class="recipe_section_tool">
-                <h2 class="recipe_section_tool_title">Ustensiles</h2>
-                <ul class="tool_list">
-                    <% for(let i = 0; i < recipe.tools.length; i++) { %>
-                        <li>
-                            <input type="text" name="tool<%= i + 1 %>" value="<%= recipe.tools[i].name %>">
-                            <button type="button" class="delete-btn" data-index="<%= i %>" data-type="tool">X</button>
-                        </li>
-                    <% } %>
-                </ul>
-            </section>
-            
-            <section class="recipe_section_ingredient">
-                <h2 class="recipe_section_ingredient_title">Ingrédients</h2>
-                <ul class="ingredient_list">
-                    <% for(let i = 0; i < recipe.ingredients.length; i++) { %>
-                        <li>
-                            <input type="text" name="ingredient<%= i + 1 %>" value="<%= recipe.ingredients[i].name %>">
-                            <button type="button" class="delete-btn" data-index="<%= i %>" data-type="ingredient">X</button>
-                        </li>
-                    <% } %>
-                </ul>
-            </section>
-    
-            <section class="recipe_section_step">
-                <h2 class="recipe_section_step_title">Étapes</h2>
-                <ul class="step_list">
-                    <% for(let i = 0; i < recipe.steps.length; i++) { %>
-                        <article class="step">
-                            <h3 class="step_title">Étape <%= i + 1 %></h3>
-                            <textarea name="step<%= i + 1 %>"><%= recipe.steps[i].instruction %></textarea>
-                            <button type="button" class="delete-btn" data-index="<%= i %>" data-type="step">X</button>
-                        </article>
-                    <% } %>
-                </ul>
-            </section>
-        </form>
-    </main>
+<link rel="stylesheet" href="/assets/css/update-recipe.css">
+<script src="/assets/js/update-recipe.js" defer></script>
+
+<main>
+    <form action="/recette/<%= recipe.slug %>/modifier" method="POST" enctype="multipart/form-data" id="updateRecipeForm">
+        
+        <!-- Section informations générales -->
+        <section class="recipe_section_info">
+            <h2>Informations générales</h2>
+            <div class="form-group">
+                <label for="name">Nom de la recette :</label>
+                <input type="text" id="name" name="name" value="<%= recipe.name %>" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" required><%= recipe.description %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="duration">Durée (en minutes) :</label>
+                <input type="number" id="duration" name="duration" value="<%= recipe.duration %>" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image :</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <% if (recipe.image) { %>
+                    <div class="current-image">
+                        <p>Image actuelle :</p>
+                        <img src="<%= recipe.image %>" alt="Image actuelle" style="max-width: 200px;">
+                    </div>
+                <% } %>
+            </div>
+        </section>
+
+        <!-- Section ustensiles -->
+        <section class="recipe_section_tool">
+            <h2 class="recipe_section_tool_title">Ustensiles</h2>
+            <div id="tools-container">
+                <% for(let i = 0; i < recipe.tools.length; i++) { %>
+                    <div class="tool-item" data-index="<%= i %>">
+                        <input type="hidden" name="tools[<%= i %>][id]" value="<%= recipe.tools[i].id %>">
+                        <input type="text" name="tools[<%= i %>][name]" value="<%= recipe.tools[i].name %>" placeholder="Nom de l'ustensile" required>
+                        <input type="number" name="tools[<%= i %>][quantity]" value="<%= recipe.tools[i].RecipeHasTool ? recipe.tools[i].RecipeHasTool.quantity || 1 : 1 %>" placeholder="Quantité" min="1">
+                        <button type="button" class="delete-btn" onclick="removeItem(this, 'tool')">×</button>
+                    </div>
+                <% } %>
+            </div>
+            <button type="button" id="add-tool" class="add-btn">+ Ajouter un ustensile</button>
+        </section>
+
+        <!-- Section ingrédients -->
+        <section class="recipe_section_ingredient">
+            <h2 class="recipe_section_ingredient_title">Ingrédients</h2>
+            <div id="ingredients-container">
+                <% for(let i = 0; i < recipe.ingredients.length; i++) { %>
+                    <div class="ingredient-item" data-index="<%= i %>">
+                        <input type="hidden" name="ingredients[<%= i %>][id]" value="<%= recipe.ingredients[i].id %>">
+                        <input type="text" name="ingredients[<%= i %>][name]" value="<%= recipe.ingredients[i].name %>" placeholder="Nom de l'ingrédient" required>
+                        <input type="number" name="ingredients[<%= i %>][quantity]" value="<%= recipe.ingredients[i].RecipeHasIngredient.quantity %>" placeholder="Quantité" step="0.1" min="0" required>
+                        <input type="text" name="ingredients[<%= i %>][unity]" value="<%= recipe.ingredients[i].RecipeHasIngredient.unity %>" placeholder="Unité" required>
+                        <button type="button" class="delete-btn" onclick="removeItem(this, 'ingredient')">×</button>
+                    </div>
+                <% } %>
+            </div>
+            <button type="button" id="add-ingredient" class="add-btn">+ Ajouter un ingrédient</button>
+        </section>
+
+        <!-- Section étapes -->
+        <section class="recipe_section_step">
+            <h2 class="recipe_section_step_title">Étapes</h2>
+            <div id="steps-container">
+                <% for(let i = 0; i < recipe.steps.length; i++) { %>
+                    <div class="step-item" data-index="<%= i %>">
+                        <h3 class="step_title">Étape <%= i + 1 %></h3>
+                        <input type="hidden" name="steps[<%= i %>][id]" value="<%= recipe.steps[i].id %>">
+                        <input type="text" name="steps[<%= i %>][title]" value="<%= recipe.steps[i].title %>" placeholder="Titre de l'étape" required>
+                        <textarea name="steps[<%= i %>][instruction]" placeholder="Instructions détaillées" required><%= recipe.steps[i].instruction %></textarea>
+                        <button type="button" class="delete-btn" onclick="removeItem(this, 'step')">×</button>
+                    </div>
+                <% } %>
+            </div>
+            <button type="button" id="add-step" class="add-btn">+ Ajouter une étape</button>
+        </section>
+
+        <div class="form-actions">
+            <button type="submit" class="save-btn">Enregistrer les modifications</button>
+            <a href="/recette/<%= recipe.slug %>" class="cancel-btn">Annuler</a>
+        </div>
+    </form>
+</main>
 
 <%- include('partials/footer') %>
+
+<script>
+    // Fonctions pour gérer l'ajout et la suppression dynamique d'éléments
+
+let toolIndex = document.querySelectorAll('.tool-item').length;
+let ingredientIndex = document.querySelectorAll('.ingredient-item').length;
+let stepIndex = document.querySelectorAll('.step-item').length;
+
+// Ajouter un ustensile
+document.getElementById('add-tool').addEventListener('click', function() {
+    const container = document.getElementById('tools-container');
+    const toolDiv = document.createElement('div');
+    toolDiv.className = 'tool-item';
+    toolDiv.setAttribute('data-index', toolIndex);
+    
+    toolDiv.innerHTML = `
+        <input type="text" name="tools[${toolIndex}][name]" placeholder="Nom de l'ustensile" required>
+        <input type="number" name="tools[${toolIndex}][quantity]" value="1" placeholder="Quantité" min="1">
+        <button type="button" class="delete-btn" onclick="removeItem(this, 'tool')">×</button>
+    `;
+    
+    container.appendChild(toolDiv);
+    toolIndex++;
+});
+
+// Ajouter un ingrédient
+document.getElementById('add-ingredient').addEventListener('click', function() {
+    const container = document.getElementById('ingredients-container');
+    const ingredientDiv = document.createElement('div');
+    ingredientDiv.className = 'ingredient-item';
+    ingredientDiv.setAttribute('data-index', ingredientIndex);
+    
+    ingredientDiv.innerHTML = `
+        <input type="text" name="ingredients[${ingredientIndex}][name]" placeholder="Nom de l'ingrédient" required>
+        <input type="number" name="ingredients[${ingredientIndex}][quantity]" placeholder="Quantité" step="0.1" min="0" required>
+        <input type="text" name="ingredients[${ingredientIndex}][unity]" placeholder="Unité" required>
+        <button type="button" class="delete-btn" onclick="removeItem(this, 'ingredient')">×</button>
+    `;
+    
+    container.appendChild(ingredientDiv);
+    ingredientIndex++;
+});
+
+// Ajouter une étape
+document.getElementById('add-step').addEventListener('click', function() {
+    const container = document.getElementById('steps-container');
+    const stepDiv = document.createElement('div');
+    stepDiv.className = 'step-item';
+    stepDiv.setAttribute('data-index', stepIndex);
+    
+    stepDiv.innerHTML = `
+        <h3 class="step_title">Étape ${stepIndex + 1}</h3>
+        <input type="text" name="steps[${stepIndex}][title]" placeholder="Titre de l'étape" required>
+        <textarea name="steps[${stepIndex}][instruction]" placeholder="Instructions détaillées" required></textarea>
+        <button type="button" class="delete-btn" onclick="removeItem(this, 'step')">×</button>
+    `;
+    
+    container.appendChild(stepDiv);
+    stepIndex++;
+    updateStepNumbers();
+});
+
+// Supprimer un élément
+function removeItem(button, type) {
+    const item = button.closest(`.${type}-item`);
+    item.remove();
+    
+    if (type === 'step') {
+        updateStepNumbers();
+    }
+}
+
+// Mettre à jour la numérotation des étapes
+function updateStepNumbers() {
+    const steps = document.querySelectorAll('.step-item');
+    steps.forEach((step, index) => {
+        const title = step.querySelector('.step_title');
+        if (title) {
+            title.textContent = `Étape ${index + 1}`;
+        }
+    });
+}
+
+// Validation du formulaire
+document.getElementById('updateRecipeForm').addEventListener('submit', function(e) {
+    const name = document.getElementById('name').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const duration = document.getElementById('duration').value;
+    
+    if (!name || !description || !duration) {
+        e.preventDefault();
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return false;
+    }
+    
+    // Vérifier qu'il y a au moins un ingrédient
+    const ingredients = document.querySelectorAll('.ingredient-item');
+    if (ingredients.length === 0) {
+        e.preventDefault();
+        alert('Veuillez ajouter au moins un ingrédient.');
+        return false;
+    }
+    
+    // Vérifier qu'il y a au moins une étape
+    const steps = document.querySelectorAll('.step-item');
+    if (steps.length === 0) {
+        e.preventDefault();
+        alert('Veuillez ajouter au moins une étape.');
+        return false;
+    }
+});
+</script>

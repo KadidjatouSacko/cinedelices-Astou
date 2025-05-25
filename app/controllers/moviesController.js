@@ -1,22 +1,76 @@
-import { Movie } from "../models/index.js";
+import dotenv from "dotenv";
+dotenv.config();
+
+import { Movie, Recipe, Genre, Difficulty, Category, Price, User } from "../models/index.js";
+
+const API_KEY = process.env.TMDB_API_KEY;
+const BASE_URL = "https://api.themoviedb.org/3";
+
+console.log("Clé API chargée :", API_KEY);
+
+function slugify(text) {
+  return text
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 export const moviesController = {
   async GetAllMovies(req, res) {
     const movies = await Movie.findAll();
-    
+    const recipe = await Recipe.findAll();
+
     const css = 'movies';
     const js = "index";
-    const title = " Page des films";
+    const title = "Page des films";
 
-    res.render("movies", {movies, title, css, js});
+    res.render("movies", { movies, recipe, title, css, js });
   },
 
-  GetOneMovie(req, res) {
-    // const movieTitle = req.params.title;
+  async GetOneMovie(req, res) {
+    try {
+      const slug = req.params.slug;
 
-    // const movie = movies.find(m => m.title.toLowerCase() === movieTitle.toLowerCase());
+        if (!slug) {
+          return res.status(400).send("Slug manquant dans l'URL");
+        }
 
-    // res.render("movie", { movie, movies });
-    res.render("movie");
+      console.log("Slug récupéré:", slug);  // Ajoute cette ligne pour le débogage
+      const movie = await Movie.findOne({
+        where: { slug },
+        include: [
+          {
+            model: Genre,
+            as: 'Genres',
+            through: { attributes: [] }
+          }
+        ]
+      });
+      
+
+      if (!movie) {
+        return res.status(404).render('404', { message: 'Film introuvable' });
+      }
+
+      const recipes = await Recipe.findAll({
+        where: { movie_id: movie.id },
+        include: [
+          { model: Difficulty, as: 'difficulty' },
+          { model: Category, as: 'category' },
+          { model: Price, as: 'price' },
+          { model: User, as: 'user' }
+        ]
+      });
+
+      res.render('movie', { movie, recipes });
+
+    } catch (error) {
+      console.error('Erreur dans showMovie :', error);
+      res.status(500).send("Erreur interne du serveur");
+    }
   },
 };

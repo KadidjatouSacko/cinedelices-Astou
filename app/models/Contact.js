@@ -13,12 +13,12 @@ Contact.init({
         allowNull: false,
         unique: true
     },
-    object: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        unique: true
-    },
-    message: {
+    // object: {
+    //     type: DataTypes.TEXT,
+    //     allowNull: false,
+    //     unique: true
+    // },
+    text: {
         type: DataTypes.TEXT,
         allowNull: false,
         unique: true

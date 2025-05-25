@@ -7,10 +7,13 @@ export const mainController = {
         const title = "Accueil";
         const js = "index"
         const recipes = await Recipe.findAll({
-            include: [ 'difficulty', 'category', 'movie' ]
+            include: [ 'difficulty', 'category', 'movie' ],
+            order: [['created_at', 'ASC']],
+            limit: 3,
           })
           
         //console.log(recipes);
+        
         
         res.render("home", { css, title, js, recipes });
     },

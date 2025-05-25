@@ -1,79 +1,666 @@
-<%- include("partials/header") %>
+<%- include('partials/header') %>
+
+<link rel="stylesheet" href="/assets/css/formRecipe.css">
 <main class="body__main">
     <h2 class="title">Créer une Recette</h2>
-    <!-- nom a validé -->
-    <form action="/recette/ajouter" method="POST" enctype="multipart/form-data" class="form">
+    
+    <!-- Message de validation/erreur -->
+    <div id="form-messages" class="form-messages"></div>
+    
+   <form action="/recette/ajouter" method="POST" enctype="multipart/form-data" class="form" id="recipe-form">
+
         <input hidden name="film_id" value="<%= filmId %>" />
+        
         <article class="form-level">
             <label for="name" class="label">Nom de la recette * :</label>
             <input class="input" type="text" id="name" name="name" required>
         </article>
+        
         <article class="form-level">
             <h3 class="subtitle">Catégorie *</h3>
-            <div class="sub-cat">
-                <label for="category" class="label">Entrée</label>
-                <input type="radio" name="category" value="1">
+            <div class="radio-group">
+                <% categories.forEach((category, index) => { %>
+                    <div class="sub-cat">
+                        <input type="radio" id="category<%= category.id %>" name="category" value="<%= category.id %>" <%= index === 0 ? 'required' : '' %> <%= index === 0 ? 'checked' : '' %>>
+                        <label for="category<%= category.id %>" class="label"><%= category.name %></label>
+                    </div>
+                <% }) %>
             </div>
-            <div class="sub-cat">
-                <label for="category" class="label">Plat</label>
-                <input type="radio" name="category" value="2">
-            </div>
-            <div class="sub-cat">
-                <label for="category" class="label">Dessert </label>
-                <input type="radio" name="category" value="3">
-            </div>                   
         </article>
+        
         <article class="form-level">
-            <label class="label" for="video">Extrait du film :</label>
-            <input class="input" type="url" id="video" name="video" placeholder="https://www.youtube.com/watch?v=nsIpBTl0ab4&ab_channel=ImaginationInstitute">
+            <h3 class="subtitle">Prix *</h3>
+            <div class="radio-group">
+                <% prices.forEach((price, index) => { %>
+                    <div class="sub-cat">
+                        <input type="radio" id="price<%= price.id %>" name="price" value="<%= price.id %>" <%= index === 0 ? 'required' : '' %> <%= index === 0 ? 'checked' : '' %>>
+                        <label for="price<%= price.id %>" class="label"><%= price.name %></label>
+                    </div>
+                <% }) %>
+            </div>
         </article>
-
+        
+        <article class="form-level">
+            <label for="video" class="label">Extrait du film :</label>
+            <input class="input" type="url" id="video" name="video" placeholder="URL de la vidéo YouTube">
+            <small class="helper-text">Format attendu: https://www.youtube.com/watch?v=XXXX ou https://youtu.be/XXXX</small>
+        </article>
+        
         <article class="form-level">
             <label for="description" class="label">Description de la recette *:</label>
-            <input type="text" name="description" id="description" rows="4" required placeholder="Décrivez la recette...">
+            <textarea name="description" id="description" rows="3" required placeholder="Décrivez la recette..."></textarea>
         </article>
-
+        
+        <article class="form-level">
+            <label class="label">Ingrédients *</label>
+            <div class="ingredients-container">
+                <div class="selected-ingredients">
+                    <p>Ingrédients sélectionnés :</p>
+                    <div id="selected-ingredients-list" class="selected-ingredients-list">
+                        <p class="empty-message">Aucun ingrédient sélectionné</p>
+                    </div>
+                </div>
+                
+                <div class="ingredient-dropdown">
+                    <button type="button" class="dropdown-btn" id="ingredient-dropdown-btn">Sélectionner des ingrédients</button>
+                    <div class="dropdown-content" id="ingredient-dropdown-content">
+                        <input type="text" id="ingredient-search" class="ingredient-search" placeholder="Rechercher un ingrédient...">
+                        <div class="ingredients-list">
+                            <% if (ingredients.length > 0) { %>
+                                <% ingredients.forEach(ingredient => { %>
+                                    <div class="ingredient-selection" data-name="<%= ingredient.name.toLowerCase() %>">
+                                        <input type="checkbox" 
+                                               id="ingredient<%= ingredient.id %>" 
+                                               class="ingredient-checkbox" 
+                                               name="ingredientIds[]"  
+                                               value="<%= ingredient.id %>">
+                                        <label for="ingredient<%= ingredient.id %>"><%= ingredient.name %></label>
+                                        
+                                        <div class="quantity-unit-container">
+                                            <input type="number" 
+                                                   id="quantity<%= ingredient.id %>"
+                                                   name="quantities[]" 
+                                                   placeholder="Quantité" 
+                                                   class="quantity-input"
+                                                   min="0" step="0.1"
+                                                   disabled>
+                        
+                                            <input type="text" 
+                                                   id="unit<%= ingredient.id %>"
+                                                   name="units[]" 
+                                                   placeholder="Unité (ex: g, ml)" 
+                                                   class="unit-input"
+                                                   disabled>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            <% } %>
+                            <div class="add-new-item">
+                                <button type="button" id="add-new-ingredient-btn" class="add-item-btn">+ Ajouter un nouvel ingrédient</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal pour ajouter un nouvel ingrédient -->
+            <div id="new-ingredient-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>Ajouter un nouvel ingrédient</h3>
+                    <div class="modal-form">
+                        <div class="form-group">
+                            <label for="new-ingredient-name">Nom de l'ingrédient :</label>
+                            <input type="text" id="new-ingredient-name" class="modal-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-ingredient-quantity">Quantité :</label>
+                            <input type="number" id="new-ingredient-quantity" class="modal-input" min="0" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-ingredient-unit">Unité :</label>
+                            <input type="text" id="new-ingredient-unit" class="modal-input" placeholder="g, ml, cuillère, etc.">
+                        </div>
+                        <button type="button" id="save-new-ingredient" class="modal-btn">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <article class="form-level">
+            <label class="label">Ustensiles</label>
+            <div class="tools-container">
+                <% if (tools.length > 0) { %>
+                    <% tools.forEach(tool => { %>
+                        <div class="tool-item">
+                            <input type="checkbox" id="tool<%= tool.id %>" name="tools[]" value="<%= tool.id %>">
+                            <label for="tool<%= tool.id %>"><%= tool.name %></label>
+                        </div>
+                    <% }) %>
+                <% } %>
+                <div class="add-new-tool">
+                    <button type="button" id="add-new-tool-btn" class="add-item-btn">+ Ajouter un nouvel ustensile</button>
+                </div>
+            </div>
+            
+            <!-- Modal pour ajouter un nouvel ustensile -->
+            <div id="new-tool-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>Ajouter un nouvel ustensile</h3>
+                    <div class="modal-form">
+                        <div class="form-group">
+                            <label for="new-tool-name">Nom de l'ustensile :</label>
+                            <input type="text" id="new-tool-name" class="modal-input" required>
+                        </div>
+                        <button type="button" id="save-new-tool" class="modal-btn">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
         <article class="form-level">
             <label class="label" for="image">Photo de la recette :</label>
-            <input class="image-btn" type="file" id="image" name="image">
+            <div class="image-upload-container">
+                <div class="image-upload-box">
+                    <input class="image-input" type="file" id="image" name="image" accept="image/*">
+                    <label for="image" class="upload-label">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="upload-text">
+                            Cliquez ou glissez une image ici
+                        </div>
+                    </label>
+                </div>
+                <div id="image-preview" class="image-preview">
+                    <p>Aperçu de l'image</p>
+                    <img id="preview-img" src="" alt="Aperçu" style="display: none;">
+                </div>
+            </div>
         </article>
-
-        <section class="multiple-levels">
-            <h3 class="subtitle">Ingrédients *</h3>                
-            <article class="ingredients-list">
-                <p class="add-elt">+</p>
-                <ul class="ctn-ingredients">
-                   <li class="ctn-ingredients-list" id="no-ingredients">Aucun élément sélectionné</li>
-                </ul>
-            </article>
-
-            <article class="form-add-ingredients">
-                <h3 class="add-title">Ajouter</h3> 
-                <div>
-                   <label class="label" for="ingredient">Ingrédients * :</label>
-                   <input name="ingredient" id="ingredient" class="select">
-                        <option value="">Sélectionner</option>
-                                              
-                    </input>
-                    <button type="button" class="add-btn">Ajouter</button>
-                    <button type="button" class="end-btn">J'ai tout</button>
-                </div>                        
-            </article>
-        </section>
+        
         <article class="form-level">
-            <label class="instruction-title" for="instructions">Instructions :</label>
-            <textarea class="instruction-text-box" id="instructions" name="instructions" rows="5" required placeholder="Décrivez les étapes de préparation..."></textarea>
-        </article>     
+            <div id="steps-container">
+                <h3>Étapes de préparation * :</h3>
+                <div class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">1</span>
+                        <button type="button" class="remove-step-btn" disabled>Supprimer</button>
+                    </div>
+                    <textarea name="steps[]" placeholder="Entrez une étape" required></textarea>
+                </div>
+            </div>
+            <button type="button" class="add-step-btn" id="add-step-btn">Ajouter une étape</button>
+        </article>
+        
         <article class="form-level">
-            <label class="time-title" for="duration">Temps de préparation (en minutes) :</label>
+            <label class="time-title" for="duration">Temps de préparation (en minutes) * :</label>
             <input class="time-text-box" type="number" id="duration" name="duration" min="1" required>
         </article>
+        
         <article class="form-level">
-            <label class="time-title" for="difficulty">Degré de difficulté :</label>
-            <input class="time-text-box" type="number" id="difficulty" name="difficulty" required> 
+            <label class="time-title" for="difficulty">Degré de difficulté * :</label>
+            <select id="difficulty" name="difficulty" required>
+                <option value="">-- Sélectionnez une difficulté --</option>
+                <% difficulties.forEach(difficulty => { %>
+                    <option value="<%= difficulty.id %>"><%= difficulty.name %></option>
+                <% }) %>
+            </select>
         </article>
-        <button class="submit-btn" type="submit">Envoyer la Recette</button>
+        
+        <div class="form-actions">
+            <button class="submit-btn" type="submit">Envoyer la Recette</button>
+            <button class="reset-btn" type="reset">Réinitialiser</button>
+        </div>
     </form>
 </main>
 
-<%- include('partials/footer') %>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Gestion des étapes
+        const stepsContainer = document.getElementById('steps-container');
+        const addStepBtn = document.getElementById('add-step-btn');
+        
+        // Fonction pour mettre à jour les numéros d'étapes
+        function updateStepNumbers() {
+            const steps = stepsContainer.querySelectorAll('.step-item');
+            steps.forEach((step, index) => {
+                step.querySelector('.step-number').textContent = index + 1;
+                const removeBtn = step.querySelector('.remove-step-btn');
+                removeBtn.disabled = steps.length <= 1;
+            });
+        }
+        
+        // Fonction pour ajouter un champ d'étape supplémentaire
+        function addStepField() {
+            const stepItems = stepsContainer.querySelectorAll('.step-item');
+            const newStepIndex = stepItems.length + 1;
+            
+            const stepItem = document.createElement('div');
+            stepItem.classList.add('step-item');
+            
+            const stepHeader = document.createElement('div');
+            stepHeader.classList.add('step-header');
+            
+            const stepNumber = document.createElement('span');
+            stepNumber.classList.add('step-number');
+            stepNumber.textContent = newStepIndex;
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.setAttribute('type', 'button');
+            removeBtn.classList.add('remove-step-btn');
+            removeBtn.textContent = 'Supprimer';
+            removeBtn.addEventListener('click', function() {
+                stepsContainer.removeChild(stepItem);
+                updateStepNumbers();
+            });
+            
+            const textarea = document.createElement('textarea');
+            textarea.setAttribute('name', 'steps[]');
+            textarea.setAttribute('placeholder', 'Entrez une étape');
+            textarea.setAttribute('required', 'required');
+            
+            stepHeader.appendChild(stepNumber);
+            stepHeader.appendChild(removeBtn);
+            stepItem.appendChild(stepHeader);
+            stepItem.appendChild(textarea);
+            
+            stepsContainer.appendChild(stepItem);
+            updateStepNumbers();
+        }
+        
+        // Initialiser les boutons de suppression d'étape
+        function initRemoveButtons() {
+            const removeButtons = stepsContainer.querySelectorAll('.remove-step-btn');
+            removeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const stepItem = this.closest('.step-item');
+                    stepsContainer.removeChild(stepItem);
+                    updateStepNumbers();
+                });
+            });
+        }
+        
+        // Ajouter un écouteur d'événement au bouton "Ajouter une étape"
+        addStepBtn.addEventListener('click', addStepField);
+        
+        // Initialiser les boutons de suppression
+        initRemoveButtons();
+        
+        // Gestion des ingrédients
+        const ingredientCheckboxes = document.querySelectorAll('.ingredient-checkbox');
+        
+        ingredientCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const ingredientId = this.value;
+                const quantityInput = document.getElementById('quantity' + ingredientId);
+                const unitInput = document.getElementById('unit' + ingredientId);
+                
+                if (this.checked) {
+                    quantityInput.disabled = false;
+                    quantityInput.required = true;
+                    unitInput.disabled = false;
+                } else {
+                    quantityInput.disabled = true;
+                    quantityInput.required = false;
+                    unitInput.disabled = true;
+                    quantityInput.value = '';
+                    unitInput.value = '';
+                }
+                
+                updateSelectedIngredients();
+            });
+        });
+        
+        // Fonction pour mettre à jour la liste des ingrédients sélectionnés
+        function updateSelectedIngredients() {
+            const selectedIngredientsList = document.getElementById('selected-ingredients-list');
+            const selectedIngredients = document.querySelectorAll('.ingredient-checkbox:checked');
+            
+            // Vider la liste des ingrédients sélectionnés
+            selectedIngredientsList.innerHTML = '';
+            
+            if (selectedIngredients.length === 0) {
+                selectedIngredientsList.innerHTML = '<p class="empty-message">Aucun ingrédient sélectionné</p>';
+                return;
+            }
+            
+            selectedIngredients.forEach(checkbox => {
+                const ingredientId = checkbox.value;
+                const ingredientName = checkbox.nextElementSibling.textContent;
+                const quantityInput = document.getElementById('quantity' + ingredientId);
+                const unitInput = document.getElementById('unit' + ingredientId);
+                
+                const quantity = quantityInput.value || '?';
+                const unit = unitInput.value || '';
+                
+                const ingredientItem = document.createElement('div');
+                ingredientItem.classList.add('ingredient-item');
+                ingredientItem.innerHTML = `<span>${ingredientName}</span>: <strong>${quantity} ${unit}</strong>`;
+                
+                selectedIngredientsList.appendChild(ingredientItem);
+            });
+        }
+        
+        // Gestion du menu déroulant des ingrédients
+        const dropdownBtn = document.getElementById('ingredient-dropdown-btn');
+        const dropdownContent = document.getElementById('ingredient-dropdown-content');
+        
+        dropdownBtn.addEventListener('click', function() {
+            dropdownContent.classList.toggle('show');
+        });
+        
+        // Fermer le menu déroulant si l'utilisateur clique en dehors
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown-btn') && !dropdownContent.contains(event.target)) {
+                dropdownContent.classList.remove('show');
+            }
+        });
+        
+        // Recherche d'ingrédients
+        const ingredientSearch = document.getElementById('ingredient-search');
+        
+        ingredientSearch.addEventListener('input', function() {
+            const searchText = this.value.toLowerCase();
+            const ingredientItems = document.querySelectorAll('.ingredient-selection');
+            
+            ingredientItems.forEach(item => {
+                const ingredientName = item.getAttribute('data-name');
+                if (ingredientName.includes(searchText)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Aperçu de l'image
+        const imageInput = document.getElementById('image');
+        const previewImg = document.getElementById('preview-img');
+        const uploadLabel = document.querySelector('.upload-label');
+        
+        imageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                    uploadLabel.classList.add('has-image');
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                previewImg.src = '';
+                previewImg.style.display = 'none';
+                uploadLabel.classList.remove('has-image');
+            }
+        });
+        
+        // Ajouter support pour glisser-déposer
+        const uploadBox = document.querySelector('.image-upload-box');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadBox.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadBox.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadBox.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadBox.classList.add('highlight');
+        }
+        
+        function unhighlight() {
+            uploadBox.classList.remove('highlight');
+        }
+        
+        uploadBox.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                imageInput.files = files;
+                const event = new Event('change');
+                imageInput.dispatchEvent(event);
+            }
+        }
+        
+        // Gestion des modals pour nouveaux ingrédients et ustensiles
+        const newIngredientBtn = document.getElementById('add-new-ingredient-btn');
+        const newIngredientModal = document.getElementById('new-ingredient-modal');
+        const saveNewIngredientBtn = document.getElementById('save-new-ingredient');
+        
+        const newToolBtn = document.getElementById('add-new-tool-btn');
+        const newToolModal = document.getElementById('new-tool-modal');
+        const saveNewToolBtn = document.getElementById('save-new-tool');
+        
+        const closeButtons = document.querySelectorAll('.close-modal');
+        
+        // Ouvrir modal nouvel ingrédient
+        newIngredientBtn.addEventListener('click', function() {
+            newIngredientModal.style.display = 'block';
+        });
+        
+        // Ouvrir modal nouvel ustensile
+        newToolBtn.addEventListener('click', function() {
+            newToolModal.style.display = 'block';
+        });
+        
+        // Fermer les modals
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                newIngredientModal.style.display = 'none';
+                newToolModal.style.display = 'none';
+            });
+        });
+        
+        // Fermer les modals en cliquant à l'extérieur
+        window.addEventListener('click', function(event) {
+            if (event.target === newIngredientModal) {
+                newIngredientModal.style.display = 'none';
+            }
+            if (event.target === newToolModal) {
+                newToolModal.style.display = 'none';
+            }
+        });
+        
+        // Fonction pour générer un ID temporaire 
+        function generateTempId() {
+            return 'new_' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        // Ajouter un nouvel ingrédient
+        saveNewIngredientBtn.addEventListener('click', function() {
+            const newIngredientName = document.getElementById('new-ingredient-name').value.trim();
+            const newIngredientQuantity = document.getElementById('new-ingredient-quantity').value;
+            const newIngredientUnit = document.getElementById('new-ingredient-unit').value.trim();
+            
+            if (!newIngredientName) {
+                alert('Veuillez entrer un nom d\'ingrédient');
+                return;
+            }
+            
+            if (!newIngredientQuantity) {
+                alert('Veuillez entrer une quantité');
+                return;
+            }
+            
+            // Générer un ID temporaire pour le nouvel ingrédient
+            const tempId = generateTempId();
+            
+            // Ajouter le nouvel ingrédient à la liste d'ingrédients
+            const ingredientsList = document.querySelector('.ingredients-list');
+            const newIngredientItem = document.createElement('div');
+            newIngredientItem.classList.add('ingredient-selection');
+            newIngredientItem.setAttribute('data-name', newIngredientName.toLowerCase());
+            
+            newIngredientItem.innerHTML = `
+                <input type="checkbox" 
+                       id="ingredient${tempId}" 
+                       class="ingredient-checkbox" 
+                       name="newIngredients[]"  
+                       value="${newIngredientName}" 
+                       checked>
+                <label for="ingredient${tempId}">${newIngredientName} (Nouveau)</label>
+                
+                <div class="quantity-unit-container">
+                    <input type="number" 
+                           id="quantity${tempId}"
+                           name="newQuantities[]" 
+                           value="${newIngredientQuantity}"
+                           class="quantity-input">
+    
+                    <input type="text" 
+                           id="unit${tempId}"
+                           name="newUnits[]" 
+                           value="${newIngredientUnit}"
+                           class="unit-input">
+                </div>
+            `;
+            
+            // Insérer avant le bouton d'ajout
+            ingredientsList.insertBefore(newIngredientItem, document.querySelector('.add-new-item'));
+            
+            // Ajouter l'écouteur d'événements
+            const newCheckbox = newIngredientItem.querySelector('.ingredient-checkbox');
+            newCheckbox.addEventListener('change', function() {
+                const quantityInput = document.getElementById('quantity' + tempId);
+                const unitInput = document.getElementById('unit' + tempId);
+                
+                if (this.checked) {
+                    quantityInput.disabled = false;
+                    quantityInput.required = true;
+                    unitInput.disabled = false;
+                } else {
+                    quantityInput.disabled = true;
+                    quantityInput.required = false;
+                    unitInput.disabled = true;
+                    quantityInput.value = '';
+                    unitInput.value = '';
+                }
+                
+                updateSelectedIngredients();
+            });
+            
+            // Mettre à jour la liste des ingrédients sélectionnés
+            updateSelectedIngredients();
+            
+            // Fermer le modal et réinitialiser les champs
+            newIngredientModal.style.display = 'none';
+            document.getElementById('new-ingredient-name').value = '';
+            document.getElementById('new-ingredient-quantity').value = '';
+            document.getElementById('new-ingredient-unit').value = '';
+        });
+        
+        // Ajouter un nouvel ustensile
+        saveNewToolBtn.addEventListener('click', function() {
+            const newToolName = document.getElementById('new-tool-name').value.trim();
+            
+            if (!newToolName) {
+                alert('Veuillez entrer un nom d\'ustensile');
+                return;
+            }
+            
+            // Générer un ID temporaire pour le nouvel ustensile
+            const tempId = generateTempId();
+            
+            // Ajouter le nouvel ustensile à la liste d'ustensiles
+            const toolsContainer = document.querySelector('.tools-container');
+            const newToolItem = document.createElement('div');
+            newToolItem.classList.add('tool-item');
+            
+            newToolItem.innerHTML = `
+                <input type="checkbox" id="tool${tempId}" name="newTools[]" value="${newToolName}" checked>
+                <label for="tool${tempId}">${newToolName} (Nouveau)</label>
+            `;
+            
+            // Insérer avant le bouton d'ajout
+            toolsContainer.insertBefore(newToolItem, document.querySelector('.add-new-tool'));
+            
+            // Fermer le modal et réinitialiser le champ
+            newToolModal.style.display = 'none';
+            document.getElementById('new-tool-name').value = '';
+        });
+        
+        // Validation du formulaire
+        const form = document.getElementById('recipe-form');
+        const formMessages = document.getElementById('form-messages');
+        
+        form.addEventListener('submit', function(event) {
+            let isValid = true;
+            let errorMessages = [];
+            
+            // Vérifier si au moins un ingrédient est sélectionné
+            const selectedIngredients = document.querySelectorAll('.ingredient-checkbox:checked');
+            if (selectedIngredients.length === 0) {
+                isValid = false;
+                errorMessages.push('Veuillez sélectionner au moins un ingrédient.');
+            }
+            
+            // Vérifier si les quantités sont spécifiées pour tous les ingrédients sélectionnés
+            selectedIngredients.forEach(checkbox => {
+                const ingredientId = checkbox.id.replace('ingredient', '');
+                const quantityInput = document.getElementById('quantity' + ingredientId);
+                const ingredientName = checkbox.nextElementSibling.textContent;
+                
+                if (!quantityInput.value) {
+                    isValid = false;
+                    errorMessages.push(`Veuillez spécifier une quantité pour l'ingrédient "${ingredientName}".`);
+                }
+            });
+            
+            // Vérifier si au moins une étape est spécifiée
+            const steps = document.querySelectorAll('[name="steps[]"]');
+            let hasStep = false;
+            steps.forEach(step => {
+                if (step.value.trim()) {
+                    hasStep = true;
+                }
+            });
+            
+            if (!hasStep) {
+                isValid = false;
+                errorMessages.push('Veuillez ajouter au moins une étape de préparation.');
+            }
+            
+            if (!isValid) {
+                event.preventDefault();
+                formMessages.innerHTML = '';
+                
+                const errorList = document.createElement('ul');
+                errorList.classList.add('error-list');
+                
+                errorMessages.forEach(message => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = message;
+                    errorList.appendChild(listItem);
+                });
+                
+                const errorContainer = document.createElement('div');
+                errorContainer.classList.add('error-container');
+                errorContainer.innerHTML = '<strong>Veuillez corriger les erreurs suivantes :</strong>';
+                errorContainer.appendChild(errorList);
+                
+                formMessages.appendChild(errorContainer);
+                formMessages.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+

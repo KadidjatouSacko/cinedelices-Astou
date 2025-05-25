@@ -110,6 +110,16 @@ Step.belongsTo(Recipe, {
   as: 'recipe'
 });
 
+// Movie.belongsToMany(Recipe, {
+//   through: MovieRecipe,  // Spécifier la table de liaison
+//   foreignKey: 'movie_id',
+//   as: 'recipes',  // Alias pour la relation
+// });
+// Recipe.belongsToMany(Movie, {
+//   through: MovieRecipe,  // Spécifier la table de liaison
+//   foreignKey: 'recipe_id',
+//   as: 'movies',  // Alias pour la relation
+// });
 
 
   // Recipe_Ingredient

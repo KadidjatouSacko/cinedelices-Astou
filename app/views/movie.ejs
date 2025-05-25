@@ -1,24 +1,204 @@
 <%- include('partials/header') %>
 
-<link rel="stylesheet" href="/assets/css/movies.css">
-<main>
+<link rel="stylesheet" href="/assets/css/movie.css">
+    
+    <main class="container">
+        <div class="movie-container">
+            <div class="movie-poster">
+                <img src="/assets/img/movies/<%= recipe.movie.title.toLowerCase().replace(/\s+/g, '-').replace(/[éèê]/g, 'e').replace(/[àâ]/g, 'a').replace(/[ùü]/g, 'u').replace(/[ô]/g, 'o').replace(/[^a-z0-9-]/g, '') %>.jpg" alt="Affiche du film <% movie.title %>" />
+            </div>
+            <div class="movie-info">
+                <h1 class="movie-title" id="movieTitle"><% movie.title %></h1>
+                <div class="movie-year" id="movieYear">Année :<% movie.year %></div>
+                <div class="movie-genres">
+                    <% movie.genres.forEach(genre => { %>
+                      <span class="genre-tag"><%= genre.name %></span>
+                    <% }) %>
+                  </div>
+                  
+                  <h2 class="section-title">Recettes inspirées par ce film</h2>
+                  <div class="recipes-grid">
+                    <% recipes.forEach(recipe => { %>
+                      <div class="recipe-card">
+                        <div class="recipe-image">
+                          <img src="<%= recipe.image %>" alt="<%= recipe.name %>" />
+                        </div>
+                        <div class="recipe-content">
+                          <h3 class="recipe-name"><%= recipe.name %></h3>
+                          <div class="recipe-meta">
+                            <span><%= recipe.difficulty.name %></span>
+                            <span><%= recipe.price.name %></span>
+                          </div>
+                          <p class="recipe-description"><%= recipe.description %></p>
+                          <div class="recipe-stats">
+                            <div class="stat"><%= recipe.duration %> min</div>
+                            <div class="stat"><%= recipe.user.pseudo %></div>
+                          </div>
+                          <a href="/recettes/<%= recipe.slug %>" class="view-recipe">Voir la recette</a>
+                        </div>
+                      </div>
+                    <% }) %>
+                  </div>
+    </main>
+    
+   <%- include('partials/footer') %>
 
-    <h2><%= movie.title %></h2>
-
-    <section class="films">
-        <article class="film">
-            <img src="/assets/img/<%= movie.title.toLowerCase() %>.jpg" alt="<%= movie.title %>">
-            <ul>
-                <li><strong>Réalisateur :</strong> <span><%= movie.director %></span></li>
-                <li><strong>Année :</strong> <span><%= movie.year %></span></li>
-                <li><strong>Genre :</strong> <span><%= movie.genre %></span></li>
-            </ul>
-            <button><a href="/films"> Retourner à la filmographie</a></button>
-        </article>
-
-    </section>
-</main>
-
-<%- include('partials/footer') %>
+    <script>
+        // Simulons des données que nous récupérerions normalement d'une API backend
+        // Ces données seraient générées côté serveur en fonction de l'ID du film dans l'URL
+        
+        // Simulation de récupération des données du film depuis la base de données
+        const movieData = {
+            id: 1,
+            title: "Ratatouille",
+            year: "2007-06-29",
+            tmdb_id: 2062,
+            genres: [
+                { id: 1, name: "Animation" },
+                { id: 2, name: "Comédie" },
+                { id: 3, name: "Famille" }
+            ],
+            description: "Rémy est un jeune rat qui rêve de devenir un grand chef français. Ni l'opposition de sa famille, ni le fait d'être un rongeur dans une profession qui les déteste ne le démotivent. Rémy est prêt à tout pour vivre sa passion de la cuisine... et le fait d'habiter dans les égouts du restaurant ultra-coté de la star des fourneaux, Auguste Gusteau, va lui en donner l'occasion !"
+        };
+        
+        // Simulation de récupération des recettes liées à ce film depuis la base de données
+        // const recipesData = [
+            {
+                id: 1,
+                name: "Ratatouille Provençale",
+                slug: "ratatouille-provencale",
+                description: "Une délicieuse ratatouille traditionnelle comme celle préparée par Rémy dans le film Pixar.",
+                duration: 60,
+                image: "/api/placeholder/280/180",
+                difficulty: { id: 2, name: "Intermédiaire" },
+                category: { id: 1, name: "Plat principal" },
+                price: { id: 2, name: "Abordable" },
+                user: { id: 1, pseudo: "ChefGustave" }
+            },
+            {
+                id: 2,
+                name: "Confit Byaldi",
+                slug: "confit-byaldi",
+                description: "La version élégante de la ratatouille présentée à la fin du film, avec des légumes finement tranchés.",
+                duration: 90,
+                image: "/api/placeholder/280/180",
+                difficulty: { id: 3, name: "Difficile" },
+                category: { id: 1, name: "Plat principal" },
+                price: { id: 3, name: "Moyen" },
+                user: { id: 2, pseudo: "ChefColette" }
+            },
+            {
+                id: 3,
+                name: "Soupe aux légumes façon Linguini",
+                slug: "soupe-legumes-linguini",
+                description: "Une soupe aux légumes improvisée comme celle que Linguini tente de sauver au début du film.",
+                duration: 45,
+                image: "/api/placeholder/280/180",
+                difficulty: { id: 1, name: "Facile" },
+                category: { id: 2, name: "Entrée" },
+                price: { id: 1, name: "Économique" },
+                user: { id: 3, pseudo: "AmateurChef" }
+            }
+        ];
+        
+        // Fonction pour afficher les détails du film
+        function displayMovieDetails() {
+            document.getElementById('movieTitle').textContent = movieData.title;
+            
+            // Formater la date pour n'afficher que l'année
+            const year = new Date(movieData.year).getFullYear();
+            document.getElementById('movieYear').textContent = `Année : ${year}`;
+            
+            // Afficher les genres
+            const genresContainer = document.getElementById('movieGenres');
+            genresContainer.innerHTML = '';
+            movieData.genres.forEach(genre => {
+                const genreTag = document.createElement('span');
+                genreTag.className = 'genre-tag';
+                genreTag.textContent = genre.name;
+                genresContainer.appendChild(genreTag);
+            });
+            
+            // Afficher la description
+            document.getElementById('movieDescription').textContent = movieData.description;
+        }
+        
+        // Fonction pour afficher les recettes liées au film
+        function displayRelatedRecipes() {
+            const recipesContainer = document.getElementById('recipesContainer');
+            recipesContainer.innerHTML = '';
+            
+            recipesData.forEach(recipe => {
+                // Créer la carte de recette
+                const recipeCard = document.createElement('div');
+                recipeCard.className = 'recipe-card';
+                
+                // Structure HTML de la carte
+                recipeCard.innerHTML = `
+                    <div class="recipe-image">
+                        <img src="${recipe.image}" alt="${recipe.name}" />
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-name">${recipe.name}</h3>
+                        <div class="recipe-meta">
+                            <span>${recipe.difficulty.name}</span>
+                            <span>${recipe.price.name}</span>
+                        </div>
+                        <p class="recipe-description">${recipe.description}</p>
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                ${recipe.duration} min
+                            </div>
+                            <div class="stat">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                ${recipe.user.pseudo}
+                            </div>
+                        </div>
+                        <a href="/recettes/${recipe.slug}" class="view-recipe">Voir la recette</a>
+                    </div>
+                `;
+                
+                recipesContainer.appendChild(recipeCard);
+            });
+        }
+        
+        // Initialiser la page au chargement
+        window.addEventListener('DOMContentLoaded', () => {
+            displayMovieDetails();
+            displayRelatedRecipes();
+        });
+        
+        // Dans une implémentation réelle, nous récupérerions l'ID du film depuis l'URL
+        // et ferions une requête AJAX vers le serveur pour obtenir les données
+        function getMovieIdFromUrl() {
+            // Exemple: extraction de l'ID depuis une URL comme /films/1-ratatouille
+            const urlParts = window.location.pathname.split('/');
+            const idPart = urlParts[urlParts.length - 1];
+            return parseInt(idPart.split('-')[0]);
+        }
+        
+        // Exemple de fonction qui ferait une requête au serveur dans un cas réel
+        async function fetchMovieData(movieId) {
+            try {
+                // Dans une implémentation réelle, nous ferions une requête AJAX ici
+                // const response = await fetch(`/api/movies/${movieId}`);
+                // const data = await response.json();
+                // return data;
+                
+                // Pour cette démonstration, nous utilisons les données simulées
+                return movieData;
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données du film:', error);
+                return null;
+            }
+        }
+    </script>
 </body>
 </html>

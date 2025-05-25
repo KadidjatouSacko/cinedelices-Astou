@@ -1,48 +1,70 @@
-<link rel="stylesheet" href="/assets/css/recipe">
 <%- include('partials/header') %>
+<link rel="stylesheet" href="/assets/css/recipe.css">
 
 <main>
     <section class="infos">
-        <!-- <div>
-            <img src="../assets/img/<%= recipe.name.toLowerCase() %>.jpg" alt="<%= recipe.name %>">
-        </div> -->
-
+        <h2><%= recipe.name %></h2>
+        <div>
+            <img src="/assets/img/movies/<%= recipe.movie.image %>.jpg">
+        </div>
+        
         <article class="utensils">
-            <h3> Ustensiles :</h3>
-            <ul>
-                <% recipe.utensils.forEach(utensil => { %>
-                    <li>  <%= utensil %></li>
-                <% }) %>
-            </ul>
+            <h3>Ustensiles :</h3>
+            <% if (recipe.tools && recipe.tools.length > 0) { %>
+                <ul>
+                    <% recipe.tools.forEach(tool => { %>
+                        <li><%= tool.name %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>Aucun ustensile spécifié.</p>
+            <% } %>
         </article>
-
+                
         <article class="ingredients">
-            <h3> Acteurs principaux :</h3>
-            <ul>
-                <% recipe.ingredients.forEach(ingredient => { %>
-                    <li>  <%= ingredient.name %></li>
-                <% }) %>
-            </ul>
+            <h3>Ingrédients :</h3>
+            <% if (recipe.ingredients && recipe.ingredients.length > 0) { %>
+                <ul>
+                    <% recipe.ingredients.forEach(ingredient => { %>
+                        <li>
+                            <%= ingredient.name %>
+                            <% if (ingredient.recipe_has_ingredient) { %>
+                                - <%= ingredient.recipe_has_ingredient.quantity %> 
+                                <%= ingredient.recipe_has_ingredient.unity %>
+                            <% } %>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>Aucun ingrédient spécifié.</p>
+            <% } %>
         </article>
     </section>
 
     <section class="description">
+        <h2><%= recipe.name %></h2>
         <div>
-            <img src="../assets/img/<%= recipe.name.toLowerCase() %>.jpg" alt="<%= recipe.name %>">
+            <img src="/assets/img/recipes/<%= recipe.image %>" class="recipe-img" alt="Image de <%= recipe.name %>">
         </div>
 
         <article class="script">
-            <h3> Script:</h3>
-            <ul>
-                <% recipe.steps.forEach(step => { %>
-                    <li>  <%= step %></li>
-                <% }) %>
-            </ul>
+            <h3>Script:</h3>
+            <% if (recipe.steps && recipe.steps.length > 0) { %>
+                <ul>
+                    <% recipe.steps.forEach(step => { %>
+                        <li><%= step.instruction %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>Aucune étape spécifiée.</p>
+            <% } %>
         </article>
+
+        <% if (user) { %> <!-- Si l'utilisateur est connecté -->
+            <a href="/recette/<%= recipe.slug %>/modifier" class="modify-button">Modifier la recette</a>
+            <a href="/recette/<%= recipe.slug %>/supprimer" class="modify-button">Supprimer la recette</a>
+        <% } %>
     </section>
 </main>
 
-<footer>
-    <a href="/legal-notices"> Mentions légales</a>
-    <a href="/contact"> Contact</a>
-</footer>
+<%- include('partials/footer') %>
