@@ -46,7 +46,6 @@
         <div>
             <img src="/assets/img/recipes/<%= recipe.image %>" class="recipe-img" alt="Image de <%= recipe.name %>">
         </div>
-
         <article class="script">
             <h3>Script:</h3>
             <% if (recipe.steps && recipe.steps.length > 0) { %>
@@ -66,5 +65,4 @@
         <% } %>
     </section>
 </main>
-
 <%- include('partials/footer') %>

@@ -15,43 +15,82 @@ body {
 /* Header */
 header {
     background-color: #2A2D34;
-    padding-bottom: 2.3rem;
-    height: 10rem;
+    color: white;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.navbar-header h2 {
+/* Section avec le logo et les liens de connexion */
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.logo {
+    width: 4rem;
+    height: auto;
+    border-radius: 40%;
+}
+
+/* Liens d'authentification */
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Titre principal */
+header h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-family: 'Georgia', serif;
     color: bisque;
-    font-size: 3rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Barre de navigation principale */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #1E1F26;
+    padding: 0.3rem;
 }
 
 .navbar ul {
     display: flex;
-    justify-content: space-evenly;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar li {
     background-color: #CE1902;
-    color: white;
-    list-style: none;
-    display: flex;
+    padding: 0.4rem 1rem;
+    margin: 0 0.5rem;
     border-radius: 18%;
-    padding: 0.5rem 1.2rem;
-    font-size: 1.3rem;
-    margin-top: -2rem;
+    font-size: 1.1rem;
 }
 
+.navbar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar li:hover {
+    background-color: #d44a2e;
+}
+
+/* Liens généraux */
 a {
     text-decoration: none;
     color: white;
-}
-
-.navbar-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem 2rem 0rem;
-    margin-bottom: -2rem;
-    margin-top: -2rem;
 }
 
 .navbar-header img {

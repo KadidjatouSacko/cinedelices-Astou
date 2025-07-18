@@ -40,6 +40,8 @@ CREATE TABLE "movie" (
     "title" TEXT NOT NULL,
     "year" DATE NOT NULL,
     "tmdb_id" INTEGER NOT NULL,
+    "director" VARCHAR(255) NULL,
+    "genre" VARCHAR(100) NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMPTZ
 );

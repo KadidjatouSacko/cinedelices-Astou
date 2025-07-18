@@ -1,42 +1,33 @@
+<link rel="stylesheet" href="/assets/css/login.css">
 <%- include('partials/header') %>
-    <link rel="stylesheet" href="/assets/css/login.css">
 
-    <main class="main-content">
-        <div class="contact-container">
-            <h2 class="contact-heading">Je me connecte</h2>
-            <div class="contact-info">
-                
-                <!-- Ajout du form avec method et action -->
-                <% if (locals.errorMessage) { %> 
-                    <div class="error-message" style="color: red; margin-bottom: 15px;">
-                         <%= locals.errorMessage %>
-                    </div>
-                <% } %>
-                <form action="/connexion" method="POST">
 
-                    <div class="alert alert-danger" role="alert">
-                       <!--   Une erreur s'est produite lors de la connexion.-->
-                    </div>
-                    <div>
-                        <label for="pseudo">Pseudo</label>
-                        <input type="text" id="pseudo" name="pseudo" required>
-                    </div>
-                    <div>
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit">Se connecter</button>
-                </form>
-            </div>
+<main class="main-content">
+    <div class="contact-container">
+        <h2 class="contact-heading">Je me connecte</h2>
+        <div class="contact-info">
+            <!-- Affichage des erreurs -->
+            <% if (locals.errorMessage) { %>
+                <div class="error-message" style="color: red; margin-bottom: 15px;">
+                    <%= locals.errorMessage %>
+                </div>
+            <% } %>
+            
+            <form action="/connexion" method="POST">
+                <!-- Div d'alerte supprimée ou masquée -->
+                <div>
+                    <label for="pseudo">Pseudo</label>
+                    <input type="text" id="pseudo" name="pseudo" required>
+                </div>
+                <div>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Se connecter</button>
+            </form>
         </div>
-        <nav class="side-nav">
-            <ul>
-                <li><a href="/recettes">Recettes</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/filmographie">Filmographie</a></li>
-            </ul>
-            <button class="close-btn">X</button>
-        </nav>
-    </main>
-</body>
-</html>
+    </div>
+    <!-- Navigation latérale supprimée de la page de connexion -->
+</main>
+
+<%- include('partials/footer') %>

@@ -21,15 +21,20 @@ function slugify(text) {
 
 export const moviesController = {
   async GetAllMovies(req, res) {
-    const movies = await Movie.findAll();
-    const recipe = await Recipe.findAll();
-
+    const movies = await Movie.findAll({
+      attributes: ['id', 'title', 'slug', 'year', 'director', 'genre'],
+      include: {
+        model: Recipe,
+        attributes: ['id', 'name', 'slug']
+      }
+    });
+  
     const css = 'movies';
     const js = "index";
     const title = "Page des films";
-
-    res.render("movies", { movies, recipe, title, css, js });
-  },
+  
+    res.render("movies", { movies, title, css, js });
+  },  
 
   async GetOneMovie(req, res) {
     try {

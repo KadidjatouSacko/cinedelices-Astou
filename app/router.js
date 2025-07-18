@@ -1,12 +1,12 @@
 import { Router } from "express";
 import path from "path";
-import fs from "fs"; // Import manquant
+import fs from "fs";
 import multer from "multer";
 
 // Configuration de multer pour l'upload des images
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    const uploadDir = path.join(process.cwd(), 'public/img/recipes'); // Utiliser process.cwd() au lieu de __dirname
+    const uploadDir = path.join(process.cwd(), 'public/img/recipes');
     
     // Créer le répertoire s'il n'existe pas
     if (!fs.existsSync(uploadDir)) {
@@ -24,9 +24,9 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
   
-  if (allowedTypes.includes(file.mimetype)) {
+  if (allowedTypes.includes(file.mimetype.toLowerCase())) {
     cb(null, true);
   } else {
     cb(new Error('Type de fichier non supporté. Utilisez JPG, PNG, GIF ou WebP.'), false);
@@ -41,6 +41,22 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
+// Middleware pour gérer les erreurs Multer
+const handleMulterError = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({
+        error: 'Le fichier est trop volumineux. Taille maximum: 5MB'
+      });
+    }
+  } else if (err) {
+    return res.status(400).json({
+      error: err.message
+    });
+  }
+  next();
+};
+
 
 
 import { mainController } from "./controllers/mainController.js";
@@ -53,8 +69,16 @@ import { legalsNoticesController } from "./controllers/legalsNoticesController.j
 import { contactController } from "./controllers/contactController.js";
 import { authController } from "./controllers/authController.js";
 import { loginLimiter } from "./controllers/authController.js";
+import { isLoggedMiddleware
 
+ } from "./middlewares/isLoggedMiddleware.js";
 export const router = new Router();
+
+router.post('/recette/ajouter', 
+  upload.single('image'), 
+  handleMulterError,
+  recipesController.AddOneRecipe
+);
 
 router.get("/", mainController.renderHomePage); //OK
 router.get("/recettes", recipesController.GetAllRecipes);   //OK
@@ -68,22 +92,24 @@ router.get("/contact", contactController.GetContact)    //OK
 router.post("/contact",contactController.ContactSumbit)   //OK
 
 
-router.get("/profil", authController.renderUserProfile);
-router.get("/profil/modifier", authController.renderEditProfilePage);
-router.post("/profil/modifier", authController.updateUserProfile);
-router.get('/profil/supprimer', authController.showDeleteConfirmation);
-router.post('/profil/supprimer', authController.deleteAccount);
+//UNIQUEMENT POUR UNE PERSONNE CONNECTEE :
+    //PROFIL
+router.get("/profil", isLoggedMiddleware,authController.renderUserProfile);
+router.get("/profil/modifier",isLoggedMiddleware, authController.renderEditProfilePage);
+router.post("/profil/modifier",isLoggedMiddleware, authController.updateUserProfile);
+router.get('/profil/supprimer',isLoggedMiddleware, authController.showDeleteConfirmation);
+router.post('/profil/supprimer',isLoggedMiddleware, authController.deleteAccount);
 
-
-router.get("/recette/select-film",recipesController.RenderFilmSelectPage)   //OK-revoir le css+ ajouter un lien sur la page d'acceuil
-router.get("/recette/ajouter",recipesController.RenderAddRecipePage)
-router.post('/recette/ajouter', upload.single('image'), recipesController.AddOneRecipe);
+   //RECETTE
+router.get("/recette/select-film",isLoggedMiddleware, recipesController.RenderFilmSelectPage) 
+router.get("/recette/ajouter",isLoggedMiddleware,recipesController.RenderAddRecipePage)
+router.post('/recette/ajouter',isLoggedMiddleware, upload.single('image'), recipesController.AddOneRecipe);
 // Route pour afficher le formulaire de modification
-router.get('/recette/:slug/modifier', recipesController.renderUpdateRecipePage);
+router.get('/recette/:slug/modifier', isLoggedMiddleware, recipesController.renderUpdateRecipePage);
 // router.post("/recette/:slug/modifier", uploadImageRecipe.single('image'), recipesController.UpdateRecipe);
 // Route pour traiter la mise à jour de la recette
-router.post('/recette/:slug/modifier', upload.single('image'), recipesController.updateRecipe);
-router.get("/recette/:slug/supprimer", recipesController.deleteRecipe),
+router.post('/recette/:slug/modifier',isLoggedMiddleware, upload.single('image'), recipesController.updateRecipe);
+router.get("/recette/:slug/supprimer",isLoggedMiddleware, recipesController.deleteRecipe),
 // router.post("/recette/:id/modifier", recipesController.UpdateRecipeById)
 
 

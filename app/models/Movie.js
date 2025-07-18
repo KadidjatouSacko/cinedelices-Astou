@@ -28,7 +28,14 @@ Movie.init ({
     validate: {
       notEmpty: true  // Vérifie qu'il n'est pas vide
     }
-  } //
+  } ,
+  director: {
+    type : DataTypes.STRING,
+  },
+
+  genre:{
+    type :  DataTypes.STRING,
+  }//
 }, 
 {
   sequelize,

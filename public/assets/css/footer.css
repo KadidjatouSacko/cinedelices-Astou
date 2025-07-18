@@ -1,0 +1,13 @@
+footer {
+    background-color: #2A2D34;
+    color: #CE1902;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+footer a {
+    text-decoration: none;
+    color: #CE1902;
+    font-size: 1.2rem;
+}

@@ -1,4 +1,96 @@
-/* Mobile First */
+/* ========== HEADER UNIFIÉ (IDENTIQUE À MOVIES.CSS) ========== */
+
+/* Styles généraux */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Structure globale du header */
+header {
+    background-color: #2A2D34;
+    color: white;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Section avec le logo et les liens de connexion */
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.logo {
+    width: 4rem;
+    height: auto;
+    border-radius: 40%;
+}
+
+/* Liens d'authentification */
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Titre principal */
+header h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-family: 'Georgia', serif;
+    color: bisque;
+}
+
+/* Barre de navigation principale */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #1E1F26;
+    padding: 0.3rem;
+}
+
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    background-color: #CE1902;
+    padding: 0.4rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 18%;
+    font-size: 1.1rem;
+}
+
+.navbar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar li:hover {
+    background-color: #d44a2e;
+}
+
+/* Liens généraux */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* ========== CONTENU SPÉCIFIQUE HOME ========== */
+
+/* Mobile First - Styles pour recettes */
 .body__main--ctn-article {
     width: 90%;
     margin: .5rem 5%;
@@ -6,14 +98,14 @@
 
 .body__main--ctn-article-title {
     font-family: var(--font-subtitle);
-    font-size: 2rem; /* Augmentation de la taille */
+    font-size: 2rem;
     text-align: center;
     color: var(--colorRed);
     font-weight: 700;
     text-transform: uppercase;
     margin: 1rem .5rem;
-    letter-spacing: 2px; /* Espace entre les lettres pour plus de lisibilité */
-    line-height: 1.5; /* Meilleure lisibilité */
+    letter-spacing: 2px;
+    line-height: 1.5;
 }
 
 .body__main--ctn-article-lastRecipes {
@@ -28,10 +120,10 @@
 
 .body__main--ctn-article-subtitle {
     font-family: var(--font-subtitle);
-    font-size: 1.2rem; /* Augmentation de la taille */
+    font-size: 1.2rem;
     margin: .5rem .40rem;
     text-align: center;
-    color: var(--colorTextDark); /* S'assurer que la couleur est lisible sur fond clair */
+    color: var(--colorTextDark);
     line-height: 1.5;
     font-weight: 600;
 }
@@ -48,10 +140,10 @@
 .body__main--ctn-article-wrapper {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr; /* Une recette par ligne */
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     margin-left: 5%;
-    gap: 1rem; /* Ajout d'un espace entre les éléments */
+    gap: 1rem;
 }
 
 .body__main--ctn-article-carousel-arrowLeft {
@@ -76,7 +168,7 @@
     position: relative;
     overflow: hidden;
     background-color: #ebede0;
-    margin-bottom: 1rem; /* Espacement sous chaque recette */
+    margin-bottom: 1rem;
 }
 
 #tags {
@@ -97,14 +189,14 @@
 }
 
 .tags__ctn--img {
-    width: 40px; /* Augmenter la taille de l'icône */
+    width: 40px;
     height: 50px;
     margin-left: 1.5rem;
     border-radius: 5px;
 }
 
 .tags__ctn--title {
-    color: white;
+    color: rgb(135, 103, 103);
     font-family: var(--font-title);
     font-size: .9rem;
     margin-left: .6rem;
@@ -132,19 +224,19 @@
 }
 
 .body__main--ctn-article-wrapper-card-img {
-    width: 100%; /* Image pleine largeur */
-    height: 10rem; /* Augmentation de la taille de l'image */
+    width: 100%;
+    height: 10rem;
     margin: .2rem 0 .4rem 0;
     border-radius: 5px;
-    object-fit: cover; /* Pour que l'image s'adapte bien à l'espace */
+    object-fit: cover;
 }
 
 .body__main--ctn-article-wrapper-card-legends {
     position: absolute;
     top: 35%;
     left: 0;
-    background-color: beige;
-    opacity: .5;
+    background-color: rgba(214, 214, 201, 0.836);
+    opacity: 10;
     width: 30%;
     height: 60%;
     margin: .25rem 15% .5rem 0;
@@ -199,49 +291,127 @@
 }
 
 .body__main--ctn-article-wrapper-card-btn-placeHolder {
-    display: inline-block; /* Forcer l'affichage */
-    visibility: visible; /* Assurer qu'il soit visible */
-    background-color: #ff0000; /* Pour tester si l'élément est bien visible */
+    display: inline-block;
+    visibility: visible;
+    background-color: #ff0000;
     cursor: pointer;
     position: relative;
     z-index: 10;
 }
 
-/* Quand il y a 2 recettes par ligne */
+.card-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+/* Caroussel */
+.body__main--ctn-article-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding: 1rem;
+    scroll-snap-type: x mandatory; /* pour un scroll fluide par carte */
+  }
+
+.body__main--ctn-article-wrapper::-webkit-scrollbar {
+  display: none; /* masque la scrollbar */
+}
+
+/* Chaque carte (recette) */
+.card-link-wrapper {
+    flex: 0 0 calc(33.33% - 1rem); /* 3 cartes visibles */
+    scroll-snap-align: start;
+  }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    /* Header responsive - IDENTIQUE À MOVIES.CSS */
+    .navbar-top {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.3rem;
+    }
+
+    .logo {
+        width: 3rem;
+    }
+
+    .auth-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 0.5rem;
+    }
+
+    .auth-links a {
+        margin-left: 0;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    header h2 {
+        font-size: 1.5rem;
+        margin: 0.3rem 0;
+    }
+
+    .navbar {
+        padding: 0.2rem;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar li {
+        margin: 0.3rem 0;
+        padding: 0.3rem 0.8rem;
+        font-size: 1rem;
+    }
+
+    .card-link-wrapper {
+        flex: 0 0 80%;
+    }
+      
+}
+
+/* Tablette - 2 recettes par ligne */
 @media screen and (min-width: 768px) {
     .body__main--ctn-article-wrapper {
-        grid-template-columns: 1fr 1fr; /* Deux recettes par ligne */
-        gap: 2rem; /* Ajout d'un espace entre les recettes */
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
     }
 
     .body__main--ctn-article-wrapper-card {
         width: 95%;
-        margin-bottom: 2rem; /* Espacement amélioré */
+        margin-bottom: 2rem;
     }
 }
 
-/* Quand il y a 3 recettes par ligne */
+/* Desktop - 3 recettes par ligne */
 @media screen and (min-width: 1024px) {
     .body__main--ctn-article-wrapper {
-        grid-template-columns: 1fr 1fr 1fr; /* Trois recettes par ligne */
-        gap: 2rem; /* Espacement entre les recettes */
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
     }
 
     .body__main--ctn-article-wrapper-card {
         width: 90%;
-        height: 18rem; /* Hauteur ajustée pour l'image plus grande */
+        height: 18rem;
     }
 
     .body__main--ctn-article-wrapper-card-img {
-        height: 10rem; /* Taille de l'image ajustée */
+        height: 10rem;
     }
 }
 
-/* Quand il y a 3 recettes par ligne max */
+/* Large desktop - maintient 3 recettes par ligne */
 @media screen and (min-width: 1440px) {
     .body__main--ctn-article-wrapper {
-        grid-template-columns: 1fr 1fr 1fr; /* Trois recettes par ligne */
-        gap: 2rem; /* Espacement entre les recettes */
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
     }
 
     .body__main--ctn-article-wrapper-card {

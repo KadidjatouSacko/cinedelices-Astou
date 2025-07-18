@@ -12,9 +12,10 @@ Step.init({
     type: DataTypes.TEXT,
     allowNull: false,
     validate: {
-      len: [2, 100]
+      len: [1, 10000]
     }
-  }
+  },  
+
 }, {
   sequelize,
   tableName: 'step'

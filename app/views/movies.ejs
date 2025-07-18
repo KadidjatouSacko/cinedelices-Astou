@@ -1,6 +1,7 @@
 <%- include('partials/header') %>
 
 <link rel="stylesheet" href="/assets/css/movies.css">
+
 <main>
     <h2>Notre sélection de films :</h2>
 
@@ -14,16 +15,18 @@
                     <li><strong>Année :</strong> <span><%= movie.year %></span></li>
                     <li><strong>Genre :</strong> <span><%= movie.genre %></span></li>
                     <li><strong>Plat associé :</strong>
-                        <% if (movie.recipes && movie.recipes.length > 0) { %>
-                            <ul>
-                                <% movie.recipes.forEach(recipe => { %>
-                                    <li><%= recipe %></li>
-                                <% }) %>
-                            </ul>
+                        <% if (movie.Recipes && movie.Recipes.length > 0) { %>
+                          <ul>
+                            <% movie.Recipes.forEach(recipe => { %>
+                              <li>
+                                <a href="/recettes/<%= recipe.slug %>"><%= recipe.name %></a>
+                              </li>
+                            <% }) %>
+                          </ul>
                         <% } else { %>
-                            <span>Aucun plat associé</span>
+                          <span>Aucun plat associé</span>
                         <% } %>
-                    </li>
+                      </li>
                 </ul>
                  <button class="more">
                     <a href="/films/<%= movie.slug %>">Voir</a>

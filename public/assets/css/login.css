@@ -5,56 +5,89 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Header */
+/* ========== HEADER MODERNE (MÊME QUE MOVIES) ========== */
+/* Structure globale du header */
 header {
     background-color: #2A2D34;
-    padding-bottom: 2.3rem;
-    height: auto;
+    color: white;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.navbar-header h2 {
-    color: bisque;
+/* Section avec le logo et les liens de connexion */
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.logo {
+    width: 4rem;
+    height: auto;
+    border-radius: 40%;
+}
+
+/* Liens d'authentification */
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Titre principal */
+header h2 {
     font-size: 2rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
+    margin: 0.5rem 0;
+    font-family: 'Georgia', serif;
+    color: bisque;
+}
+
+/* Barre de navigation principale */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #1E1F26;
+    padding: 0.3rem;
 }
 
 .navbar ul {
     display: flex;
-    justify-content: space-evenly;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar li {
     background-color: #CE1902;
-    color: white;
-    list-style: none;
-    display: flex;
+    padding: 0.4rem 1rem;
+    margin: 0 0.5rem;
     border-radius: 18%;
-    padding: 0.5rem 1.2rem;
-    font-size: 1.3rem;
-    margin-top: -2rem;
+    font-size: 1.1rem;
 }
 
+.navbar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar li:hover {
+    background-color: #d44a2e;
+}
+
+/* Liens généraux */
 a {
     text-decoration: none;
     color: white;
 }
 
-.navbar-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem 2rem 0rem;
-    margin-bottom: -2rem;
-    margin-top: -2rem;
-}
-
-.navbar-header img {
-    margin-top: 1rem;
-    margin-left: 1rem;
-    width: 8rem;
-    border-radius: 40%;
-}
-
+/* ========== CONTENU SPÉCIFIQUE CONTACT ========== */
 /* Contenu principal */
 .main-content {
     display: flex;
@@ -94,6 +127,7 @@ textarea {
     border-radius: 3px;
     margin-top: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 
 textarea {
@@ -114,9 +148,53 @@ button[type="submit"] {
     font-size: 1.2em;
 }
 
-/* Responsive */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
-    /* Réduire la taille des éléments sur mobile */
+    /* Header responsive */
+    .navbar-top {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.3rem;
+    }
+
+    .logo {
+        width: 3rem;
+    }
+
+    .auth-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 0.5rem;
+    }
+
+    .auth-links a {
+        margin-left: 0;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    header h2 {
+        font-size: 1.5rem;
+        margin: 0.3rem 0;
+    }
+
+    .navbar {
+        padding: 0.2rem;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar li {
+        margin: 0.3rem 0;
+        padding: 0.3rem 0.8rem;
+        font-size: 1rem;
+    }
+
+    /* Contact responsive */
     .main-content {
         padding: 15px;
     }
@@ -142,63 +220,23 @@ button[type="submit"] {
         font-size: 1rem;
         padding: 10px 30px;
     }
-
-    .side-nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #f5f5dc;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        padding: 20px;
-        box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .side-nav ul {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        color: #cc0000;
-        background: none;
-        border: none;
-        font-size: 1.5em;
-        cursor: pointer;
-    }
 }
 
 /* Styles pour les écrans plus larges */
 @media (min-width: 769px) {
-    /* Navigation latérale sur grand écran */
-    .side-nav {
-        position: relative;
-        transform: translateX(0);
-        width: 220px;
-        padding: 20px;
-    }
-
     .main-content {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .contact-container {
         flex-grow: 1;
         padding: 40px;
         max-width: 800px;
+        width: 100%;
     }
-
-    /* .side-nav ul {
-        flex-direction: column;
-    } */
 
     .contact-info {
         font-size: 1.2em;

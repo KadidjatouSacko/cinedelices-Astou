@@ -382,157 +382,113 @@ console.log('Modèles disponibles ?', { Recipe, Step, Recipe_Ingredient, Recipe_
   },
 
   async AddOneRecipe(req, res) {
-    const {
-      name,
-      description,
-      duration,
-      difficulty,
-      category,
-      price,
-      film_id,
-      video,
-      steps,
-      ingredientIds = [],
-      quantities = [],
-      units = [],
-      tools = [],
-      newIngredients = [],
-      newQuantities = [],
-      newUnits = [],
-      newTools = []
-    } = req.body;
-
-    if (!req.session.user) {
-      return res.status(401).json({ error: 'Vous devez être connecté pour ajouter une recette' });
-    }
-
-    const slug = generateSlug(name); // Utiliser votre fonction existante
-
-    let imagePath = null;
-    if (req.file) {
-      // Utiliser le nom de fichier généré par multer
-      imagePath = `/img/recipes/${req.file.filename}`;
-    }
-
-    const t = await sequelize.transaction();
-
     try {
-      const recipe = await Recipe.create({
-        name,
+      const {
+        title,
+        description,
+        duration,
+        difficulty,
+        price,
+        video_url,
+        category_id,
+        ingredients, // tableau d'objets { name, quantity, unit }
+        steps,       // tableau d'instructions
+        tools        // tableau de noms d'ustensiles
+      } = req.body;
+  
+      const image = req.body.image || req.file?.filename;
+  
+      if (!title || !description || !price || !image) {
+        return res.render('form-recipe', {
+          title: 'Ajouter une recette',
+          error: 'Veuillez remplir les champs obligatoires.',
+          formData: req.body
+        });
+      }
+  
+      // Slug unique
+      const baseSlug = slugify(title, { lower: true, strict: true });
+      let slug = baseSlug;
+      let count = 1;
+  
+      while (await Recipe.findOne({ where: { slug } })) {
+        slug = `${baseSlug}-${count}`;
+        count++;
+      }
+  
+      // Gestion image base64 (si jamais elle arrive encodée comme dans ton addJewel)
+      let imageFileName = image;
+  
+      if (image && image.startsWith('data:image')) {
+        const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
+        const buffer = Buffer.from(base64Data, 'base64');
+  
+        const uploadDir = path.join(process.cwd(), 'public/uploads/recipes');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+  
+        imageFileName = `${slug}-${Date.now()}.jpg`;
+        const uploadPath = path.join(uploadDir, imageFileName);
+        fs.writeFileSync(uploadPath, buffer);
+      }
+  
+      // Création de la recette
+      const newRecipe = await Recipe.create({
+        title,
         slug,
         description,
-        duration: parseInt(duration),
-        image: imagePath,
-        video,
-        user_id: req.session.user.id,
-        difficulty_id: difficulty,
-        category_id: category,
-        price_id: price,
-        movie_id: film_id
-      }, { transaction: t });
-
-      // Étapes
+        duration: parseInt(duration || 0),
+        difficulty: difficulty || 'facile',
+        price: parseFloat(price),
+        video_url: video_url || null,
+        category_id: parseInt(category_id),
+        image: imageFileName,
+        user_id: req.session.userId || null
+      });
+  
+      // Ajout des ingrédients
+      if (Array.isArray(ingredients)) {
+        for (const ing of ingredients) {
+          await Recipe_Ingredient.create({
+            recipe_id: newRecipe.id,
+            name: ing.name,
+            quantity: ing.quantity,
+            unit: ing.unit
+          });
+        }
+      }
+  
+      // Ajout des ustensiles
+      if (Array.isArray(tools)) {
+        for (const tool of tools) {
+          await Recipe_Tool.create({
+            recipe_id: newRecipe.id,
+            name: tool
+          });
+        }
+      }
+  
+      // Ajout des étapes
       if (Array.isArray(steps)) {
         for (let i = 0; i < steps.length; i++) {
-          if (steps[i] && steps[i].trim()) {
-            await Step.create({
-              recipe_id: recipe.id,
-              step_number: i + 1,
-              instruction: steps[i].trim() // Utiliser 'instruction' au lieu de 'description'
-            }, { transaction: t });
-          }
+          await Step.create({
+            recipe_id: newRecipe.id,
+            instruction: steps[i],
+            step_number: i + 1
+          });
         }
       }
-
-      // Ingrédients existants
-      for (let i = 0; i < ingredientIds.length; i++) {
-        if (ingredientIds[i] && quantities[i]) {
-          await Recipe_Ingredient.create({
-            recipe_id: recipe.id,
-            ingredient_id: ingredientIds[i],
-            quantity: parseFloat(quantities[i]),
-            unity: units[i] || ''
-          }, { transaction: t });
-        }
-      }
-
-      // Nouveaux ingrédients
-      for (let i = 0; i < newIngredients.length; i++) {
-        if (newIngredients[i] && newIngredients[i].trim() && newQuantities[i]) {
-          const newIngredient = await Ingredient.create({ 
-            name: newIngredients[i].trim() 
-          }, { transaction: t });
-
-          await Recipe_Ingredient.create({
-            recipe_id: recipe.id,
-            ingredient_id: newIngredient.id,
-            quantity: parseFloat(newQuantities[i]),
-            unity: newUnits[i] || ''
-          }, { transaction: t });
-        }
-      }
-
-      // Ustensiles existants
-      if (Array.isArray(tools)) {
-        for (const toolId of tools) {
-          if (toolId) {
-            await Recipe_Tool.create({
-              recipe_id: recipe.id,
-              tool_id: toolId
-            }, { transaction: t });
-          }
-        }
-      }
-
-      // Nouveaux ustensiles
-      if (Array.isArray(newTools)) {
-        for (const newToolName of newTools) {
-          if (newToolName && newToolName.trim()) {
-            const newTool = await Tool.create({ 
-              name: newToolName.trim() 
-            }, { transaction: t });
-
-            await Recipe_Tool.create({
-              recipe_id: recipe.id,
-              tool_id: newTool.id
-            }, { transaction: t });
-          }
-        }
-      }
-
-      await t.commit();
-      return res.redirect(`/recettes/${slug}`);
-      
+  
+      console.log("Recette ajoutée avec succès :", newRecipe.slug);
+      res.redirect(`/recette/${newRecipe.slug}`);
     } catch (error) {
-      await t.rollback();
-      console.error('Erreur lors de l\'ajout de la recette:', error);
-
-      // Recharger les données nécessaires au formulaire
-      const [categories, prices, ingredients, tools, difficulties] = await Promise.all([
-        Category.findAll({ order: [['name', 'ASC']] }),
-        Price.findAll({ order: [['id', 'ASC']] }),
-        Ingredient.findAll({ order: [['name', 'ASC']] }),
-        Tool.findAll({ order: [['name', 'ASC']] }),
-        Difficulty.findAll({ order: [['id', 'ASC']] })
-      ]);
-
-      
-
-      return res.render('form-recipe', { // Corriger le nom de la vue
-        css: 'formRecipe',
-        js: 'form',
-        title: 'Ajouter une recette',
-        categories,
-        prices,
-        ingredients,
-        tools,
-        difficulties,
-        filmId: film_id,
-        error: 'Une erreur est survenue lors de l\'ajout de la recette',
-        formData: req.body
-      });
+      console.error("Erreur lors de l'ajout de la recette :", error);
+      res.status(500).render('error', { message: "Erreur serveur lors de l'ajout de la recette." });
     }
   },
+  
+
       
   
 
@@ -763,7 +719,7 @@ async updateRecipe(req, res) {
   }
 },
 
-// Méthode pour rendre la page de modification (votre méthode existante améliorée)
+// Méthode pour rendre la page de modification 
 async renderUpdateRecipePage(req, res) {
   try {
       const css = 'update-recipe';

@@ -1,6 +1,8 @@
 <%- include('partials/header') %>
 
 <link rel="stylesheet" href="/assets/css/home.css">
+
+
 <main class="body__main">
     <section class="body__main--ctn">
         <article class="body__main--ctn-article">
@@ -16,34 +18,37 @@
                 <div class="body__main--ctn-article-carousel-arrowLeft">
                     <img src="/assets/img/icon/arrowLeft.png" alt="Recette précédente">
                 </div>
-                <article class="body__main--ctn-article-wrapper">
+                <article class="body__main--ctn-article-wrapper" id="carousel-track">
                     <% recipes.forEach(recipe => { %>
-                        <article class="body__main--ctn-article-wrapper-card">
-                            <section id="tags">
-                                <div class="tags__ctn">
-                                    <img src="/assets/img/movies/<%=  %>" alt="" class="tags__ctn--img">
-                                </div>
-                                <h2 class="tags__ctn--title"><%= recipe.name %></h3>
-                            </section>                    
-                            <img src="/assets/img/recipes/<%= recipe.image %>" alt="Photo du rendu de la recette de <%= recipe.name %>" class="body__main--ctn-article-wrapper-card-img">
-                            <section class="body__main--ctn-article-wrapper-card-legends">
-                                <article class="body__main--ctn-article-wrapper-card-legend-ctn-category">
-                                    <h3 class="body__main--ctn-article-wrapper-card-legend-category"><%= recipe.category.name %></h3>                                    
-                                </article>
-                                <article class="body__main--ctn-article-wrapper-card-legend-ctn">
-                                    <img src="assets/img/icon/clock.png" alt="Icone de timer" class="body__main--ctn-article-wrapper-card-legend-ctn-icon">
-                                    <p class="body__main--ctn-article-wrapper-card-legend-ctn-text"><%= recipe.duration %> min</p>
-                                </article>
-                                <article class="body__main--ctn-article-wrapper-card-legend-ctn">
-                                    <img src="assets/img/icon/difficulty.png" alt="Icone de jauge de difficulté" class="body__main--ctn-article-wrapper-card-legend-ctn-icon">
-                                    <p class="body__main--ctn-article-wrapper-card-legend-ctn-text"><%= recipe.difficulty.name %></p>
-                                </article>
-                            </section >
-                            <p class="body__main--ctn-article-wrapper-card-btn">
-                                <a href="/recettes/<%= recipe.slug %> " class="body__main--ctn-article-wrapper-card-btn-placeHolder">Voir la recette</a>
-                            </p>                            
-                        </article>
-                        <% }) %>                    
+                        <a href="/recettes/<%= recipe.slug %>" class="card-link-wrapper">
+                            <article class="body__main--ctn-article-wrapper-card">
+                                <section id="tags">
+                                    <div class="tags__ctn">
+                                        <img src="/assets/img/movies/<%= recipe.movie.title.toLowerCase().replace(/\s+/g, '-').replace(/[éèê]/g, 'e').replace(/[àâ]/g, 'a').replace(/[ùü]/g, 'u').replace(/[ô]/g, 'o').replace(/[^a-z0-9-]/g, '') %>.jpg" alt="Affiche de <%= recipe.movie.title %>" class="tags__ctn--img">
+                                    </div>
+                                    <h2 class="tags__ctn--title"><%= recipe.name %></h2>
+                                </section>                    
+                                <img src="/assets/img/recipes/<%= recipe.image %>" alt="Photo du rendu de la recette de <%= recipe.name %>" class="body__main--ctn-article-wrapper-card-img">
+                                <section class="body__main--ctn-article-wrapper-card-legends">
+                                    <article class="body__main--ctn-article-wrapper-card-legend-ctn-category">
+                                        <h3 class="body__main--ctn-article-wrapper-card-legend-category"><%= recipe.category.name %></h3>                                    
+                                    </article>
+                                    <article class="body__main--ctn-article-wrapper-card-legend-ctn">
+                                        <img src="assets/img/icon/clock.png" alt="Icone de timer" class="body__main--ctn-article-wrapper-card-legend-ctn-icon">
+                                        <p class="body__main--ctn-article-wrapper-card-legend-ctn-text"><%= recipe.duration %> min</p>
+                                    </article>
+                                    <article class="body__main--ctn-article-wrapper-card-legend-ctn">
+                                        <img src="assets/img/icon/difficulty.png" alt="Icone de jauge de difficulté" class="body__main--ctn-article-wrapper-card-legend-ctn-icon">
+                                        <p class="body__main--ctn-article-wrapper-card-legend-ctn-text"><%= recipe.difficulty.name %></p>
+                                    </article>
+                                </section>
+                                <p class="body__main--ctn-article-wrapper-card-btn">
+                                    <span class="body__main--ctn-article-wrapper-card-btn-placeHolder">Voir la recette</span>
+                                </p>                            
+                            </article>
+                        </a>
+                    <% }) %>
+                                    
                 </article>
                 
                 <div class="body__main--ctn-article-carousel-arrowRight">
@@ -52,7 +57,45 @@
             </section>            
         </article>
     </section>
+
+    
 </main>
 
 
 <%- include('partials/footer') %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("JS chargé !");
+      const carouselTrack = document.getElementById("carousel-track");
+      const arrowLeft = document.querySelector(".body__main--ctn-article-carousel-arrowLeft");
+      const arrowRight = document.querySelector(".body__main--ctn-article-carousel-arrowRight");
+  
+      console.log("carouselTrack :", carouselTrack);
+      console.log("arrowLeft :", arrowLeft);
+      console.log("arrowRight :", arrowRight);
+  
+      const scrollAmount = 300; // pixels à scroller par clic
+  
+      if (arrowLeft && arrowRight && carouselTrack) {
+        arrowLeft.addEventListener("click", () => {
+          console.log("← click");
+          carouselTrack.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth"
+          });
+        });
+  
+        arrowRight.addEventListener("click", () => {
+          console.log("→ click");
+          carouselTrack.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth"
+          });
+        });
+      } else {
+        console.warn("Un des éléments est introuvable !");
+      }
+    });
+  </script>
+  
